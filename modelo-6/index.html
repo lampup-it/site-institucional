@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-lampup.png">
+<title>LampUP IT — Descubra em 60 segundos se seu software está exposto</title>
+<meta name="description" content="Diagnóstico interativo gratuito de qualidade de software. Responda 5 perguntas e descubra onde sua operação está vulnerável.">
+<style>
+/* ─── MODELO 6: DIAGNÓSTICO INTERATIVO ─── */
+/* Conversacional. Visitor responde quiz e recebe diagnóstico personalizado */
+
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBlack.ttf') format('truetype'); font-weight:900; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBold.ttf') format('truetype'); font-weight:700; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBook.ttf') format('truetype'); font-weight:400; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueLight.ttf') format('truetype'); font-weight:300; font-display:swap; }
+
+:root {
+  --cyan: #00D4E8;
+  --purple: #5B2D9F;
+  --purple-dark: #3D1F6B;
+  --bg: #0E0B1F;
+  --bg-soft: #1A1530;
+  --text: #F5F3FF;
+  --gray: #9C95B8;
+  --border: rgba(255,255,255,0.1);
+  --success: #00C851;
+  --warn: #FFBB33;
+  --danger: #FF4444;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'UniNeue','Segoe UI',sans-serif;
+  background:var(--bg); color:var(--text); min-height:100vh;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(91,45,159,0.25), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(0,212,232,0.15), transparent 40%);
+}
+
+/* NAV */
+nav {
+  padding:18px 48px; display:flex; justify-content:space-between; align-items:center;
+  border-bottom:1px solid var(--border);
+}
+nav img { height:32px; }
+.nav-cta { color:var(--cyan); text-decoration:none; font-size:14px; font-weight:700; }
+
+/* HERO */
+.hero {
+  text-align:center; padding:64px 24px 32px; max-width:780px; margin:0 auto;
+}
+.hero-eyebrow {
+  display:inline-block; padding:6px 16px; background:rgba(0,212,232,0.12);
+  border:1px solid rgba(0,212,232,0.4); color:var(--cyan);
+  border-radius:24px; font-size:12px; letter-spacing:2px; text-transform:uppercase;
+  margin-bottom:18px;
+}
+.hero h1 {
+  font-size:54px; font-weight:900; line-height:1.1; letter-spacing:-1px; margin-bottom:16px;
+}
+.hero h1 .cyan { color:var(--cyan); }
+.hero p { font-size:19px; color:var(--gray); max-width:580px; margin:0 auto 24px; }
+.hero-meta { display:flex; justify-content:center; gap:32px; font-size:13px; color:var(--gray); flex-wrap:wrap; }
+.hero-meta span b { color:var(--cyan); font-weight:700; }
+
+/* QUIZ CONTAINER */
+.quiz {
+  max-width:680px; margin:0 auto 64px; background:var(--bg-soft);
+  border:1px solid var(--border); border-radius:24px; padding:40px;
+  box-shadow:0 30px 80px rgba(0,0,0,0.4);
+}
+.progress-bar {
+  height:6px; background:rgba(255,255,255,0.08); border-radius:3px; overflow:hidden;
+  margin-bottom:24px;
+}
+.progress-fill {
+  height:100%; background:linear-gradient(90deg, var(--purple), var(--cyan));
+  width:0%; transition:width 0.4s ease;
+}
+.step-counter { font-size:12px; color:var(--gray); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; }
+
+.q-step { display:none; animation:fadeIn 0.4s ease; }
+.q-step.active { display:block; }
+@keyframes fadeIn { from {opacity:0; transform:translateY(8px);} to {opacity:1; transform:translateY(0);} }
+
+.q-step h2 { font-size:28px; font-weight:700; margin-bottom:8px; line-height:1.3; }
+.q-step .q-hint { font-size:14px; color:var(--gray); margin-bottom:24px; }
+
+.options { display:grid; gap:12px; }
+.opt {
+  background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; gap:14px;
+  color:var(--text); font-size:16px; text-align:left; font-family:inherit;
+}
+.opt:hover { border-color:var(--cyan); background:rgba(0,212,232,0.08); transform:translateX(4px); }
+.opt.selected { border-color:var(--cyan); background:rgba(0,212,232,0.15); }
+.opt .icon {
+  width:36px; height:36px; border-radius:8px; background:rgba(91,45,159,0.3); color:var(--cyan);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+
+.q-nav { display:flex; justify-content:space-between; align-items:center; margin-top:24px; }
+.btn-back, .btn-next {
+  border:none; padding:12px 28px; border-radius:8px; font-family:inherit; font-weight:700;
+  font-size:14px; letter-spacing:1px; cursor:pointer; transition:all 0.2s;
+}
+.btn-back { background:transparent; color:var(--gray); }
+.btn-back:hover { color:var(--text); }
+.btn-next { background:var(--cyan); color:var(--bg); }
+.btn-next:hover { background:white; }
+.btn-next:disabled { opacity:0.4; cursor:not-allowed; }
+
+/* RESULT SCREEN */
+.result { display:none; text-align:center; }
+.result.active { display:block; animation:fadeIn 0.5s ease; }
+.score-ring {
+  width:180px; height:180px; margin:0 auto 24px; position:relative;
+  display:flex; align-items:center; justify-content:center;
+}
+.score-ring svg { transform:rotate(-90deg); width:100%; height:100%; }
+.score-ring circle.bg { fill:none; stroke:rgba(255,255,255,0.08); stroke-width:14; }
+.score-ring circle.fg { fill:none; stroke:var(--cyan); stroke-width:14; stroke-linecap:round;
+  stroke-dasharray:502; stroke-dashoffset:502; transition:stroke-dashoffset 1.2s ease; }
+.score-num {
+  position:absolute; font-size:48px; font-weight:900; color:var(--text);
+}
+.score-num .small { font-size:18px; color:var(--gray); display:block; margin-top:-6px; }
+.result h2 { font-size:32px; margin-bottom:10px; }
+.result .badge {
+  display:inline-block; padding:6px 18px; border-radius:24px; font-size:13px;
+  font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:18px;
+}
+.badge.risk-high { background:rgba(255,68,68,0.2); color:var(--danger); border:1px solid var(--danger); }
+.badge.risk-mid { background:rgba(255,187,51,0.2); color:var(--warn); border:1px solid var(--warn); }
+.badge.risk-low { background:rgba(0,200,81,0.2); color:var(--success); border:1px solid var(--success); }
+.result p.intro { font-size:17px; color:var(--gray); max-width:520px; margin:0 auto 24px; }
+.findings {
+  background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:14px;
+  padding:24px; text-align:left; margin-bottom:24px;
+}
+.findings h3 { font-size:15px; color:var(--cyan); margin-bottom:12px; letter-spacing:1.5px; text-transform:uppercase; }
+.findings li { margin-bottom:10px; padding-left:28px; position:relative; font-size:15px; color:var(--text); }
+.findings li::before {
+  content:'⚠'; position:absolute; left:0; top:0; color:var(--warn); font-size:16px;
+}
+.findings li.ok::before { content:'✓'; color:var(--success); }
+.findings ul { list-style:none; }
+
+/* LEAD FORM IN RESULT */
+.result-form {
+  background:linear-gradient(135deg, var(--purple-dark), var(--purple));
+  border-radius:14px; padding:28px; text-align:left;
+}
+.result-form h3 { font-size:20px; margin-bottom:6px; }
+.result-form p { font-size:14px; color:#D5CFEC; margin-bottom:18px; }
+.rf-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+.rf-group label { display:block; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#D5CFEC; margin-bottom:5px; font-weight:700; }
+.rf-group input, .rf-group select {
+  width:100%; background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.1);
+  border-radius:8px; padding:10px 12px; color:white; font-size:14px; font-family:inherit;
+}
+.rf-group input:focus, .rf-group select:focus { outline:none; border-color:var(--cyan); }
+.consent { font-size:12px; color:#D5CFEC; margin:14px 0; }
+.consent input { margin-right:6px; }
+.consent a { color:var(--cyan); }
+.btn-final {
+  width:100%; background:var(--cyan); color:var(--bg); border:none; padding:14px;
+  border-radius:8px; font-weight:700; font-size:15px; letter-spacing:1px; cursor:pointer;
+  text-transform:uppercase; font-family:inherit;
+}
+.btn-final:hover { background:white; }
+
+.thanks { display:none; text-align:center; padding:32px; }
+.thanks h2 { font-size:32px; color:var(--cyan); }
+
+/* FOOTER */
+footer {
+  padding:24px 48px; border-top:1px solid var(--border); font-size:12px; color:var(--gray);
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+}
+footer a { color:var(--cyan); text-decoration:none; margin-right:14px; }
+
+@media (max-width: 700px) {
+  nav { padding:14px 20px; }
+  .hero h1 { font-size:36px; }
+  .hero { padding:40px 20px 24px; }
+  .quiz { margin:0 16px 40px; padding:24px; border-radius:18px; }
+  .q-step h2 { font-size:22px; }
+  .rf-row { grid-template-columns:1fr; }
+  footer { padding:18px 20px; flex-direction:column; }
+}
+/* Back to top button (LampUP shared component) */
+.back-to-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 90;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #FFFFFF; border: 2px solid #00D4E8;
+  cursor: pointer; padding: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity 0.25s, transform 0.25s ease-out, visibility 0.25s, box-shadow 0.3s, border-color 0.3s, background 0.3s;
+  animation: btt-pulse 2.6s ease-out infinite;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top img { width: 30px; height: 30px; object-fit: contain; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.back-to-top:hover { background: #FFFFFF; border-color: #5B2D9F; box-shadow: 0 14px 36px rgba(91,45,159,0.4), 0 0 0 8px rgba(0,212,232,0.25); transform: translateY(-2px); animation: none; }
+.back-to-top:hover img { transform: translateY(-6px) scale(1.12); }
+.back-to-top:active img { transform: translateY(-2px) scale(0.96); }
+@keyframes btt-pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55); }
+  50% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 14px rgba(0,212,232,0); }
+}
+@media (max-width: 768px) { .back-to-top { right: 16px; bottom: 16px; width: 50px; height: 50px; } .back-to-top img { width: 26px; height: 26px; } }
+@media (prefers-reduced-motion: reduce) { .back-to-top { animation: none; } .back-to-top img, .back-to-top:hover img { transition: none; transform: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <img src="../../assets/img/logo-lampup-final-transparente-para-fundo-azul.png" alt="LampUP IT">
+  <a class="nav-cta" href="mailto:contato@lampup.com.br">Fale com a gente →</a>
+</nav>
+
+<div class="hero">
+  <span class="hero-eyebrow">Diagnóstico Gratuito · 60 segundos</span>
+  <h1>Seu software está <span class="cyan">exposto?</span></h1>
+  <p>Responda 5 perguntas rápidas. Mostramos onde sua operação pode estar perdendo dinheiro com bugs em produção — e o que dá pra fazer em 30 dias.</p>
+  <div class="hero-meta">
+    <span><b>5</b> perguntas</span>
+    <span><b>60</b> segundos</span>
+    <span><b>0</b> compromisso</span>
+  </div>
+</div>
+
+<div class="quiz" id="quiz">
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+  <div class="step-counter" id="counter">Pergunta 1 de 5</div>
+
+  <!-- STEP 1 -->
+  <div class="q-step active" data-step="1">
+    <h2>O seu software já está em produção?</h2>
+    <p class="q-hint">Em uso por clientes reais agora.</p>
+    <div class="options">
+      <button class="opt" data-val="prod" data-points="3"><div class="icon">🚀</div>Sim, em produção com clientes pagantes</button>
+      <button class="opt" data-val="beta" data-points="2"><div class="icon">🧪</div>Em beta / piloto com poucos usuários</button>
+      <button class="opt" data-val="dev" data-points="1"><div class="icon">🛠</div>Ainda em desenvolvimento</button>
+      <button class="opt" data-val="idea" data-points="0"><div class="icon">💡</div>Estamos na fase de ideia/projeto</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="q-step" data-step="2">
+    <h2>Hoje, quem testa o software antes de subir uma atualização?</h2>
+    <p class="q-hint">Seja honesto — esse diagnóstico só é útil se for verdadeiro.</p>
+    <div class="options">
+      <button class="opt" data-val="ninguem" data-points="3"><div class="icon">❌</div>Ninguém de forma estruturada. A gente sobe e torce.</button>
+      <button class="opt" data-val="dev" data-points="2"><div class="icon">👨‍💻</div>O próprio desenvolvedor que fez a feature</button>
+      <button class="opt" data-val="time" data-points="1"><div class="icon">👥</div>Alguém do time clica em algumas telas antes</button>
+      <button class="opt" data-val="qa" data-points="0"><div class="icon">✅</div>Temos pessoa(s) dedicada(s) só para testes</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="q-step" data-step="3">
+    <h2>Quantas vezes por mês um cliente reporta bug antes de você descobrir?</h2>
+    <p class="q-hint">Ticket aberto, reclamação no WhatsApp, e-mail bravo — tudo conta.</p>
+    <div class="options">
+      <button class="opt" data-val="muito" data-points="3"><div class="icon">🔥</div>Toda semana acontece algo</button>
+      <button class="opt" data-val="medio" data-points="2"><div class="icon">📞</div>Algumas vezes por mês</button>
+      <button class="opt" data-val="raro" data-points="1"><div class="icon">🤔</div>Raramente, mas quando acontece é feio</button>
+      <button class="opt" data-val="nunca" data-points="0"><div class="icon">😌</div>Praticamente nunca</button>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="q-step" data-step="4">
+    <h2>Você processa dados pessoais de clientes?</h2>
+    <p class="q-hint">CPF, e-mail, endereço, dados de pagamento — qualquer coisa que a LGPD proteja.</p>
+    <div class="options">
+      <button class="opt" data-val="muito" data-points="3"><div class="icon">🗂</div>Sim, é o coração da operação</button>
+      <button class="opt" data-val="alguns" data-points="2"><div class="icon">📋</div>Sim, alguns dados</button>
+      <button class="opt" data-val="poucos" data-points="1"><div class="icon">📮</div>Quase nada — só e-mail de cadastro</button>
+      <button class="opt" data-val="nao" data-points="0"><div class="icon">🚫</div>Não processamos dados pessoais</button>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="q-step" data-step="5">
+    <h2>Quanto custaria pra você se o sistema caísse hoje por 4 horas?</h2>
+    <p class="q-hint">Em receita perdida, multa contratual, suporte, ou cliente cancelando.</p>
+    <div class="options">
+      <button class="opt" data-val="cat" data-points="3"><div class="icon">💀</div>Mais de R$ 50 mil — seria catastrófico</button>
+      <button class="opt" data-val="alto" data-points="2"><div class="icon">😰</div>Entre R$ 10 mil e R$ 50 mil</button>
+      <button class="opt" data-val="medio" data-points="1"><div class="icon">😐</div>Algo entre R$ 1 mil e R$ 10 mil</button>
+      <button class="opt" data-val="baixo" data-points="0"><div class="icon">🙂</div>Pouco impacto financeiro direto</button>
+    </div>
+  </div>
+
+  <div class="q-nav">
+    <button class="btn-back" id="back" style="visibility:hidden">← Voltar</button>
+    <button class="btn-next" id="next" disabled>Próximo →</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result" id="result">
+    <div class="score-ring">
+      <svg viewBox="0 0 180 180">
+        <circle class="bg" cx="90" cy="90" r="80"></circle>
+        <circle class="fg" id="ring" cx="90" cy="90" r="80"></circle>
+      </svg>
+      <div class="score-num"><span id="score">0</span><span class="small">/100 exposição</span></div>
+    </div>
+    <span class="badge" id="risk-badge">Calculando...</span>
+    <h2 id="risk-title">Diagnóstico pronto</h2>
+    <p class="intro" id="risk-intro">Baseado nas suas respostas, este é o panorama da exposição do seu software hoje.</p>
+
+    <div class="findings">
+      <h3>O que identificamos</h3>
+      <ul id="findings-list"></ul>
+    </div>
+
+    <div class="result-form">
+      <h3>Receba o diagnóstico completo</h3>
+      <p>Em até 24 horas, enviamos para o seu e-mail um relatório personalizado com o que está exposto agora, o que custa mais e o que dá para resolver em 30 dias. Sem custo, sem pitch chato.</p>
+      <form id="lead-form" novalidate>
+        <div class="rf-row">
+          <div class="rf-group">
+            <label>E-mail*</label>
+            <input type="email" id="email" required>
+          </div>
+          <div class="rf-group">
+            <label>WhatsApp</label>
+            <input type="tel" id="whatsapp" placeholder="(11) 99999-9999">
+          </div>
+        </div>
+        <div class="rf-row">
+          <div class="rf-group">
+            <label>Primeiro nome</label>
+            <input type="text" id="nome">
+          </div>
+          <div class="rf-group">
+            <label>Ramo de atividade*</label>
+            <select id="ramo" required>
+              <option value="">Selecione</option>
+              <option>SaaS / Software</option>
+              <option>E-commerce / Marketplace</option>
+              <option>Fintech</option>
+              <option>Saúde / Healthtech</option>
+              <option>Educação / Edtech</option>
+              <option>Logística</option>
+              <option>Outros</option>
+            </select>
+          </div>
+        </div>
+        <div class="consent">
+          <label><input type="checkbox" id="lgpd" required>
+            Li e concordo com a <a href="../politica-de-privacidade.html" target="_blank">Política de Privacidade</a> (LGPD). *
+          </label><br>
+          <label><input type="checkbox" id="mkt">
+            Aceito receber comunicações de marketing.
+          </label>
+        </div>
+        <button type="submit" class="btn-final">Receber meu diagnóstico</button>
+      </form>
+    </div>
+
+    <div class="thanks" id="thanks">
+      <h2>🎉 Pronto!</h2>
+      <p>Seu diagnóstico chega em até 24 horas no e-mail informado.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>© 2026 LampUP IT · Lighting Up Your Business</div>
+  <div>
+    <a href="../politica-de-privacidade.html">Política de Privacidade</a>
+    <a href="mailto:contato@lampup.com.br">contato@lampup.com.br</a>
+    <a href="https://wa.me/5581995994382" target="_blank">WhatsApp</a>
+  </div>
+</footer>
+
+<script src="../shared/lgpd-cookies.js"></script>
+<script src="../shared/beacon-leads.js" defer></script>
+<script>
+let currentStep = 1;
+const totalSteps = 5;
+const answers = {};
+let totalPoints = 0;
+
+const counter = document.getElementById('counter');
+const progress = document.getElementById('progress');
+const nextBtn = document.getElementById('next');
+const backBtn = document.getElementById('back');
+
+function updateProgress() {
+  progress.style.width = ((currentStep-1)/totalSteps * 100) + '%';
+  counter.textContent = `Pergunta ${currentStep} de ${totalSteps}`;
+  backBtn.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
+  nextBtn.textContent = currentStep === totalSteps ? 'Ver diagnóstico →' : 'Próximo →';
+}
+updateProgress();
+
+document.querySelectorAll('.opt').forEach(btn => {
+  btn.addEventListener('click', function(){
+    const step = this.closest('.q-step');
+    step.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+    this.classList.add('selected');
+    answers[currentStep] = { val: this.dataset.val, points: parseInt(this.dataset.points) };
+    nextBtn.disabled = false;
+  });
+});
+
+nextBtn.addEventListener('click', () => {
+  if (!answers[currentStep]) return;
+  if (currentStep < totalSteps) {
+    document.querySelector(`.q-step[data-step="${currentStep}"]`).classList.remove('active');
+    currentStep++;
+    const next = document.querySelector(`.q-step[data-step="${currentStep}"]`);
+    next.classList.add('active');
+    nextBtn.disabled = !answers[currentStep];
+    updateProgress();
+  } else {
+    showResult();
+  }
+});
+
+backBtn.addEventListener('click', () => {
+  if (currentStep > 1) {
+    document.querySelector(`.q-step[data-step="${currentStep}"]`).classList.remove('active');
+    currentStep--;
+    document.querySelector(`.q-step[data-step="${currentStep}"]`).classList.add('active');
+    nextBtn.disabled = !answers[currentStep];
+    updateProgress();
+  }
+});
+
+function showResult() {
+  document.querySelectorAll('.q-step').forEach(s => s.classList.remove('active'));
+  document.querySelector('.q-nav').style.display = 'none';
+  progress.style.width = '100%';
+  counter.style.display = 'none';
+  document.getElementById('result').classList.add('active');
+
+  totalPoints = Object.values(answers).reduce((s,a) => s + a.points, 0);
+  const score = Math.round((totalPoints / 15) * 100);
+
+  document.getElementById('ring').style.strokeDashoffset = 502 - (502 * score / 100);
+
+  let n = 0;
+  const target = score;
+  const interval = setInterval(() => {
+    n += Math.ceil(target / 30);
+    if (n >= target) { n = target; clearInterval(interval); }
+    document.getElementById('score').textContent = n;
+  }, 30);
+
+  const badge = document.getElementById('risk-badge');
+  const title = document.getElementById('risk-title');
+  const intro = document.getElementById('risk-intro');
+  const findings = document.getElementById('findings-list');
+
+  if (score >= 60) {
+    badge.textContent = 'Risco Alto'; badge.className = 'badge risk-high';
+    title.textContent = 'Sua operação está bem exposta';
+    intro.textContent = 'Seus clientes provavelmente já encontram bugs antes de você. O custo cumulativo disso costuma ser muito maior do que aparenta no curto prazo.';
+  } else if (score >= 30) {
+    badge.textContent = 'Risco Médio'; badge.className = 'badge risk-mid';
+    title.textContent = 'Tem brecha para acontecer feio';
+    intro.textContent = 'Você tem alguma cobertura, mas as lacunas atuais são suficientes para um incidente grande estragar um trimestre inteiro.';
+  } else {
+    badge.textContent = 'Risco Baixo'; badge.className = 'badge risk-low';
+    title.textContent = 'Você está em boa posição';
+    intro.textContent = 'Boa notícia: sua exposição é baixa. Ainda assim, vale conversarmos sobre como manter esse patamar enquanto cresce.';
+  }
+
+  const items = [];
+  if (answers[1]?.points >= 2) items.push('Produto em uso por clientes — qualquer bug aparece em produção primeiro');
+  if (answers[2]?.points >= 2) items.push('Sem processo estruturado de teste antes do deploy');
+  if (answers[3]?.points >= 2) items.push('Frequência de bug reportado por cliente está alta');
+  if (answers[4]?.points >= 2) items.push('Processamento de dados pessoais relevante — exposição LGPD significativa');
+  if (answers[5]?.points >= 2) items.push('Custo de downtime alto — uma queda de 4h dói muito no caixa');
+  if (items.length === 0) items.push('Cobertura atual razoável para o estágio atual');
+
+  findings.innerHTML = items.map(t => `<li>${t}</li>`).join('');
+}
+
+document.getElementById('lead-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const lgpd = document.getElementById('lgpd').checked;
+  const ramo = document.getElementById('ramo').value;
+  if (!email || !lgpd || !ramo) { alert('Preencha e-mail, ramo e aceite a Política de Privacidade.'); return; }
+  const btn = this.querySelector('button');
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  const payload = {
+    nome: document.getElementById('nome').value, email,
+    whatsapp: document.getElementById('whatsapp').value,
+    ramo_atividade: ramo,
+    diagnostico_score: Math.round((totalPoints / 15) * 100),
+    diagnostico_respostas: JSON.stringify(answers),
+    origem: 'landing-modelo-6',
+  };
+  try {
+    await BeaconLeads.submit(payload);
+    this.style.display = 'none';
+    document.getElementById('thanks').style.display = 'block';
+  } catch (err) {
+    console.error('[BeaconLeads]', err);
+    alert('Não foi possível enviar agora. Tente novamente em instantes.');
+    btn.disabled = false; btn.textContent = 'Enviar';
+  }
+});
+
+document.getElementById('whatsapp').addEventListener('input', function(e){
+  let v = e.target.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>=7) v=`(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  else if(v.length>=3) v=`(${v.slice(0,2)}) ${v.slice(2)}`;
+  e.target.value = v;
+});
+</script>
+<button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+  <img src="../../assets/img/simbolo-lampup-final-transparente.png" alt="">
+</button>
+<script>
+(function(){
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  window.addEventListener('scroll', () => { btn.classList.toggle('visible', window.scrollY > 400); }, { passive: true });
+})();
+</script>
+</body>
+</html>

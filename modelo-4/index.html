@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-lampup.png">
+<title>LampUP IT — Software sem bugs, cliente sem reclamação</title>
+<meta name="description" content="Testing as a Service com IA. A qualidade que seu software merece, acessível para qualquer empresa.">
+<style>
+/* ─── MODELO 4: SPLIT STORY ─── */
+/* Storytelling visual, seções split (roxo|branco), números animados, editorial */
+
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBlack.ttf') format('truetype'); font-weight:900; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBold.ttf') format('truetype'); font-weight:700; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBook.ttf') format('truetype'); font-weight:400; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueLight.ttf') format('truetype'); font-weight:300; font-display:swap; }
+
+:root {
+  --cyan: #00D4E8;
+  --purple: #5B2D9F;
+  --purple-dark: #3D1F6B;
+  --white: #FFFFFF;
+  --off-white: #F8F7FC;
+  --text: #1A1A2E;
+  --gray: #6B7280;
+  --border: #E5E7EB;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'UniNeue','Segoe UI',Arial,sans-serif; overflow-x:hidden; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  background:white; border-bottom:1px solid var(--border);
+  padding:0 80px; height:70px; display:flex; align-items:center; justify-content:space-between;
+}
+.nav-logo img { height:32px; }
+.nav-right { display:flex; align-items:center; gap:24px; }
+.nav-contact { font-size:14px; color:var(--gray); text-decoration:none; transition:color 0.2s; }
+.nav-contact:hover { color:var(--purple); }
+.nav-cta-btn {
+  background:var(--purple); color:white; padding:10px 24px;
+  border:none; border-radius:8px; font-family:'UniNeue',sans-serif;
+  font-size:14px; font-weight:700; cursor:pointer; text-decoration:none;
+  transition:all 0.2s; display:inline-block;
+}
+.nav-cta-btn:hover { background:var(--purple-dark); }
+
+/* HERO — SPLIT SCREEN */
+.hero-split {
+  display:grid; grid-template-columns:1fr 1fr; min-height:100vh; padding-top:70px;
+}
+.hero-left {
+  background:linear-gradient(160deg, var(--purple-dark), var(--purple));
+  padding:80px 60px; display:flex; flex-direction:column; justify-content:center; color:white;
+  position:relative; overflow:hidden;
+}
+.hero-left::before {
+  content:''; position:absolute; bottom:-100px; right:-100px;
+  width:400px; height:400px; border-radius:50%;
+  background:rgba(0,212,232,0.1);
+}
+.hero-left::after {
+  content:''; position:absolute; top:-60px; left:-60px;
+  width:200px; height:200px; border-radius:50%;
+  background:rgba(255,255,255,0.05);
+}
+.hero-left-content { position:relative; z-index:1; }
+.hero-kicker {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(0,212,232,0.15); border:1px solid rgba(0,212,232,0.3);
+  color:var(--cyan); padding:6px 14px; border-radius:100px;
+  font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+  margin-bottom:28px;
+}
+.hero-left h1 {
+  font-size:clamp(36px, 4vw, 64px); font-weight:900; line-height:1.1; margin-bottom:20px;
+}
+.hero-left h1 em { color:var(--cyan); font-style:normal; }
+.hero-left p { font-size:17px; color:rgba(255,255,255,0.75); line-height:1.7; max-width:440px; margin-bottom:40px; font-weight:300; }
+.hero-left-cta { display:flex; gap:12px; flex-wrap:wrap; }
+.btn-cta-white {
+  background:white; color:var(--purple); border:none; padding:14px 28px;
+  border-radius:10px; font-family:'UniNeue',sans-serif; font-size:15px; font-weight:700;
+  cursor:pointer; text-decoration:none; display:inline-block; transition:all 0.2s;
+}
+.btn-cta-white:hover { background:var(--cyan); color:var(--purple-dark); }
+.btn-cta-outline {
+  background:transparent; color:rgba(255,255,255,0.8); border:2px solid rgba(255,255,255,0.3);
+  padding:12px 24px; border-radius:10px; font-family:'UniNeue',sans-serif;
+  font-size:14px; cursor:pointer; text-decoration:none; display:inline-block; transition:all 0.2s;
+}
+.btn-cta-outline:hover { border-color:white; color:white; }
+
+.hero-right {
+  background:var(--off-white); padding:80px 60px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.hero-right h2 { font-size:22px; font-weight:700; color:var(--text); margin-bottom:28px; }
+.hero-right h2 span { color:var(--purple); }
+
+/* Form in hero right */
+.split-form {}
+.sf-group { margin-bottom:16px; }
+.sf-group label { display:block; font-size:13px; font-weight:700; color:var(--text); margin-bottom:8px; }
+.sf-group label span { color:var(--purple); }
+.sf-group input, .sf-group select {
+  width:100%; padding:13px 16px;
+  background:white; border:1px solid var(--border); border-radius:10px;
+  font-family:'UniNeue',sans-serif; font-size:15px; color:var(--text);
+  transition:all 0.2s; appearance:none;
+}
+.sf-group input:focus, .sf-group select:focus {
+  outline:none; border-color:var(--purple); box-shadow:0 0 0 3px rgba(91,45,159,0.1);
+}
+.sf-group input::placeholder { color:#C8C8C8; }
+.sf-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.sf-check-label { font-size:13px; font-weight:700; color:var(--text); margin-bottom:10px; display:block; }
+.sf-chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.sf-chip {
+  background:white; border:2px solid var(--border); border-radius:100px;
+  padding:6px 14px; font-size:12px; font-weight:700; color:var(--gray);
+  cursor:pointer; transition:all 0.2s; user-select:none;
+}
+.sf-chip.on { background:rgba(91,45,159,0.1); border-color:var(--purple); color:var(--purple); }
+.sf-chip:hover { border-color:var(--purple); }
+
+.sf-consent { margin:14px 0; }
+.sf-cst-row { display:flex; align-items:flex-start; gap:8px; margin-bottom:8px; }
+.sf-cst-row input[type="checkbox"] { accent-color:var(--purple); flex-shrink:0; margin-top:2px; }
+.sf-cst-row span { font-size:12px; color:var(--gray); line-height:1.5; }
+.sf-cst-row a { color:var(--purple); }
+
+.btn-split-submit {
+  width:100%; padding:15px; background:var(--purple); color:white;
+  border:none; border-radius:10px; font-family:'UniNeue',sans-serif;
+  font-size:16px; font-weight:900; cursor:pointer; transition:all 0.2s; margin-top:4px;
+}
+.btn-split-submit:hover { background:var(--purple-dark); box-shadow:0 4px 20px rgba(91,45,159,0.3); }
+.sf-note { font-size:11px; color:#C0C0C0; text-align:center; margin-top:10px; }
+
+.sf-success { display:none; text-align:center; padding:32px 0; }
+.sf-success .big { font-size:52px; display:block; margin-bottom:12px; }
+.sf-success h3 { font-size:22px; font-weight:900; color:var(--purple); margin-bottom:8px; }
+.sf-success p { font-size:14px; color:var(--gray); }
+
+/* STORY SECTIONS */
+.story {
+  display:grid; grid-template-columns:1fr 1fr;
+  min-height:480px;
+}
+.story.reverse { }
+.story-panel-dark {
+  background:linear-gradient(135deg, var(--purple-dark), var(--purple));
+  padding:80px 60px; color:white; display:flex; flex-direction:column; justify-content:center;
+}
+.story-panel-light {
+  background:white; padding:80px 60px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.story-panel-gray {
+  background:var(--off-white); padding:80px 60px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.story-tag { font-size:11px; text-transform:uppercase; letter-spacing:2px; font-weight:700; margin-bottom:16px; opacity:0.7; }
+.story-panel-dark .story-tag { color:var(--cyan); }
+.story-panel-light .story-tag { color:var(--purple); }
+.story-panel-gray .story-tag { color:var(--purple); }
+.story-panel-dark h2, .story-panel-dark p { color:white; }
+.story-panel-light h2 { color:var(--text); }
+.story-panel-gray h2 { color:var(--text); }
+h2.story-h { font-size:clamp(24px, 3vw, 40px); font-weight:900; line-height:1.2; margin-bottom:16px; }
+h2.story-h em { font-style:normal; }
+.story-panel-dark h2.story-h em { color:var(--cyan); }
+.story-panel-light h2.story-h em { color:var(--purple); }
+.story-panel-gray h2.story-h em { color:var(--cyan); }
+p.story-p { font-size:16px; line-height:1.7; font-weight:300; }
+.story-panel-dark p.story-p { color:rgba(255,255,255,0.75); }
+.story-panel-light p.story-p { color:var(--gray); }
+.story-panel-gray p.story-p { color:var(--gray); }
+
+/* Big number in story */
+.story-numbers { display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:32px; }
+.sn-item .sn-val { font-size:56px; font-weight:900; line-height:1; }
+.sn-item .sn-lab { font-size:14px; opacity:0.7; margin-top:4px; }
+.story-panel-dark .sn-val { color:var(--cyan); }
+.story-panel-light .sn-val { color:var(--purple); }
+
+/* Feature list in story */
+.story-list { list-style:none; margin-top:24px; }
+.story-list li { display:flex; align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px solid rgba(0,0,0,0.06); font-size:15px; }
+.story-list li:last-child { border:none; }
+.story-list .sl-icon { font-size:20px; flex-shrink:0; margin-top:1px; }
+.story-list .sl-text strong { display:block; font-weight:700; margin-bottom:2px; }
+.story-list .sl-text span { font-size:13px; }
+.story-panel-light .story-list .sl-text strong { color:var(--text); }
+.story-panel-light .story-list .sl-text span { color:var(--gray); }
+.story-panel-dark .story-list li { border-bottom-color:rgba(255,255,255,0.08); }
+.story-panel-dark .story-list .sl-text strong { color:white; }
+.story-panel-dark .story-list .sl-text span { color:rgba(255,255,255,0.6); }
+
+/* CTA band */
+.cta-band {
+  background:linear-gradient(135deg, var(--purple-dark), var(--purple));
+  padding:80px 60px; text-align:center; color:white;
+}
+.cta-band h2 { font-size:clamp(28px, 4vw, 52px); font-weight:900; margin-bottom:16px; }
+.cta-band h2 em { color:var(--cyan); font-style:normal; }
+.cta-band p { font-size:17px; color:rgba(255,255,255,0.75); margin-bottom:36px; max-width:600px; margin-left:auto; margin-right:auto; font-weight:300; }
+.cta-band-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+.btn-band-wpp {
+  background:#25D366; color:white; padding:16px 32px; border-radius:10px;
+  font-family:'UniNeue',sans-serif; font-size:16px; font-weight:700;
+  text-decoration:none; display:inline-block; transition:all 0.2s;
+}
+.btn-band-wpp:hover { background:#1da851; transform:translateY(-2px); }
+.btn-band-email {
+  background:rgba(255,255,255,0.15); color:white; padding:16px 32px; border-radius:10px;
+  font-family:'UniNeue',sans-serif; font-size:16px; font-weight:700;
+  text-decoration:none; display:inline-block; border:2px solid rgba(255,255,255,0.3);
+  transition:all 0.2s;
+}
+.btn-band-email:hover { border-color:white; background:rgba(255,255,255,0.25); }
+
+/* FOOTER */
+footer {
+  background:var(--text); color:rgba(255,255,255,0.5);
+  padding:40px 80px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+}
+footer .footer-brand img { height:28px; display:block; margin-bottom:6px; }
+footer .footer-brand p { font-size:12px; }
+footer .footer-links { display:flex; gap:20px; }
+footer .footer-links a { color:rgba(255,255,255,0.4); text-decoration:none; font-size:13px; transition:color 0.2s; }
+footer .footer-links a:hover { color:var(--cyan); }
+footer .footer-copy { font-size:12px; text-align:right; }
+
+/* Reveal */
+.reveal { opacity:0; transform:translateX(-20px); transition:all 0.7s ease; }
+.reveal.from-right { transform:translateX(20px); }
+.reveal.visible { opacity:1; transform:translateX(0); }
+
+/* Responsive */
+@media (max-width:900px) {
+  nav { padding:0 20px; }
+  .hero-split, .story { grid-template-columns:1fr; }
+  .hero-left, .hero-right { padding:48px 24px; }
+  .story-panel-dark, .story-panel-light, .story-panel-gray { padding:48px 24px; }
+  .sf-row { grid-template-columns:1fr; }
+  .story-numbers { grid-template-columns:1fr 1fr; }
+  .cta-band { padding:60px 24px; }
+  footer { padding:32px 24px; flex-direction:column; align-items:flex-start; }
+  footer .footer-copy { text-align:left; }
+}
+/* Back to top button (LampUP shared component) */
+.back-to-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 90;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #FFFFFF; border: 2px solid #00D4E8;
+  cursor: pointer; padding: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity 0.25s, transform 0.25s ease-out, visibility 0.25s, box-shadow 0.3s, border-color 0.3s, background 0.3s;
+  animation: btt-pulse 2.6s ease-out infinite;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top img { width: 30px; height: 30px; object-fit: contain; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.back-to-top:hover { background: #FFFFFF; border-color: #5B2D9F; box-shadow: 0 14px 36px rgba(91,45,159,0.4), 0 0 0 8px rgba(0,212,232,0.25); transform: translateY(-2px); animation: none; }
+.back-to-top:hover img { transform: translateY(-6px) scale(1.12); }
+.back-to-top:active img { transform: translateY(-2px) scale(0.96); }
+@keyframes btt-pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55); }
+  50% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 14px rgba(0,212,232,0); }
+}
+@media (max-width: 768px) { .back-to-top { right: 16px; bottom: 16px; width: 50px; height: 50px; } .back-to-top img { width: 26px; height: 26px; } }
+@media (prefers-reduced-motion: reduce) { .back-to-top { animation: none; } .back-to-top img, .back-to-top:hover img { transition: none; transform: none; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="../../assets/img/logo-lampup-final-transparente.png" alt="LampUP IT">
+  </div>
+  <div class="nav-right">
+    <a href="mailto:contato@lampup.com.br" class="nav-contact">contato@lampup.com.br</a>
+    <a href="#contato" class="nav-cta-btn">Fale conosco</a>
+  </div>
+</nav>
+
+<!-- HERO SPLIT -->
+<div class="hero-split">
+  <!-- LEFT: Headline -->
+  <div class="hero-left">
+    <div class="hero-left-content">
+      <div class="hero-kicker">🚀 Testing as a Service com IA</div>
+      <h1>
+        Pare de descobrir<br>bugs no <em>cliente.</em>
+      </h1>
+      <p>
+        Seu app merece mais do que cruzar os dedos antes de cada lançamento. Nossos agentes de IA testam tudo, 24 horas por dia — sem você precisar contratar um time inteiro.
+      </p>
+      <div class="hero-left-cta">
+        <a href="#contato" class="btn-cta-white">Quero uma demo gratuita</a>
+        <a href="#historia" class="btn-cta-outline">Saiba mais</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Form -->
+  <div class="hero-right" id="contato">
+    <h2>Deixe seu contato<br><span>e entramos em contato!</span></h2>
+    <div id="sf-wrap">
+      <form class="split-form" id="split-form" novalidate>
+        <div class="sf-row">
+          <div class="sf-group">
+            <label for="s-email">E-mail <span>*</span></label>
+            <input type="email" id="s-email" name="email" placeholder="voce@empresa.com" required>
+          </div>
+          <div class="sf-group">
+            <label for="s-wpp">WhatsApp</label>
+            <input type="tel" id="s-wpp" name="whatsapp" placeholder="(11) 99999-0000">
+          </div>
+        </div>
+        <div class="sf-group">
+          <label for="s-ramo">Ramo de atividade <span>*</span></label>
+          <select id="s-ramo" name="ramo" required>
+            <option value="" disabled selected>Selecione seu setor...</option>
+            <option value="fintech">Fintech / Financeiro</option>
+            <option value="ecommerce">E-commerce / Varejo</option>
+            <option value="healthtech">Healthtech / Saúde</option>
+            <option value="edtech">Edtech / Educação</option>
+            <option value="logistica">Logística</option>
+            <option value="saas">SaaS / Tecnologia</option>
+            <option value="industria">Indústria</option>
+            <option value="agro">Agronegócio</option>
+            <option value="governo">Governo / Público</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+
+        <span class="sf-check-label">Tipos de aplicação</span>
+        <div class="sf-chips" id="sf-chips">
+          <div class="sf-chip" data-val="web">🌐 Web</div>
+          <div class="sf-chip" data-val="mobile-ios">🍎 iOS</div>
+          <div class="sf-chip" data-val="mobile-android">🤖 Android</div>
+          <div class="sf-chip" data-val="api">⚙️ API</div>
+          <div class="sf-chip" data-val="desktop">🖥️ Desktop</div>
+          <div class="sf-chip" data-val="ecommerce">🛒 E-commerce</div>
+          <div class="sf-chip" data-val="erp">📋 ERP/CRM</div>
+          <div class="sf-chip" data-val="integracao">🔗 Integração</div>
+        </div>
+
+        <div class="sf-consent">
+          <div class="sf-cst-row">
+            <input type="checkbox" id="s-lgpd" name="consent_lgpd" required>
+            <span><strong>*</strong> Aceito a <a href="../politica-de-privacidade.html" target="_blank">Política de Privacidade</a> e autorizo contato comercial (LGPD).</span>
+          </div>
+          <div class="sf-cst-row">
+            <input type="checkbox" id="s-mkt" name="consent_mkt">
+            <span>Aceito receber novidades da LampUP IT por e-mail (opcional).</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-split-submit">Solicitar demonstração gratuita →</button>
+        <p class="sf-note">🔒 Dados protegidos por criptografia. LGPD compliant.</p>
+      </form>
+      <div class="sf-success" id="sf-success">
+        <span class="big">🎉</span>
+        <h3>Recebemos seu contato!</h3>
+        <p>Nossa equipe responderá em até <strong>24 horas</strong>.<br>Prepare-se para um software sem bugs.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STORY: O PROBLEMA -->
+<div id="historia">
+<div class="story">
+  <div class="story-panel-dark reveal">
+    <span class="story-tag">A Realidade do Mercado</span>
+    <h2 class="story-h">PMEs com software<br>sem <em>nenhuma</em> proteção<br>de qualidade.</h2>
+    <div class="story-numbers">
+      <div class="sn-item">
+        <div class="sn-val" data-target="8">8M+</div>
+        <div class="sn-lab">PMEs com apps no Brasil sem equipe de QA</div>
+      </div>
+      <div class="sn-item">
+        <div class="sn-val" data-target="10">10x</div>
+        <div class="sn-lab">mais caro corrigir bug em produção vs. durante testes</div>
+      </div>
+      <div class="sn-item">
+        <div class="sn-val">R$12k</div>
+        <div class="sn-lab">custo mínimo mensal de um QA pleno em CLT</div>
+      </div>
+      <div class="sn-item">
+        <div class="sn-val">71x</div>
+        <div class="sn-lab">mais rápido: IA vs. testadores humanos</div>
+      </div>
+    </div>
+  </div>
+  <div class="story-panel-light reveal from-right">
+    <span class="story-tag">Nosso Propósito</span>
+    <h2 class="story-h">Democratizar o acesso<br>à <em>qualidade de software.</em></h2>
+    <p class="story-p">Grandes empresas têm equipes inteiras dedicadas a testar software, com ferramentas caras e processos maduros. Pequenos e médios negócios ficam de fora dessa proteção. A LampUP IT muda isso — trazendo o mesmo nível de qualidade que protege bancos e Big Techs para a sua empresa, via IA.</p>
+    <ul class="story-list">
+      <li>
+        <span class="sl-icon">💡</span>
+        <div class="sl-text">
+          <strong>Nenhuma contratação necessária</strong>
+          <span>Você acessa uma equipe completa de QA como serviço.</span>
+        </div>
+      </li>
+      <li>
+        <span class="sl-icon">⚡</span>
+        <div class="sl-text">
+          <strong>Resultados em horas, não semanas</strong>
+          <span>Agentes autônomos trabalham 24/7 sem parar.</span>
+        </div>
+      </li>
+      <li>
+        <span class="sl-icon">📊</span>
+        <div class="sl-text">
+          <strong>Portal completo de gestão</strong>
+          <span>Evidências, bugs e relatórios para seus stakeholders.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- STORY: O QUE FAZEMOS -->
+<div class="story">
+  <div class="story-panel-gray reveal">
+    <span class="story-tag">Nossos Serviços</span>
+    <h2 class="story-h">Cobertura <em>completa</em><br>de qualidade.</h2>
+    <ul class="story-list">
+      <li><span class="sl-icon">📄</span><div class="sl-text"><strong>Revisão antes do desenvolvimento</strong><span>Apontamos problemas nos requisitos antes do time gastar uma hora codando.</span></div></li>
+      <li><span class="sl-icon">✅</span><div class="sl-text"><strong>Critérios claros do que é "pronto"</strong><span>Sem retrabalho, sem briga entre produto e desenvolvimento.</span></div></li>
+      <li><span class="sl-icon">📝</span><div class="sl-text"><strong>Cenários em português claro</strong><span>Cada teste descrito do jeito que produto e negócio entendem.</span></div></li>
+      <li><span class="sl-icon">⚡</span><div class="sl-text"><strong>Aguenta o pico de cliente?</strong><span>Descobrimos os limites do seu sistema antes da Black Friday descobrir.</span></div></li>
+      <li><span class="sl-icon">🤖</span><div class="sl-text"><strong>Testes 24/7 sem cansar</strong><span>Web, mobile e integrações — testados continuamente por IA.</span></div></li>
+      <li><span class="sl-icon">📊</span><div class="sl-text"><strong>Relatórios para mostrar a quem importa</strong><span>Investidor, cliente, auditor — todos veem o que precisam ver.</span></div></li>
+    </ul>
+  </div>
+  <div class="story-panel-dark reveal from-right">
+    <span class="story-tag">Por que confiar</span>
+    <h2 class="story-h">A mesma rigidez<br>dos <em>grandes bancos.</em></h2>
+    <p class="story-p" style="margin-bottom:24px">Trabalhamos com os mesmos padrões usados por bancos, fintechs e Big Techs para testar software crítico — e mais de <strong style="color:var(--cyan)">1 milhão de profissionais no mundo</strong> seguem essa mesma escola.</p>
+    <ul class="story-list">
+      <li><span class="sl-icon">🏆</span><div class="sl-text"><strong>Time fundador especialista</strong><span>+10 anos resolvendo qualidade de software para grandes empresas.</span></div></li>
+      <li><span class="sl-icon">📋</span><div class="sl-text"><strong>Processo auditável</strong><span>Cada teste tem evidência. Cada decisão tem justificativa.</span></div></li>
+      <li><span class="sl-icon">♾️</span><div class="sl-text"><strong>Encaixa no seu dia a dia</strong><span>Conecta no fluxo do seu time sem virar a operação de cabeça para baixo.</span></div></li>
+      <li><span class="sl-icon">⚖️</span><div class="sl-text"><strong>LGPD por padrão</strong><span>Testes de privacidade e segurança incluídos, sem custo extra.</span></div></li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Pronto para <em>parar</em> de descobrir bugs no cliente?</h2>
+  <p>Fale com nossa equipe e receba uma demonstração gratuita de como a LampUP IT pode transformar a qualidade do seu software.</p>
+  <div class="cta-band-btns">
+    <a href="https://wa.me/5581995994382?text=Olá!%20Quero%20saber%20mais%20sobre%20a%20LampUP%20IT" target="_blank" class="btn-band-wpp">
+      💬 WhatsApp
+    </a>
+    <a href="mailto:contato@lampup.com.br?subject=Quero%20uma%20demo%20da%20LampUP%20IT" class="btn-band-email">
+      📧 Enviar e-mail
+    </a>
+    <a href="#contato" class="btn-band-email">
+      📋 Formulário
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img src="../../assets/img/logo-lampup-final-transparente-para-fundo-azul.png" alt="LampUP IT">
+    <p>Lighting Up Your Business — Barueri/SP</p>
+  </div>
+  <div class="footer-links">
+    <a href="../politica-de-privacidade.html">Política de Privacidade</a>
+    <a href="mailto:contato@lampup.com.br">contato@lampup.com.br</a>
+    <a href="https://wa.me/5581995994382" target="_blank">WhatsApp</a>
+  </div>
+  <div class="footer-copy">© 2026 LampUP IT<br>CNPJ em registro</div>
+</footer>
+
+<script src="../shared/lgpd-cookies.js"></script>
+<script src="../shared/beacon-leads.js" defer></script>
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')), {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Chip toggle
+document.getElementById('sf-chips').addEventListener('click', function(e) {
+  const chip = e.target.closest('.sf-chip');
+  if(chip) chip.classList.toggle('on');
+});
+
+// Form submit — conectado ao Beacon
+document.getElementById('split-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const email = document.getElementById('s-email').value.trim();
+  const lgpd = document.getElementById('s-lgpd').checked;
+  const ramo = document.getElementById('s-ramo').value;
+  if(!email || !lgpd || !ramo) { alert('Por favor, preencha e-mail, ramo de atividade e aceite a Política de Privacidade.'); return; }
+  const btn = this.querySelector('button');
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  const chips = [...document.querySelectorAll('.sf-chip.on')].map(c => c.dataset.val);
+  const payload = {
+    email,
+    whatsapp: document.getElementById('s-wpp').value,
+    ramo_atividade: ramo,
+    tipo_aplicacao: chips.join(', '),
+    origem: 'landing-modelo-4',
+  };
+  try {
+    await BeaconLeads.submit(payload);
+    this.style.display = 'none';
+    document.getElementById('sf-success').style.display = 'block';
+  } catch (err) {
+    console.error('[BeaconLeads]', err);
+    alert('Não foi possível enviar agora. Tente novamente em instantes.');
+    btn.disabled = false; btn.textContent = 'Enviar';
+  }
+});
+
+// WhatsApp mask
+document.getElementById('s-wpp').addEventListener('input', function(e) {
+  let v = e.target.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>=7) v=`(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  else if(v.length>=3) v=`(${v.slice(0,2)}) ${v.slice(2)}`;
+  e.target.value = v;
+});
+</script>
+<button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+  <img src="../../assets/img/simbolo-lampup-final-transparente.png" alt="">
+</button>
+<script>
+(function(){
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  window.addEventListener('scroll', () => { btn.classList.toggle('visible', window.scrollY > 400); }, { passive: true });
+})();
+</script>
+</body>
+</html>

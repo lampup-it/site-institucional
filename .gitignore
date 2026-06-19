@@ -1,0 +1,37 @@
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Editor / IDE
+.vscode/
+*.sublime-*
+
+# Logs
+*.log
+npm-debug.log*
+
+# Vercel
+.vercel/
+
+# Node (caso entremos com build tools no Modelo 2)
+node_modules/
+dist/
+.cache/
+
+# Sensíveis
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Backup / temp
+*.bak
+*.tmp
+*.orig

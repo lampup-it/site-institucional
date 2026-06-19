@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-lampup.png">
+<title>LampUP IT — Testes de Software com IA | TaaS para PMEs</title>
+<meta name="description" content="Plataforma de Testing as a Service com agentes de IA. Teste seu aplicativo sem precisar de equipe de QA.">
+<style>
+/* ─── MODELO 3: GRADIENT FLOW ─── */
+/* Gradientes fluidos roxo→cyan, formas orgânicas, glassmorphism, formulário inline no hero */
+
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBlack.ttf') format('truetype'); font-weight:900; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBold.ttf') format('truetype'); font-weight:700; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBook.ttf') format('truetype'); font-weight:400; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueLight.ttf') format('truetype'); font-weight:300; font-display:swap; }
+
+:root {
+  --cyan: #00D4E8;
+  --purple: #5B2D9F;
+  --purple-dark: #3D1F6B;
+  --white: #FFFFFF;
+  --text: #1A1A2E;
+  --gray: #666;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'UniNeue','Segoe UI',Arial,sans-serif; color:var(--text); overflow-x:hidden; }
+
+/* BLOB BACKGROUND */
+.blob-bg {
+  position:fixed; top:0; left:0; right:0; bottom:0;
+  background:linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 45%, #1A6080 75%, #006680 100%);
+  z-index:-2;
+}
+.blob {
+  position:fixed; border-radius:50%; filter:blur(80px); opacity:0.4; z-index:-1;
+  animation:float 8s ease-in-out infinite;
+}
+.blob-1 { width:600px; height:600px; background:rgba(0,212,232,0.3); top:-100px; right:-100px; animation-delay:0s; }
+.blob-2 { width:400px; height:400px; background:rgba(91,45,159,0.5); bottom:-50px; left:-80px; animation-delay:-3s; }
+.blob-3 { width:300px; height:300px; background:rgba(0,212,232,0.2); top:40%; left:40%; animation-delay:-5s; }
+@keyframes float { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-30px) scale(1.05)} 66%{transform:translate(-20px,20px) scale(0.95)} }
+
+/* SECTIONS ALTERNATE */
+.section-light { background:rgba(255,255,255,0.97); }
+.section-colored {
+  background:linear-gradient(135deg, rgba(61,31,107,0.95), rgba(91,45,159,0.9));
+  color:white;
+}
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  padding:16px 60px; display:flex; align-items:center; justify-content:space-between;
+  background:rgba(61,31,107,0.6); backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.nav-logo img { height:36px; }
+.nav-cta {
+  background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3);
+  padding:10px 24px; border-radius:100px; font-family:'UniNeue',sans-serif;
+  font-size:14px; font-weight:700; text-decoration:none; transition:all 0.2s;
+  backdrop-filter:blur(10px);
+}
+.nav-cta:hover { background:rgba(255,255,255,0.25); border-color:white; }
+
+/* HERO — GRADIENT GLASS */
+.hero {
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:100px 24px 60px; text-align:center; color:white;
+}
+.hero-inner { max-width:700px; }
+.hero-tag {
+  display:inline-block; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25);
+  color:rgba(255,255,255,0.9); padding:8px 20px; border-radius:100px;
+  font-size:13px; margin-bottom:28px; backdrop-filter:blur(8px); letter-spacing:1px;
+}
+.hero h1 {
+  font-size:clamp(40px, 6.5vw, 88px); font-weight:900; line-height:1.05;
+  margin-bottom:20px; text-shadow:0 4px 20px rgba(0,0,0,0.3);
+}
+.hero h1 em { font-style:normal; color:var(--cyan); }
+.hero p {
+  font-size:clamp(16px, 2vw, 20px); color:rgba(255,255,255,0.8);
+  line-height:1.7; max-width:580px; margin:0 auto 48px; font-weight:300;
+}
+
+/* GLASS FORM */
+.glass-form-wrap {
+  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2);
+  border-radius:24px; padding:36px; backdrop-filter:blur(20px);
+  max-width:600px; margin:0 auto; text-align:left;
+}
+.glass-form-wrap h3 { font-size:18px; font-weight:700; color:white; text-align:center; margin-bottom:24px; }
+.gf-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.gf-group { margin-bottom:14px; }
+.gf-group label { display:block; font-size:12px; color:rgba(255,255,255,0.7); margin-bottom:6px; font-weight:700; letter-spacing:0.5px; }
+.gf-group label span { color:var(--cyan); }
+.gf-group input, .gf-group select {
+  width:100%; padding:12px 16px;
+  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2);
+  border-radius:10px; color:white; font-family:'UniNeue',sans-serif; font-size:14px;
+  transition:all 0.2s; appearance:none;
+}
+.gf-group select option { background:#3D1F6B; }
+.gf-group input:focus, .gf-group select:focus {
+  outline:none; border-color:var(--cyan); background:rgba(0,212,232,0.1);
+  box-shadow:0 0 0 3px rgba(0,212,232,0.2);
+}
+.gf-group input::placeholder { color:rgba(255,255,255,0.3); }
+
+.gf-apps { display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; margin-bottom:14px; }
+.gf-app-btn {
+  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+  border-radius:8px; padding:8px 4px; text-align:center; cursor:pointer;
+  font-family:'UniNeue',sans-serif; font-size:11px; color:rgba(255,255,255,0.7);
+  transition:all 0.2s; user-select:none;
+}
+.gf-app-btn.selected { background:rgba(0,212,232,0.2); border-color:var(--cyan); color:white; }
+.gf-app-btn:hover { border-color:rgba(0,212,232,0.5); }
+.gf-app-btn .app-icon { display:block; font-size:18px; margin-bottom:2px; }
+
+.gf-consent { margin:16px 0; }
+.gf-consent-row { display:flex; align-items:flex-start; gap:8px; margin-bottom:8px; }
+.gf-consent-row input[type="checkbox"] { accent-color:var(--cyan); flex-shrink:0; margin-top:2px; }
+.gf-consent-row span { font-size:11px; color:rgba(255,255,255,0.6); line-height:1.5; }
+.gf-consent-row a { color:var(--cyan); }
+
+.btn-glass-submit {
+  width:100%; padding:16px;
+  background:linear-gradient(135deg, var(--cyan), #00A0B0);
+  color:#0A0A1A; border:none; border-radius:12px;
+  font-family:'UniNeue',sans-serif; font-size:17px; font-weight:900;
+  cursor:pointer; transition:all 0.2s; margin-top:4px;
+}
+.btn-glass-submit:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(0,212,232,0.4); }
+
+.glass-success { display:none; text-align:center; padding:32px 0; }
+.glass-success .big-icon { font-size:56px; display:block; margin-bottom:12px; }
+.glass-success h3 { font-size:24px; font-weight:900; color:var(--cyan); margin-bottom:8px; }
+.glass-success p { color:rgba(255,255,255,0.8); }
+
+/* STATS */
+.stats-row {
+  background:rgba(0,0,0,0.2); border-top:1px solid rgba(255,255,255,0.08);
+  padding:40px 60px; display:flex; justify-content:center; gap:80px; flex-wrap:wrap;
+  color:white; text-align:center;
+}
+.sr-item .sr-number { font-size:48px; font-weight:900; color:var(--cyan); line-height:1; }
+.sr-item .sr-label { font-size:13px; color:rgba(255,255,255,0.6); margin-top:4px; }
+
+/* FEATURES (LIGHT SECTION) */
+.features-section { padding:100px 60px; }
+.features-inner { max-width:1100px; margin:0 auto; }
+.section-label { font-size:12px; text-transform:uppercase; letter-spacing:3px; color:var(--purple); font-weight:700; margin-bottom:12px; display:block; }
+.section-title { font-size:clamp(28px, 4vw, 48px); font-weight:900; color:var(--text); margin-bottom:16px; }
+.section-title em { color:var(--purple); font-style:normal; }
+.section-desc { font-size:17px; color:var(--gray); max-width:600px; margin-bottom:56px; font-weight:300; line-height:1.6; }
+
+.features-masonry { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
+.feat-card {
+  border-radius:20px; padding:28px; transition:all 0.3s;
+  border:1px solid rgba(91,45,159,0.12);
+}
+.feat-card:nth-child(1) { background:linear-gradient(135deg, rgba(91,45,159,0.06), rgba(0,212,232,0.04)); }
+.feat-card:nth-child(2) { background:white; box-shadow:0 4px 20px rgba(0,0,0,0.08); }
+.feat-card:nth-child(3) { background:linear-gradient(135deg, rgba(0,212,232,0.06), rgba(91,45,159,0.04)); }
+.feat-card:nth-child(4) { background:white; box-shadow:0 4px 20px rgba(0,0,0,0.08); }
+.feat-card:nth-child(5) { background:linear-gradient(135deg, rgba(91,45,159,0.08), transparent); }
+.feat-card:nth-child(6) { background:linear-gradient(135deg, rgba(0,212,232,0.08), transparent); }
+.feat-card:hover { transform:translateY(-6px); box-shadow:0 12px 40px rgba(91,45,159,0.12); border-color:var(--purple); }
+.feat-icon { font-size:36px; margin-bottom:14px; }
+.feat-card h3 { font-size:18px; font-weight:700; color:var(--text); margin-bottom:8px; }
+.feat-card p { font-size:14px; color:var(--gray); line-height:1.6; }
+.feat-pill { display:inline-block; margin-top:12px; background:rgba(91,45,159,0.1); color:var(--purple); font-size:11px; padding:3px 10px; border-radius:10px; font-weight:700; }
+
+/* TARGET (COLORED SECTION) */
+.target-section { padding:80px 60px; text-align:center; }
+.target-section h2 { font-size:clamp(28px, 4vw, 48px); font-weight:900; margin-bottom:16px; }
+.target-section h2 em { color:var(--cyan); font-style:normal; }
+.target-section p { font-size:17px; color:rgba(255,255,255,0.75); max-width:600px; margin:0 auto 48px; font-weight:300; }
+.target-pills { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+.target-pill {
+  background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);
+  color:white; padding:12px 20px; border-radius:100px; font-size:15px; font-weight:700;
+  backdrop-filter:blur(8px); transition:all 0.2s;
+}
+.target-pill:hover { background:rgba(0,212,232,0.2); border-color:var(--cyan); color:var(--cyan); }
+
+/* FOOTER */
+footer {
+  background:var(--purple-dark); color:rgba(255,255,255,0.6);
+  padding:40px 60px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+}
+footer .footer-logo img { height:28px; }
+footer .footer-links { display:flex; gap:20px; }
+footer .footer-links a { color:rgba(255,255,255,0.5); text-decoration:none; font-size:13px; transition:color 0.2s; }
+footer .footer-links a:hover { color:var(--cyan); }
+footer .footer-copy { font-size:12px; color:rgba(255,255,255,0.3); }
+
+/* Reveal */
+.reveal { opacity:0; transform:translateY(24px); transition:all 0.6s; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* Responsive */
+@media (max-width:900px) {
+  nav { padding:14px 20px; }
+  .hero { padding:100px 16px 48px; }
+  .glass-form-wrap { padding:24px; }
+  .gf-row { grid-template-columns:1fr; }
+  .gf-apps { grid-template-columns:repeat(2,1fr); }
+  .stats-row { padding:32px 20px; gap:40px; }
+  .features-section { padding:60px 20px; }
+  .features-masonry { grid-template-columns:1fr; }
+  .target-section { padding:60px 20px; }
+  footer { padding:32px 20px; flex-direction:column; align-items:flex-start; }
+}
+/* Back to top button (LampUP shared component) */
+.back-to-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 90;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #FFFFFF; border: 2px solid #00D4E8;
+  cursor: pointer; padding: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity 0.25s, transform 0.25s ease-out, visibility 0.25s, box-shadow 0.3s, border-color 0.3s, background 0.3s;
+  animation: btt-pulse 2.6s ease-out infinite;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top img { width: 30px; height: 30px; object-fit: contain; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.back-to-top:hover { background: #FFFFFF; border-color: #5B2D9F; box-shadow: 0 14px 36px rgba(91,45,159,0.4), 0 0 0 8px rgba(0,212,232,0.25); transform: translateY(-2px); animation: none; }
+.back-to-top:hover img { transform: translateY(-6px) scale(1.12); }
+.back-to-top:active img { transform: translateY(-2px) scale(0.96); }
+@keyframes btt-pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55); }
+  50% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 14px rgba(0,212,232,0); }
+}
+@media (max-width: 768px) { .back-to-top { right: 16px; bottom: 16px; width: 50px; height: 50px; } .back-to-top img { width: 26px; height: 26px; } }
+@media (prefers-reduced-motion: reduce) { .back-to-top { animation: none; } .back-to-top img, .back-to-top:hover img { transition: none; transform: none; } }
+</style>
+</head>
+<body>
+
+<div class="blob-bg"></div>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#">
+    <img src="../../assets/img/logo-lampup-final-transparente-para-fundo-azul.png" alt="LampUP IT" class="nav-logo" style="height:36px">
+  </a>
+  <a href="#form-hero" class="nav-cta">Solicitar demo gratuita</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">✨ Testes com Agentes Autônomos de IA</div>
+    <h1>Qualidade de software<br>que <em>lança</em> seu negócio.</h1>
+    <p>Pare de lançar bugs para produção. Nossos agentes de IA testam seu aplicativo 24h por dia — sem equipe, sem complicação.</p>
+
+    <div class="glass-form-wrap" id="form-hero">
+      <h3>🚀 Quero uma demonstração gratuita</h3>
+      <form id="glass-form" novalidate>
+        <div class="gf-row">
+          <div class="gf-group">
+            <label for="g-email">E-mail <span>*</span></label>
+            <input type="email" id="g-email" name="email" placeholder="seu@email.com.br" required>
+          </div>
+          <div class="gf-group">
+            <label for="g-whatsapp">WhatsApp</label>
+            <input type="tel" id="g-whatsapp" name="whatsapp" placeholder="(11) 99999-0000">
+          </div>
+        </div>
+        <div class="gf-group">
+          <label for="g-ramo">Ramo de atividade <span>*</span></label>
+          <select id="g-ramo" name="ramo" required>
+            <option value="" disabled selected>Selecione seu ramo...</option>
+            <option value="fintech">Fintech / Financeiro</option>
+            <option value="ecommerce">E-commerce / Varejo</option>
+            <option value="healthtech">Healthtech / Saúde</option>
+            <option value="edtech">Edtech / Educação</option>
+            <option value="logistica">Logística</option>
+            <option value="saas">SaaS / Tech</option>
+            <option value="industria">Indústria</option>
+            <option value="agro">Agronegócio</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+
+        <div class="gf-group">
+          <label>Tipo de aplicação</label>
+          <div class="gf-apps" id="gf-apps">
+            <div class="gf-app-btn" data-value="web"><span class="app-icon">🌐</span>Web</div>
+            <div class="gf-app-btn" data-value="ios"><span class="app-icon">🍎</span>iOS</div>
+            <div class="gf-app-btn" data-value="android"><span class="app-icon">🤖</span>Android</div>
+            <div class="gf-app-btn" data-value="api"><span class="app-icon">⚙️</span>API</div>
+            <div class="gf-app-btn" data-value="desktop"><span class="app-icon">🖥️</span>Desktop</div>
+            <div class="gf-app-btn" data-value="ecommerce"><span class="app-icon">🛒</span>E-comm</div>
+            <div class="gf-app-btn" data-value="erp"><span class="app-icon">📋</span>ERP/CRM</div>
+            <div class="gf-app-btn" data-value="integracao"><span class="app-icon">🔗</span>Integração</div>
+          </div>
+        </div>
+
+        <div class="gf-consent">
+          <div class="gf-consent-row">
+            <input type="checkbox" id="g-lgpd" name="consent_lgpd" required>
+            <span><strong>*</strong> Li e aceito a <a href="../politica-de-privacidade.html" target="_blank">Política de Privacidade</a> e autorizo contato comercial (LGPD).</span>
+          </div>
+          <div class="gf-consent-row">
+            <input type="checkbox" id="g-mkt" name="consent_mkt">
+            <span>Aceito receber novidades por e-mail (opcional).</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-glass-submit">Quero minha demonstração grátis ⚡</button>
+      </form>
+
+      <div class="glass-success" id="g-success">
+        <span class="big-icon">🎉</span>
+        <h3>Você está na fila VIP!</h3>
+        <p>Nossa equipe retornará em até <strong style="color:var(--cyan)">24 horas</strong>.<br>Prepare-se para um software sem bugs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="sr-item"><div class="sr-number">71x</div><div class="sr-label">mais rápido que testes manuais</div></div>
+  <div class="sr-item"><div class="sr-number">24/7</div><div class="sr-label">agentes ativos sem parar</div></div>
+  <div class="sr-item"><div class="sr-number">100%</div><div class="sr-label">LGPD compliant</div></div>
+  <div class="sr-item"><div class="sr-number">0</div><div class="sr-label">contratações necessárias</div></div>
+</div>
+
+<!-- FEATURES (LIGHT) -->
+<section class="features-section section-light">
+  <div class="features-inner">
+    <span class="section-label reveal">O que fazemos</span>
+    <h2 class="section-title reveal">Testes completos,<br>de <em>ponta a ponta.</em></h2>
+    <p class="section-desc reveal">Do documento ao relatório final — cobrimos cada etapa da qualidade do seu software, com a mesma rigidez das maiores empresas do mundo.</p>
+    <div class="features-masonry">
+      <div class="feat-card reveal">
+        <div class="feat-icon">📄</div>
+        <h3>Revisão antes do desenvolvimento</h3>
+        <p>Apontamos lacunas e ambiguidades nos requisitos antes do time gastar uma linha de código no caminho errado.</p>
+        <span class="feat-pill">Economia</span>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">✅</div>
+        <h3>Critérios claros do que é "pronto"</h3>
+        <p>Sem retrabalho, sem briga entre produto e desenvolvimento. Conformidade LGPD e regulação do seu setor incluídas.</p>
+        <span class="feat-pill">Conformidade</span>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">📝</div>
+        <h3>Cenários em português claro</h3>
+        <p>Cada teste é escrito do jeito que produto, comercial e suporte entendem. Sem caixa-preta, sem jargão.</p>
+        <span class="feat-pill">Transparência</span>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">⚡</div>
+        <h3>Performance & Stress</h3>
+        <p>Descubra os limites do seu sistema antes do cliente descobrir. Load, stress e spike tests automatizados.</p>
+        <span class="feat-pill">k6 / JMeter</span>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">🤖</div>
+        <h3>Automação E2E</h3>
+        <p>Suítes completas de testes automatizados para web, mobile e API — executadas e mantidas por IA.</p>
+        <span class="feat-pill">Playwright</span>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">📊</div>
+        <h3>Dashboard de Resultados</h3>
+        <p>Portal completo com execuções, bugs, evidências e relatórios prontos para gestores e stakeholders.</p>
+        <span class="feat-pill">Portal SaaS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET (COLORED) -->
+<section class="target-section section-colored">
+  <h2 class="reveal">Feito para quem <em>constrói</em> software,<br>não para quem só fala sobre ele.</h2>
+  <p class="reveal">LampUP IT é ideal para empresas com aplicações digitais que não têm — ou não querem ter — uma equipe interna de QA.</p>
+  <div class="target-pills reveal">
+    <div class="target-pill">🚀 Startups</div>
+    <div class="target-pill">🏪 E-commerces</div>
+    <div class="target-pill">💰 Fintechs</div>
+    <div class="target-pill">🏥 Healthtechs</div>
+    <div class="target-pill">📚 Edtechs</div>
+    <div class="target-pill">🌾 Agrotechs</div>
+    <div class="target-pill">🏭 Indústria</div>
+    <div class="target-pill">🏢 PMEs com apps</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="../../assets/img/logo-lampup-final-transparente-para-fundo-azul.png" alt="LampUP IT">
+  </div>
+  <div class="footer-links">
+    <a href="../politica-de-privacidade.html">Política de Privacidade</a>
+    <a href="mailto:contato@lampup.com.br">contato@lampup.com.br</a>
+    <a href="https://wa.me/5581995994382" target="_blank">WhatsApp</a>
+  </div>
+  <div class="footer-copy">© 2026 LampUP IT — Barueri/SP</div>
+</footer>
+
+<script src="../shared/lgpd-cookies.js"></script>
+<script src="../shared/beacon-leads.js" defer></script>
+<script>
+// Reveal
+const obs = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')), {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// App buttons toggle
+document.getElementById('gf-apps').addEventListener('click', function(e) {
+  const btn = e.target.closest('.gf-app-btn');
+  if(btn) btn.classList.toggle('selected');
+});
+
+// Form submit — conectado ao Beacon (chips precisam de payload customizado)
+document.getElementById('glass-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const email = document.getElementById('g-email').value.trim();
+  const lgpd = document.getElementById('g-lgpd').checked;
+  const ramo = document.getElementById('g-ramo').value;
+  if(!email || !lgpd || !ramo) { alert('Por favor, preencha e-mail, ramo de atividade e aceite a Política de Privacidade.'); return; }
+  const btn = this.querySelector('button');
+  btn.disabled = true; btn.textContent = '⚡ Enviando...';
+  const selectedApps = [...document.querySelectorAll('.gf-app-btn.selected')].map(b => b.dataset.value);
+  const payload = {
+    email,
+    whatsapp: document.getElementById('g-whatsapp').value,
+    ramo_atividade: ramo,
+    tipo_aplicacao: selectedApps.join(', '),
+    origem: 'landing-modelo-3',
+  };
+  try {
+    await BeaconLeads.submit(payload);
+    this.style.display = 'none';
+    document.getElementById('g-success').style.display = 'block';
+  } catch (err) {
+    console.error('[BeaconLeads]', err);
+    alert('Não foi possível enviar agora. Tente novamente em instantes.');
+    btn.disabled = false; btn.textContent = '⚡ Enviar';
+  }
+});
+
+// WhatsApp mask
+document.getElementById('g-whatsapp').addEventListener('input', function(e) {
+  let v = e.target.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>=7) v=`(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  else if(v.length>=3) v=`(${v.slice(0,2)}) ${v.slice(2)}`;
+  e.target.value = v;
+});
+</script>
+<button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+  <img src="../../assets/img/simbolo-lampup-final-transparente.png" alt="">
+</button>
+<script>
+(function(){
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  window.addEventListener('scroll', () => { btn.classList.toggle('visible', window.scrollY > 400); }, { passive: true });
+})();
+</script>
+</body>
+</html>

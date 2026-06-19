@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LampUP IT — Qualidade de software como serviço para sua empresa. Em breve.">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="LampUP IT — Em breve">
+<meta property="og:description" content="Testes de software com IA para pequenas e médias empresas. Sem equipe de QA. Só resultados.">
+<meta property="og:url" content="https://lampup.com.br">
+<meta property="og:image" content="https://lampup.com.br/og-image.png">
+<meta property="og:locale" content="pt_BR">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LampUP IT — Em breve">
+<meta name="twitter:description" content="Testes de software com IA para pequenas e médias empresas.">
+
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon-lampup.png">
+<link rel="canonical" href="https://lampup.com.br">
+
+<title>LampUP IT — Em breve</title>
+
+<style>
+@font-face { font-family:'UniNeue'; src:url('/fonts/UniNeueBlack.ttf') format('truetype'); font-weight:900; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('/fonts/UniNeueBold.ttf') format('truetype'); font-weight:700; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('/fonts/UniNeueBook.ttf') format('truetype'); font-weight:400; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('/fonts/UniNeueLight.ttf') format('truetype'); font-weight:300; font-display:swap; }
+
+:root {
+  --cyan: #00D4E8;
+  --purple: #5B2D9F;
+  --purple-dark: #3D1F6B;
+  --text: #1A1A2E;
+  --gray: #6B7280;
+  --gray-light: #9CA3AF;
+  --white: #FFFFFF;
+  --off-white: #F8F7FC;
+  --border: #E5E7EB;
+  --success: #10B981;
+  --error: #EF4444;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; }
+body {
+  font-family:'UniNeue','Segoe UI',Arial,sans-serif;
+  background:var(--white); color:var(--text);
+  overflow-x:hidden; line-height:1.5;
+}
+
+/* BACKGROUND DECORATIVO */
+.bg-shape {
+  position:fixed; pointer-events:none; z-index:0;
+  border-radius:50%; filter:blur(80px);
+}
+.bg-shape-1 {
+  top:-200px; right:-200px; width:600px; height:600px;
+  background:radial-gradient(circle, rgba(91,45,159,0.12) 0%, transparent 70%);
+}
+.bg-shape-2 {
+  bottom:-300px; left:-200px; width:700px; height:700px;
+  background:radial-gradient(circle, rgba(0,212,232,0.08) 0%, transparent 70%);
+}
+
+/* LAYOUT */
+.wrap {
+  position:relative; z-index:1;
+  min-height:100vh;
+  display:flex; flex-direction:column;
+  padding:32px 24px;
+  max-width:1100px; margin:0 auto;
+}
+
+header.top {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:auto;
+}
+.logo img { height:40px; display:block; }
+.top-meta {
+  font-size:13px; color:var(--gray); font-weight:400;
+}
+
+main.hero {
+  margin:auto 0; padding:48px 0;
+  text-align:center;
+}
+
+.badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(0,212,232,0.1); color:#0099AA;
+  padding:8px 16px; border-radius:100px;
+  font-size:13px; font-weight:700; letter-spacing:0.5px;
+  margin-bottom:28px;
+  border:1px solid rgba(0,212,232,0.25);
+}
+.badge .dot {
+  width:8px; height:8px; border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 0 0 rgba(0,212,232,0.7);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow:0 0 0 0 rgba(0,212,232,0.7); }
+  70% { box-shadow:0 0 0 12px rgba(0,212,232,0); }
+  100% { box-shadow:0 0 0 0 rgba(0,212,232,0); }
+}
+
+h1 {
+  font-size:clamp(36px, 6vw, 72px);
+  font-weight:900; line-height:1.05;
+  letter-spacing:-1px;
+  margin-bottom:24px;
+}
+h1 .accent { color:var(--purple); }
+h1 .gradient {
+  background:linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.tagline {
+  font-size:clamp(16px, 2vw, 20px);
+  color:var(--gray); font-weight:300;
+  max-width:580px; margin:0 auto 16px;
+}
+.subtag {
+  font-size:14px; color:var(--gray-light); font-weight:400;
+  max-width:560px; margin:0 auto 48px;
+}
+
+/* FORM */
+.form-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:32px;
+  max-width:520px; margin:0 auto;
+  box-shadow:0 4px 32px rgba(91,45,159,0.06);
+  text-align:left;
+}
+.form-card h2 {
+  font-size:18px; font-weight:700;
+  color:var(--text); margin-bottom:6px;
+}
+.form-card .form-sub {
+  font-size:13px; color:var(--gray); font-weight:400; margin-bottom:20px;
+}
+form .field { margin-bottom:14px; }
+form label {
+  display:block; font-size:12px; font-weight:700;
+  color:var(--text); margin-bottom:6px; letter-spacing:0.3px;
+}
+form input[type="email"], form input[type="text"] {
+  width:100%; padding:12px 14px;
+  border:1px solid var(--border); border-radius:8px;
+  font-family:inherit; font-size:14px;
+  background:var(--white); color:var(--text);
+  transition:border-color 0.2s, box-shadow 0.2s;
+}
+form input:focus {
+  outline:none; border-color:var(--purple);
+  box-shadow:0 0 0 3px rgba(91,45,159,0.1);
+}
+form input.invalid {
+  border-color:var(--error);
+  background:rgba(239,68,68,0.03);
+}
+form input.invalid:focus {
+  box-shadow:0 0 0 3px rgba(239,68,68,0.12);
+}
+.field-error {
+  display:none;
+  font-size:12px; color:var(--error); font-weight:400;
+  margin-top:6px; line-height:1.4;
+}
+.field-error.show { display:block; }
+
+.consent {
+  display:flex; gap:10px; align-items:flex-start;
+  font-size:12px; color:var(--gray); font-weight:400;
+  margin:16px 0 20px; line-height:1.5;
+}
+.consent input { margin-top:2px; flex-shrink:0; accent-color:var(--purple); }
+.consent.invalid { color:var(--error); }
+.consent.invalid input { outline:2px solid var(--error); outline-offset:2px; border-radius:3px; }
+.consent a { color:var(--purple); text-decoration:underline; }
+.consent-error {
+  display:none;
+  font-size:12px; color:var(--error); font-weight:400;
+  margin:-12px 0 18px 26px; line-height:1.4;
+}
+.consent-error.show { display:block; }
+
+button[type="submit"] {
+  width:100%; padding:14px;
+  background:var(--purple); color:white; border:none;
+  border-radius:8px; font-family:inherit; font-size:15px; font-weight:700;
+  cursor:pointer; transition:all 0.2s;
+}
+button[type="submit"]:hover:not(:disabled) {
+  background:var(--purple-dark); transform:translateY(-1px);
+  box-shadow:0 6px 20px rgba(91,45,159,0.3);
+}
+button[type="submit"]:disabled {
+  background:var(--gray-light); cursor:not-allowed;
+}
+
+/* Thank-you panel — substitui o form após sucesso */
+.thanks {
+  display:none;
+  text-align:center;
+  padding:8px 4px 4px;
+  animation:thanks-in 0.5s ease-out;
+}
+.thanks.show { display:block; }
+@keyframes thanks-in {
+  from { opacity:0; transform:translateY(8px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.thanks-icon {
+  width:88px; height:88px; margin:0 auto 20px;
+  border-radius:50%;
+  background:linear-gradient(135deg, rgba(91,45,159,0.12) 0%, rgba(0,212,232,0.18) 100%);
+  display:flex; align-items:center; justify-content:center;
+  border:2px solid rgba(91,45,159,0.2);
+  animation:thanks-icon-glow 2.4s ease-in-out infinite;
+}
+.thanks-icon img { width:52px; height:52px; object-fit:contain; }
+@keyframes thanks-icon-glow {
+  0%, 100% { box-shadow:0 0 0 0 rgba(0,212,232,0.45); }
+  50%      { box-shadow:0 0 0 14px rgba(0,212,232,0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .thanks-icon { animation:none; }
+}
+.thanks h2 {
+  font-size:24px; font-weight:900; color:var(--text);
+  margin-bottom:12px; line-height:1.2;
+}
+.thanks .thanks-text {
+  font-size:15px; color:var(--gray); font-weight:400;
+  line-height:1.6; margin-bottom:20px;
+  max-width:380px; margin-left:auto; margin-right:auto;
+}
+.thanks .thanks-email {
+  display:inline-block;
+  background:var(--off-white);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:10px 16px;
+  font-size:14px; color:var(--purple); font-weight:700;
+  margin-bottom:24px;
+  word-break:break-all;
+}
+.thanks-actions {
+  display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+}
+.btn-secondary {
+  background:transparent; color:var(--purple);
+  border:1px solid var(--purple);
+  padding:10px 20px; border-radius:8px;
+  font-family:inherit; font-size:14px; font-weight:700;
+  cursor:pointer; transition:all 0.2s;
+}
+.btn-secondary:hover {
+  background:var(--purple); color:white;
+}
+
+/* FOOTER */
+footer.bottom {
+  margin-top:auto; padding-top:48px;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:16px;
+  font-size:12px; color:var(--gray-light);
+}
+footer.bottom a {
+  color:var(--gray); text-decoration:none; margin-right:18px;
+  transition:color 0.2s;
+}
+footer.bottom a:hover { color:var(--purple); }
+
+@media (max-width:640px) {
+  .wrap { padding:24px 16px; }
+  .form-card { padding:24px; }
+  header.top { flex-direction:column; gap:8px; align-items:flex-start; }
+  footer.bottom { flex-direction:column; align-items:flex-start; }
+  footer.bottom .links { margin-bottom:8px; }
+}
+</style>
+</head>
+<body>
+<div class="bg-shape bg-shape-1"></div>
+<div class="bg-shape bg-shape-2"></div>
+
+<div class="wrap">
+  <header class="top">
+    <div class="logo">
+      <img src="/logo-lampup.png" alt="LampUP IT" width="160" height="40">
+    </div>
+    <div class="top-meta">Lighting up your business</div>
+  </header>
+
+  <main class="hero">
+    <div class="badge">
+      <span class="dot"></span>
+      Em breve
+    </div>
+
+    <h1>Qualidade de software <span class="gradient">com IA</span>,<br>sem equipe de QA.</h1>
+
+    <p class="tagline">
+      Estamos preparando uma plataforma de testes como serviço (TaaS) para pequenas e médias empresas que precisam de qualidade real sem montar uma equipe inteira.
+    </p>
+    <p class="subtag">
+      Cadastre seu e-mail e seja o primeiro a saber quando lançarmos.
+    </p>
+
+    <div class="form-card" id="form-card">
+      <div id="form-content">
+      <h2>Avise-me no lançamento</h2>
+      <p class="form-sub">Sem spam. Só um aviso quando estiver no ar.</p>
+
+      <form id="lead-form" novalidate>
+        <div class="field">
+          <label for="nome">Nome (opcional)</label>
+          <input type="text" id="nome" name="nome" autocomplete="given-name" maxlength="80">
+        </div>
+        <div class="field">
+          <label for="email">E-mail *</label>
+          <input type="email" id="email" name="email" required autocomplete="email" maxlength="120"
+                 aria-describedby="email-error" aria-required="true">
+          <small class="field-error" id="email-error" role="alert" aria-live="polite"></small>
+        </div>
+
+        <div class="consent" id="consent-wrapper">
+          <input type="checkbox" id="aceite_lgpd" name="aceite_lgpd" required aria-required="true"
+                 aria-describedby="consent-error">
+          <label for="aceite_lgpd" style="margin:0; font-size:12px; font-weight:400; color:inherit; letter-spacing:0;">
+            Concordo em receber comunicações da LampUP IT sobre o lançamento e atualizações. Veja nossa <a href="/politica-de-privacidade.html">Política de Privacidade</a>.
+          </label>
+        </div>
+        <small class="consent-error" id="consent-error" role="alert" aria-live="polite"></small>
+
+        <button type="submit" id="btn-submit">Quero ser avisado</button>
+      </form>
+      </div>
+
+      <div class="thanks" id="thanks-panel" role="status" aria-live="polite">
+        <div class="thanks-icon" aria-hidden="true">
+          <img src="/simbolo-lampup.png" alt="">
+        </div>
+        <h2>Cadastro confirmado!</h2>
+        <p class="thanks-text">
+          Obrigado por demonstrar interesse na LampUP IT. Assim que estivermos no ar, você será um dos primeiros a saber.
+        </p>
+        <div class="thanks-email" id="thanks-email"></div>
+        <div class="thanks-actions">
+          <button type="button" class="btn-secondary" id="btn-new-signup">Cadastrar outro e-mail</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bottom">
+    <div class="links">
+      <a href="/politica-de-privacidade.html">Política de Privacidade</a>
+      <a href="/politica-de-cookies.html">Cookies</a>
+      <a href="/termos-de-uso.html">Termos</a>
+    </div>
+    <div>
+      &copy; <span id="year"></span> LampUP IT &middot; CNPJ 44.339.749/0001-33
+    </div>
+  </footer>
+</div>
+
+<script src="/leads.js" defer></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

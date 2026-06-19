@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-lampup.png">
+<title>LampUP IT — Lighting Up Your Business | Qualidade de Software com IA</title>
+<meta name="description" content="Testes e qualidade de software como serviço. Agentes autônomos de IA que testam seu app sem você precisar de uma equipe de QA.">
+<meta property="og:title" content="LampUP IT — Qualidade de Software com IA">
+<meta property="og:description" content="A primeira plataforma de testes TaaS com IA do Brasil para pequenas e médias empresas.">
+<meta property="og:type" content="website">
+<style>
+/* ─── MODELO 1: DARK ROCKET ─── */
+/* Fundo escuro impactante, energia máxima, neon cyan, partículas */
+
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBlack.ttf') format('truetype'); font-weight:900; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBold.ttf') format('truetype'); font-weight:700; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBook.ttf') format('truetype'); font-weight:400; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueLight.ttf') format('truetype'); font-weight:300; font-display:swap; }
+
+:root {
+  --cyan: #00D4E8;
+  --cyan-glow: rgba(0, 212, 232, 0.3);
+  --purple: #5B2D9F;
+  --purple-dark: #3D1F6B;
+  --bg: #0A0A1A;
+  --bg2: #0F0F2A;
+  --white: #FFFFFF;
+  --gray: rgba(255,255,255,0.6);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'UniNeue','Segoe UI',Arial,sans-serif; background:var(--bg); color:var(--white); overflow-x:hidden; }
+
+/* CANVAS PARTICLES */
+#particles-canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:0.4; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:20px 60px; display:flex; align-items:center; justify-content:space-between;
+  background:linear-gradient(to bottom, rgba(10,10,26,0.95), transparent);
+  backdrop-filter:blur(8px);
+}
+.nav-logo img { height:38px; }
+.nav-cta {
+  background:var(--purple); color:white; border:none; padding:10px 24px;
+  border-radius:8px; cursor:pointer; font-family:'UniNeue',sans-serif;
+  font-size:14px; font-weight:700; transition:all 0.2s;
+  text-decoration:none; display:inline-block;
+}
+.nav-cta:hover { background:var(--cyan); color:var(--bg); }
+
+/* HERO */
+.hero {
+  position:relative; min-height:100vh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:120px 24px 60px; z-index:1;
+}
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(0,212,232,0.1); border:1px solid rgba(0,212,232,0.3);
+  color:var(--cyan); padding:8px 20px; border-radius:100px; font-size:13px;
+  margin-bottom:32px; animation:fadeInDown 0.6s ease;
+}
+.hero-badge .dot { width:8px; height:8px; border-radius:50%; background:var(--cyan); animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 var(--cyan-glow)} 50%{box-shadow:0 0 0 8px transparent} }
+.hero h1 {
+  font-size:clamp(42px, 7vw, 96px); font-weight:900; line-height:1.05;
+  animation:fadeInUp 0.7s ease 0.1s both;
+}
+.hero h1 .cyan { color:var(--cyan); text-shadow:0 0 40px var(--cyan-glow); }
+.hero h1 .block { display:block; }
+.hero-sub {
+  font-size:clamp(16px, 2.5vw, 22px); color:var(--gray); max-width:680px;
+  margin:24px auto 48px; font-weight:300; animation:fadeInUp 0.7s ease 0.2s both;
+}
+.hero-cta-group { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; animation:fadeInUp 0.7s ease 0.3s both; }
+.btn-primary {
+  background:linear-gradient(135deg, var(--purple), var(--cyan));
+  color:white; border:none; padding:18px 40px; border-radius:12px;
+  font-family:'UniNeue',sans-serif; font-size:17px; font-weight:700; cursor:pointer;
+  text-decoration:none; display:inline-block;
+  box-shadow:0 8px 30px rgba(91,45,159,0.5);
+  transition:all 0.3s; position:relative; overflow:hidden;
+}
+.btn-primary::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, var(--cyan), var(--purple));
+  opacity:0; transition:opacity 0.3s;
+}
+.btn-primary:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,212,232,0.4); }
+.btn-primary:hover::after { opacity:1; }
+.btn-primary span { position:relative; z-index:1; }
+.btn-secondary {
+  background:transparent; color:white; border:2px solid rgba(255,255,255,0.3);
+  padding:16px 32px; border-radius:12px; font-family:'UniNeue',sans-serif;
+  font-size:15px; cursor:pointer; text-decoration:none; display:inline-block;
+  transition:all 0.2s;
+}
+.btn-secondary:hover { border-color:var(--cyan); color:var(--cyan); }
+
+.hero-scroll { margin-top:60px; animation:fadeInUp 0.7s ease 0.5s both; }
+.hero-scroll span { font-size:12px; color:var(--gray); letter-spacing:2px; text-transform:uppercase; display:block; margin-bottom:8px; }
+.scroll-arrow { display:block; margin:0 auto; width:24px; height:24px; border-right:2px solid var(--gray); border-bottom:2px solid var(--gray); transform:rotate(45deg); animation:bounce 1.5s infinite; }
+@keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(6px)} }
+
+/* STATS BAR */
+.stats-bar {
+  position:relative; z-index:1;
+  background:rgba(255,255,255,0.04); border-top:1px solid rgba(255,255,255,0.08);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:40px 60px; display:flex; justify-content:center; gap:80px; flex-wrap:wrap;
+}
+.stat-item { text-align:center; }
+.stat-number { font-size:44px; font-weight:900; color:var(--cyan); line-height:1; text-shadow:0 0 20px var(--cyan-glow); }
+.stat-label { font-size:13px; color:var(--gray); margin-top:6px; }
+
+/* PROBLEM SECTION */
+.section-problem {
+  position:relative; z-index:1; padding:100px 60px;
+  max-width:1100px; margin:0 auto;
+}
+.section-problem .label { font-size:12px; text-transform:uppercase; letter-spacing:3px; color:var(--cyan); margin-bottom:16px; }
+.section-problem h2 { font-size:clamp(28px, 4vw, 52px); font-weight:900; line-height:1.2; margin-bottom:24px; }
+.section-problem h2 em { color:var(--cyan); font-style:normal; }
+.problems-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px; margin-top:48px; }
+.problem-card {
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px; padding:28px; transition:all 0.3s;
+}
+.problem-card:hover { background:rgba(91,45,159,0.15); border-color:rgba(91,45,159,0.4); transform:translateY(-4px); }
+.problem-icon { font-size:36px; margin-bottom:12px; }
+.problem-card h3 { font-size:18px; font-weight:700; margin-bottom:10px; color:white; }
+.problem-card p { font-size:14px; color:var(--gray); line-height:1.6; }
+
+/* SOLUTION SECTION */
+.section-solution {
+  position:relative; z-index:1;
+  background:linear-gradient(135deg, rgba(91,45,159,0.15), rgba(0,212,232,0.05));
+  border-top:1px solid rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.06);
+  padding:100px 60px;
+}
+.solution-inner { max-width:1100px; margin:0 auto; }
+.solution-inner .label { font-size:12px; text-transform:uppercase; letter-spacing:3px; color:var(--cyan); margin-bottom:16px; }
+.solution-inner h2 { font-size:clamp(28px, 4vw, 52px); font-weight:900; line-height:1.2; margin-bottom:16px; }
+.solution-inner .subtitle { font-size:18px; color:var(--gray); max-width:700px; margin-bottom:56px; font-weight:300; }
+.features-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px; }
+.feature-item {
+  display:flex; gap:16px; padding:20px; border-radius:12px;
+  background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);
+  transition:all 0.3s;
+}
+.feature-item:hover { background:rgba(0,212,232,0.06); border-color:rgba(0,212,232,0.2); }
+.feature-icon-wrap {
+  width:48px; height:48px; border-radius:12px;
+  background:linear-gradient(135deg, var(--purple), var(--cyan));
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; flex-shrink:0;
+}
+.feature-text h3 { font-size:15px; font-weight:700; margin-bottom:6px; color:white; }
+.feature-text p { font-size:13px; color:var(--gray); line-height:1.5; }
+
+/* FORM SECTION */
+.section-form {
+  position:relative; z-index:1; padding:100px 60px;
+  max-width:800px; margin:0 auto;
+}
+.section-form .label { font-size:12px; text-transform:uppercase; letter-spacing:3px; color:var(--cyan); margin-bottom:16px; text-align:center; }
+.section-form h2 { font-size:clamp(28px, 4vw, 48px); font-weight:900; line-height:1.2; margin-bottom:12px; text-align:center; }
+.section-form .subtitle { font-size:17px; color:var(--gray); text-align:center; margin-bottom:48px; font-weight:300; }
+
+.lead-form {
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1);
+  border-radius:24px; padding:48px; backdrop-filter:blur(10px);
+}
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.form-group { margin-bottom:20px; }
+.form-group label { display:block; font-size:13px; color:var(--gray); margin-bottom:8px; font-weight:400; }
+.form-group label span { color:var(--cyan); }
+.form-group input,
+.form-group select {
+  width:100%; padding:14px 18px; background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.15); border-radius:10px;
+  color:white; font-family:'UniNeue',sans-serif; font-size:15px;
+  transition:all 0.2s; appearance:none;
+}
+.form-group select option { background:#1A1A2E; color:white; }
+.form-group input:focus, .form-group select:focus {
+  outline:none; border-color:var(--cyan); background:rgba(0,212,232,0.08);
+  box-shadow:0 0 0 3px rgba(0,212,232,0.15);
+}
+.form-group input::placeholder { color:rgba(255,255,255,0.3); }
+
+.checkboxes-section { margin:16px 0; }
+.checkboxes-section .check-label { font-size:13px; color:var(--gray); margin-bottom:10px; display:block; }
+.checkbox-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:8px; }
+.checkbox-item { display:flex; align-items:center; gap:8px; cursor:pointer; }
+.checkbox-item input[type="checkbox"] { accent-color:var(--cyan); width:16px; height:16px; }
+.checkbox-item span { font-size:13px; color:rgba(255,255,255,0.7); }
+
+.consent-area { margin:24px 0; padding:16px; background:rgba(0,212,232,0.05); border-radius:10px; border:1px solid rgba(0,212,232,0.15); }
+.consent-item { display:flex; align-items:flex-start; gap:10px; margin-bottom:12px; }
+.consent-item:last-child { margin-bottom:0; }
+.consent-item input[type="checkbox"] { accent-color:var(--cyan); width:16px; height:16px; margin-top:2px; flex-shrink:0; }
+.consent-item span { font-size:12px; color:rgba(255,255,255,0.6); line-height:1.5; }
+.consent-item a { color:var(--cyan); text-decoration:underline; }
+.consent-item .required { color:var(--cyan); font-weight:700; }
+
+.btn-submit {
+  width:100%; padding:18px; margin-top:8px;
+  background:linear-gradient(135deg, var(--purple), var(--cyan));
+  color:white; border:none; border-radius:12px;
+  font-family:'UniNeue',sans-serif; font-size:18px; font-weight:900;
+  cursor:pointer; transition:all 0.3s;
+  box-shadow:0 8px 30px rgba(91,45,159,0.5);
+}
+.btn-submit:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(0,212,232,0.4); }
+.btn-submit:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+.form-disclaimer { text-align:center; font-size:11px; color:rgba(255,255,255,0.3); margin-top:16px; line-height:1.5; }
+
+/* SUCCESS STATE */
+.form-success { display:none; text-align:center; padding:48px 32px; }
+.form-success .success-icon { font-size:64px; display:block; margin-bottom:16px; }
+.form-success h3 { font-size:28px; font-weight:900; color:var(--cyan); margin-bottom:12px; }
+.form-success p { color:var(--gray); font-size:16px; }
+
+/* FOOTER */
+footer {
+  position:relative; z-index:1;
+  background:rgba(0,0,0,0.5); border-top:1px solid rgba(255,255,255,0.06);
+  padding:40px 60px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+}
+.footer-logo img { height:28px; }
+.footer-links { display:flex; gap:24px; }
+.footer-links a { color:var(--gray); text-decoration:none; font-size:13px; transition:color 0.2s; }
+.footer-links a:hover { color:var(--cyan); }
+.footer-copy { font-size:12px; color:rgba(255,255,255,0.3); text-align:right; }
+
+/* ANIMATIONS */
+@keyframes fadeInDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+/* Scroll reveal */
+.reveal { opacity:0; transform:translateY(30px); transition:all 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width:900px) {
+  nav { padding:16px 24px; }
+  .stats-bar { padding:32px 24px; gap:40px; }
+  .section-problem, .section-solution, .section-form { padding:60px 24px; }
+  .solution-inner { padding:0; }
+  .lead-form { padding:28px 20px; }
+  .form-row { grid-template-columns:1fr; }
+  footer { padding:32px 24px; flex-direction:column; align-items:flex-start; }
+  .footer-copy { text-align:left; }
+}
+/* Back to top button (LampUP shared component) */
+.back-to-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 90;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #FFFFFF; border: 2px solid #00D4E8;
+  cursor: pointer; padding: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity 0.25s, transform 0.25s ease-out, visibility 0.25s, box-shadow 0.3s, border-color 0.3s, background 0.3s;
+  animation: btt-pulse 2.6s ease-out infinite;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top img { width: 30px; height: 30px; object-fit: contain; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.back-to-top:hover { background: #FFFFFF; border-color: #5B2D9F; box-shadow: 0 14px 36px rgba(91,45,159,0.4), 0 0 0 8px rgba(0,212,232,0.25); transform: translateY(-2px); animation: none; }
+.back-to-top:hover img { transform: translateY(-6px) scale(1.12); }
+.back-to-top:active img { transform: translateY(-2px) scale(0.96); }
+@keyframes btt-pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55); }
+  50% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 14px rgba(0,212,232,0); }
+}
+@media (max-width: 768px) { .back-to-top { right: 16px; bottom: 16px; width: 50px; height: 50px; } .back-to-top img { width: 26px; height: 26px; } }
+@media (prefers-reduced-motion: reduce) { .back-to-top { animation: none; } .back-to-top img, .back-to-top:hover img { transition: none; transform: none; } }
+</style>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="../../assets/img/logo-lampup-final-transparente-para-fundo-azul.png" alt="LampUP IT">
+  </a>
+  <a href="#contato" class="nav-cta">Começar agora</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <div class="dot"></div>
+    <span>Testes de Software com Inteligência Artificial</span>
+  </div>
+  <h1>
+    <span class="block">Software sem bugs.</span>
+    <span class="block">Cliente sem <span class="cyan">reclamação.</span></span>
+  </h1>
+  <p class="hero-sub">
+    Agentes autônomos de IA testam seu aplicativo 24/7 — sem você precisar contratar, treinar ou gerenciar uma equipe de QA. Só resultados.
+  </p>
+  <div class="hero-cta-group">
+    <a href="#contato" class="btn-primary"><span>Quero testar meu app →</span></a>
+    <a href="#solucao" class="btn-secondary">Como funciona</a>
+  </div>
+  <div class="hero-scroll">
+    <span>Explore</span>
+    <i class="scroll-arrow"></i>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">71x</div>
+    <div class="stat-label">mais rápido que testes manuais</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">100%</div>
+    <div class="stat-label">LGPD compliant</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">24/7</div>
+    <div class="stat-label">agentes autônomos ativos</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">0</div>
+    <div class="stat-label">contratações necessárias</div>
+  </div>
+</div>
+
+<!-- PROBLEM SECTION -->
+<section class="section-problem">
+  <p class="label reveal">O Problema</p>
+  <h2 class="reveal">Sua empresa tem um app.<br>Mas quem garante que <em>funciona?</em></h2>
+  <div class="problems-grid">
+    <div class="problem-card reveal">
+      <div class="problem-icon">💸</div>
+      <h3>Equipe de QA é cara</h3>
+      <p>Um analista de testes pleno custa R$5.000–R$12.000/mês. Para PMEs, isso é inviável — e o mercado cobra o dobro por consultoria externa.</p>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon">⏳</div>
+      <h3>Testes atrasam lançamentos</h3>
+      <p>Processos manuais demoram semanas. Enquanto sua equipe testa, o concorrente já lançou. E bugs ainda escapam para produção.</p>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon">😰</div>
+      <h3>Bug em produção = crise</h3>
+      <p>Cada bug encontrado pelo cliente em vez de pela equipe custa 10x mais para corrigir — e destrói a reputação que você levou anos para construir.</p>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon">📋</div>
+      <h3>Documentação sem revisão</h3>
+      <p>Requisitos ambíguos e estórias de usuário incompletas geram retrabalho. Mas quem tem tempo de revisar cada documento antes de começar a codar?</p>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon">⚖️</div>
+      <h3>LGPD sem cobertura</h3>
+      <p>Sua empresa processa dados pessoais? Testes de privacidade e segurança são obrigatórios pela lei — mas poucos sabem como fazer isso direito.</p>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon">🔄</div>
+      <h3>Sem cobertura de regressão</h3>
+      <p>Cada nova versão pode quebrar funcionalidades antigas. Sem automação, você nunca tem certeza se o que funcionava ainda funciona.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION SECTION -->
+<section class="section-solution" id="solucao">
+  <div class="solution-inner">
+    <p class="label reveal">A Solução</p>
+    <h2 class="reveal">LampUP IT — TaaS com<br>Agentes Autônomos de IA</h2>
+    <p class="subtitle reveal">Conecte seu projeto à nossa plataforma e nossos agentes de IA executam o ciclo completo de qualidade — da revisão de documentos à geração de relatórios.</p>
+    <div class="features-grid">
+      <div class="feature-item reveal">
+        <div class="feature-icon-wrap">📄</div>
+        <div class="feature-text">
+          <h3>Revisão antes do desenvolvimento</h3>
+          <p>Analisamos os requisitos do seu produto e apontamos lacunas, riscos e ambiguidades antes que virem retrabalho caro.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-icon-wrap">✅</div>
+        <div class="feature-text">
+          <h3>Critérios de aceite claros</h3>
+          <p>Definimos exatamente quando uma funcionalidade está pronta — sem retrabalho, sem "achismo", sem briga entre time de produto e desenvolvimento.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-icon-wrap">🥒</div>
+        <div class="feature-text">
+          <h3>Cenários em linguagem de negócio</h3>
+          <p>Cada teste é escrito em português claro, do jeito que o time de produto entende. Sem código, sem jargão, sem caixa-preta.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-icon-wrap">⚡</div>
+        <div class="feature-text">
+          <h3>Testes de Performance</h3>
+          <p>Stress test, load test e spike test automatizados — saiba até onde seu sistema aguenta antes do cliente descobrir.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-icon-wrap">🤖</div>
+        <div class="feature-text">
+          <h3>Automação End-to-End</h3>
+          <p>Testes automatizados construídos e executados por IA — web, mobile e API — com evidências e rastreabilidade.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-icon-wrap">📊</div>
+        <div class="feature-text">
+          <h3>Dashboard Completo</h3>
+          <p>Portal com histórico de execuções, gestão de bugs, evidências e relatórios prontos para stakeholders.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM SECTION -->
+<section class="section-form" id="contato">
+  <p class="label">Comece hoje</p>
+  <h2>Pare de descobrir<br>bugs no cliente</h2>
+  <p class="subtitle">Deixe seu contato e um de nossos especialistas retorna em até 24h para uma demonstração gratuita.</p>
+
+  <div class="lead-form" id="lead-form-container">
+    <form id="lead-form" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">E-mail <span>*</span></label>
+          <input type="email" id="email" name="email" placeholder="seu@email.com.br" required>
+        </div>
+        <div class="form-group">
+          <label for="whatsapp">WhatsApp</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 99999-9999">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="ramo">Ramo de atividade <span>*</span></label>
+        <select id="ramo" name="ramo" required>
+          <option value="" disabled selected>Selecione seu ramo...</option>
+          <option value="fintech">Fintech / Financeiro</option>
+          <option value="ecommerce">E-commerce / Varejo</option>
+          <option value="healthtech">Healthtech / Saúde</option>
+          <option value="edtech">Edtech / Educação</option>
+          <option value="logistica">Logística / Transporte</option>
+          <option value="industria">Indústria / Manufatura</option>
+          <option value="saas">SaaS / Tecnologia</option>
+          <option value="agro">Agronegócio</option>
+          <option value="governo">Governo / Setor Público</option>
+          <option value="outro">Outro</option>
+        </select>
+      </div>
+
+      <div class="checkboxes-section">
+        <span class="check-label">Tipo de aplicação (selecione todos que se aplicam)</span>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="checkbox" name="tipo_app" value="web"><span>🌐 Web / SPA</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tipo_app" value="mobile_ios"><span>🍎 Mobile iOS</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tipo_app" value="mobile_android"><span>🤖 Mobile Android</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tipo_app" value="api"><span>⚙️ API / Backend</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tipo_app" value="desktop"><span>🖥️ Desktop</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tipo_app" value="ecommerce_plat"><span>🛒 E-commerce</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tipo_app" value="erp"><span>📋 ERP / CRM</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tipo_app" value="integracao"><span>🔗 Integração</span></label>
+        </div>
+      </div>
+
+      <div class="consent-area">
+        <div class="consent-item">
+          <input type="checkbox" id="consent-lgpd" name="consent_lgpd" required>
+          <span>
+            <span class="required">* </span>Li e aceito a <a href="../politica-de-privacidade.html" target="_blank">Política de Privacidade</a> da LampUP IT e consinto com o uso dos meus dados para retorno de contato comercial, conforme a LGPD (Lei 13.709/2018).
+          </span>
+        </div>
+        <div class="consent-item">
+          <input type="checkbox" id="consent-marketing" name="consent_marketing">
+          <span>Aceito receber novidades, conteúdos e ofertas da LampUP IT por e-mail (opcional — você pode cancelar a qualquer momento).</span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="btn-submit">
+        Quero uma demonstração gratuita 🚀
+      </button>
+      <p class="form-disclaimer">Seus dados são criptografados e nunca serão vendidos a terceiros. Você pode solicitar a exclusão a qualquer momento.</p>
+    </form>
+
+    <div class="form-success" id="form-success">
+      <span class="success-icon">🎉</span>
+      <h3>Incrível! Recebemos seu contato.</h3>
+      <p>Nossa equipe retornará em até <strong style="color:var(--cyan)">24 horas</strong> para agendar sua demonstração gratuita.<br>Fique de olho no seu e-mail!</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="../../assets/img/logo-lampup-final-transparente-para-fundo-azul.png" alt="LampUP IT">
+  </div>
+  <div class="footer-links">
+    <a href="../politica-de-privacidade.html">Política de Privacidade</a>
+    <a href="mailto:contato@lampup.com.br">contato@lampup.com.br</a>
+    <a href="https://wa.me/5581995994382" target="_blank">WhatsApp</a>
+  </div>
+  <div class="footer-copy">
+    © 2026 LampUP IT. Todos os direitos reservados.<br>
+    <span style="font-size:10px">Barueri/SP — CNPJ em registro</span>
+  </div>
+</footer>
+
+<script src="../shared/lgpd-cookies.js"></script>
+<script src="../shared/beacon-leads.js" defer></script>
+<script>
+// Particles
+(function() {
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let W, H;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (let i = 0; i < 80; i++) {
+    particles.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 2 + 0.5,
+      dx: (Math.random() - 0.5) * 0.4,
+      dy: (Math.random() - 0.5) * 0.4,
+      alpha: Math.random() * 0.5 + 0.2
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0,212,232,${p.alpha})`;
+      ctx.fill();
+      p.x += p.dx; p.y += p.dy;
+      if (p.x < 0 || p.x > W) p.dx *= -1;
+      if (p.y < 0 || p.y > H) p.dy *= -1;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// Scroll reveal
+(function() {
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+})();
+
+// Form submission — agora conectado ao Beacon via shared/beacon-leads.js
+BeaconLeads.attach({
+  formId: 'lead-form',
+  successId: 'form-success',
+  origin: 'landing-modelo-1',
+});
+
+// WhatsApp mask
+document.getElementById('whatsapp').addEventListener('input', function(e) {
+  let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+  if (v.length >= 7) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  else if (v.length >= 3) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+  e.target.value = v;
+});
+</script>
+<button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+  <img src="../../assets/img/simbolo-lampup-final-transparente.png" alt="">
+</button>
+<script>
+(function(){
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  window.addEventListener('scroll', () => { btn.classList.toggle('visible', window.scrollY > 400); }, { passive: true });
+})();
+</script>
+</body>
+</html>

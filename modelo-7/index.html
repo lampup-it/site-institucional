@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-lampup.png">
+<title>LampUP IT — Calculadora: quanto bug em produção custa para você</title>
+<meta name="description" content="Descubra em segundos quanto sua empresa está perdendo por mês com bugs em produção. Calculadora gratuita.">
+<style>
+/* ─── MODELO 7: CALCULADORA DE PREJUÍZO ─── */
+
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBlack.ttf') format('truetype'); font-weight:900; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBold.ttf') format('truetype'); font-weight:700; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBook.ttf') format('truetype'); font-weight:400; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('../../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueLight.ttf') format('truetype'); font-weight:300; font-display:swap; }
+
+:root {
+  --cyan: #00D4E8;
+  --purple: #5B2D9F;
+  --purple-dark: #3D1F6B;
+  --white: #FFFFFF;
+  --bg: #F5F3FA;
+  --card: #FFFFFF;
+  --text: #1A1A2E;
+  --gray: #6B7280;
+  --border: #E5E7EB;
+  --red: #DC2626;
+  --green: #059669;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'UniNeue','Segoe UI',sans-serif; background:var(--bg); color:var(--text); }
+
+/* NAV */
+nav {
+  position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.95);
+  border-bottom:1px solid var(--border); backdrop-filter:blur(12px);
+  padding:0 48px; height:64px; display:flex; align-items:center; justify-content:space-between;
+}
+nav img { height:30px; }
+nav .cta-link { color:var(--purple); font-weight:700; font-size:14px; text-decoration:none; }
+
+/* HERO */
+.hero {
+  background:linear-gradient(135deg, var(--purple-dark), var(--purple) 70%, var(--cyan));
+  color:white; padding:60px 24px 100px; text-align:center; position:relative; overflow:hidden;
+}
+.hero::after {
+  content:''; position:absolute; bottom:-1px; left:0; right:0; height:60px;
+  background:var(--bg);
+  clip-path:polygon(0 100%, 100% 0, 100% 100%);
+}
+.hero-eyebrow {
+  display:inline-block; padding:6px 18px; border:1px solid rgba(255,255,255,0.35);
+  border-radius:24px; font-size:12px; letter-spacing:2px; text-transform:uppercase;
+  background:rgba(255,255,255,0.08); margin-bottom:18px;
+}
+.hero h1 {
+  font-size:54px; font-weight:900; line-height:1.1; letter-spacing:-1px;
+  max-width:820px; margin:0 auto 14px;
+}
+.hero h1 .cyan { color:var(--cyan); }
+.hero p { font-size:19px; opacity:0.9; max-width:620px; margin:0 auto; }
+
+/* CALCULATOR */
+.calc-wrap {
+  max-width:1100px; margin:-60px auto 64px; padding:0 24px; position:relative; z-index:2;
+}
+.calc-card {
+  background:var(--card); border-radius:24px; box-shadow:0 30px 80px rgba(91,45,159,0.18);
+  overflow:hidden; display:grid; grid-template-columns:1fr 1fr;
+}
+.calc-inputs { padding:40px; border-right:1px solid var(--border); }
+.calc-inputs h2 { font-size:22px; font-weight:800; margin-bottom:6px; color:var(--purple); }
+.calc-inputs .hint { font-size:14px; color:var(--gray); margin-bottom:24px; }
+
+.field { margin-bottom:22px; }
+.field label {
+  display:block; font-size:13px; font-weight:700; color:var(--text); margin-bottom:6px;
+}
+.field label .info { display:block; font-size:11px; color:var(--gray); font-weight:400; margin-top:2px; }
+
+.slider-wrap { display:flex; align-items:center; gap:14px; }
+.slider {
+  flex:1; appearance:none; height:6px; background:var(--border); border-radius:3px; outline:none;
+}
+.slider::-webkit-slider-thumb {
+  appearance:none; width:22px; height:22px; background:var(--cyan); border:3px solid white;
+  border-radius:50%; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+.slider::-moz-range-thumb {
+  width:22px; height:22px; background:var(--cyan); border:3px solid white; border-radius:50%; cursor:pointer;
+}
+.value-pill {
+  min-width:110px; background:var(--purple); color:white; padding:7px 14px; border-radius:8px;
+  font-weight:700; font-size:14px; text-align:center;
+}
+
+select.dropdown {
+  width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:10px;
+  background:white; font-family:inherit; font-size:14px; color:var(--text);
+}
+
+/* OUTPUT */
+.calc-output {
+  padding:40px; background:linear-gradient(180deg, #FAFAFB, white);
+  display:flex; flex-direction:column;
+}
+.output-label {
+  font-size:11px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gray); margin-bottom:6px;
+}
+.output-loss {
+  font-size:64px; font-weight:900; color:var(--red); line-height:1;
+  letter-spacing:-2px; margin-bottom:8px; transition:color 0.3s;
+}
+.output-loss .small { font-size:18px; color:var(--gray); }
+.output-sub {
+  font-size:14px; color:var(--gray); margin-bottom:24px;
+}
+.output-breakdown {
+  background:#FFF6F6; border:1px solid #FFD6D6; border-radius:12px; padding:18px;
+  margin-bottom:18px;
+}
+.output-breakdown h4 {
+  font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--red);
+  margin-bottom:10px;
+}
+.output-breakdown .row {
+  display:flex; justify-content:space-between; padding:6px 0; font-size:14px;
+  border-bottom:1px dashed #FFB8B8;
+}
+.output-breakdown .row:last-child { border:none; font-weight:700; font-size:15px; padding-top:10px; }
+.output-breakdown .row b { color:var(--text); }
+
+.compare {
+  background:linear-gradient(135deg, var(--purple-dark), var(--purple));
+  color:white; border-radius:14px; padding:24px; margin-top:auto;
+}
+.compare h4 { font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:10px; }
+.compare .price {
+  font-size:36px; font-weight:900; line-height:1;
+}
+.compare .price small { font-size:14px; opacity:0.7; font-weight:400; }
+.compare .savings {
+  font-size:14px; color:#A8E5C5; margin-top:8px; font-weight:700;
+}
+
+/* CTA SECTION */
+.cta-section {
+  background:white; padding:64px 24px; text-align:center;
+}
+.cta-section h2 { font-size:36px; font-weight:900; max-width:680px; margin:0 auto 12px; }
+.cta-section h2 .purple { color:var(--purple); }
+.cta-section p { font-size:17px; color:var(--gray); max-width:580px; margin:0 auto 32px; }
+
+.lead-form-card {
+  max-width:580px; margin:0 auto; background:var(--bg); border-radius:18px; padding:32px;
+  border:1px solid var(--border); text-align:left;
+}
+.lf-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+.lf-group label { display:block; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gray); margin-bottom:5px; font-weight:700; }
+.lf-group input, .lf-group select {
+  width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:8px;
+  font-family:inherit; font-size:14px; background:white;
+}
+.lf-group input:focus, .lf-group select:focus { outline:none; border-color:var(--purple); }
+.consent { font-size:12px; color:var(--gray); margin:14px 0; }
+.consent a { color:var(--purple); }
+.consent input { margin-right:6px; }
+.btn-cta {
+  width:100%; background:var(--purple); color:white; border:none; padding:14px;
+  border-radius:10px; font-weight:700; font-size:15px; letter-spacing:1px; cursor:pointer;
+  font-family:inherit;
+}
+.btn-cta:hover { background:var(--purple-dark); }
+.thanks { display:none; text-align:center; padding:32px; }
+.thanks h2 { color:var(--purple); font-size:32px; margin-bottom:8px; }
+
+/* HOW IT WORKS BAR */
+.how {
+  background:var(--purple-dark); color:white; padding:48px 24px;
+}
+.how-inner {
+  max-width:1100px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:32px;
+}
+.how-item { text-align:center; }
+.how-item .num {
+  display:inline-flex; width:48px; height:48px; border-radius:50%;
+  background:var(--cyan); color:var(--purple-dark); font-weight:900; font-size:20px;
+  align-items:center; justify-content:center; margin-bottom:12px;
+}
+.how-item h4 { font-size:15px; margin-bottom:6px; }
+.how-item p { font-size:13px; opacity:0.7; line-height:1.5; }
+
+/* FOOTER */
+footer {
+  background:var(--text); color:#9999AA; padding:32px 48px; font-size:13px;
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+}
+footer img { height:32px; }
+footer a { color:var(--cyan); margin-right:14px; text-decoration:none; }
+
+@media (max-width: 900px) {
+  .calc-card { grid-template-columns:1fr; }
+  .calc-inputs { border-right:none; border-bottom:1px solid var(--border); padding:28px; }
+  .calc-output { padding:28px; }
+  .hero h1 { font-size:36px; }
+  .hero { padding:40px 20px 80px; }
+  .calc-wrap { padding:0 16px; }
+  .how-inner { grid-template-columns:1fr 1fr; }
+  .lf-row { grid-template-columns:1fr; }
+  nav { padding:0 20px; }
+  footer { padding:24px 20px; flex-direction:column; text-align:center; }
+}
+/* Back to top button (LampUP shared component) */
+.back-to-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 90;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #FFFFFF; border: 2px solid #00D4E8;
+  cursor: pointer; padding: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity 0.25s, transform 0.25s ease-out, visibility 0.25s, box-shadow 0.3s, border-color 0.3s, background 0.3s;
+  animation: btt-pulse 2.6s ease-out infinite;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top img { width: 30px; height: 30px; object-fit: contain; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.back-to-top:hover { background: #FFFFFF; border-color: #5B2D9F; box-shadow: 0 14px 36px rgba(91,45,159,0.4), 0 0 0 8px rgba(0,212,232,0.25); transform: translateY(-2px); animation: none; }
+.back-to-top:hover img { transform: translateY(-6px) scale(1.12); }
+.back-to-top:active img { transform: translateY(-2px) scale(0.96); }
+@keyframes btt-pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55); }
+  50% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 14px rgba(0,212,232,0); }
+}
+@media (max-width: 768px) { .back-to-top { right: 16px; bottom: 16px; width: 50px; height: 50px; } .back-to-top img { width: 26px; height: 26px; } }
+@media (prefers-reduced-motion: reduce) { .back-to-top { animation: none; } .back-to-top img, .back-to-top:hover img { transition: none; transform: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <img src="../../assets/img/logo-lampup-final-transparente.png" alt="LampUP IT">
+  <a class="cta-link" href="#diagnostico">Falar com a gente →</a>
+</nav>
+
+<div class="hero">
+  <span class="hero-eyebrow">Calculadora gratuita</span>
+  <h1>Quanto bug em produção <span class="cyan">custa</span> para você?</h1>
+  <p>Arraste os controles abaixo. Em segundos você descobre quanto seu negócio pode estar perdendo por mês — e quanto custaria para parar de perder.</p>
+</div>
+
+<div class="calc-wrap">
+  <div class="calc-card">
+
+    <!-- INPUTS -->
+    <div class="calc-inputs">
+      <h2>Sobre seu negócio</h2>
+      <p class="hint">Estimativas servem. Não precisa de número exato.</p>
+
+      <div class="field">
+        <label>Quantos clientes ativos você tem?
+          <span class="info">Quem usa seu sistema com regularidade.</span></label>
+        <div class="slider-wrap">
+          <input type="range" min="50" max="50000" step="50" value="500" class="slider" id="users">
+          <span class="value-pill" id="users-val">500</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Ticket médio mensal por cliente (R$)
+          <span class="info">Quanto cada cliente paga, em média.</span></label>
+        <div class="slider-wrap">
+          <input type="range" min="20" max="5000" step="10" value="200" class="slider" id="ticket">
+          <span class="value-pill" id="ticket-val">R$ 200</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Quantas reclamações de bug você recebe por mês?
+          <span class="info">Considere tickets, mensagens no WhatsApp e e-mails.</span></label>
+        <div class="slider-wrap">
+          <input type="range" min="0" max="200" step="1" value="15" class="slider" id="bugs">
+          <span class="value-pill" id="bugs-val">15</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Setor de atuação
+          <span class="info">Setores regulados (saúde, finanças) têm impacto maior.</span></label>
+        <select class="dropdown" id="sector">
+          <option value="1.0">SaaS / Tecnologia</option>
+          <option value="1.2">E-commerce / Marketplace</option>
+          <option value="1.5">Fintech / Banking</option>
+          <option value="1.4">Saúde / Healthtech</option>
+          <option value="1.1">Educação / Edtech</option>
+          <option value="1.3">Logística</option>
+          <option value="1.0">Outros</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="calc-output">
+      <div class="output-label">Estimativa de prejuízo mensal</div>
+      <div class="output-loss" id="total-loss">R$ 0</div>
+      <div class="output-sub" id="loss-context">Equivale a perder receita silenciosamente todo mês.</div>
+
+      <div class="output-breakdown">
+        <h4>De onde vem esse custo</h4>
+        <div class="row"><span>Churn de clientes insatisfeitos</span><b id="loss-churn">R$ 0</b></div>
+        <div class="row"><span>Suporte e atendimento estendido</span><b id="loss-support">R$ 0</b></div>
+        <div class="row"><span>Retrabalho do time de desenvolvimento</span><b id="loss-rework">R$ 0</b></div>
+        <div class="row"><span>Total mensal estimado</span><b id="loss-total-breakdown">R$ 0</b></div>
+      </div>
+
+      <div class="compare">
+        <h4>LampUP IT custa a partir de</h4>
+        <div class="price">R$ 1.500<small>/mês</small></div>
+        <div class="savings" id="savings">Economia estimada: calcule arrastando ao lado.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how">
+  <div class="how-inner">
+    <div class="how-item">
+      <div class="num">1</div>
+      <h4>Você conta sobre seu produto</h4>
+      <p>Em 24h sabemos onde testar com prioridade — sem precisar parar sua operação.</p>
+    </div>
+    <div class="how-item">
+      <div class="num">2</div>
+      <h4>Nossos agentes começam a trabalhar</h4>
+      <p>IA testa 24/7 cobrindo funcionalidade, performance e privacidade.</p>
+    </div>
+    <div class="how-item">
+      <div class="num">3</div>
+      <h4>Você recebe relatórios claros</h4>
+      <p>Dashboard com bugs priorizados, evidências e plano de correção.</p>
+    </div>
+    <div class="how-item">
+      <div class="num">4</div>
+      <h4>Bug some antes do cliente reclamar</h4>
+      <p>Você foca em crescer, não em apagar incêndio.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section" id="diagnostico">
+  <h2>Pronto para <span class="purple">parar de perder dinheiro</span> com bug?</h2>
+  <p>Receba uma proposta personalizada em até 24 horas. Sem compromisso, sem fidelidade no primeiro mês.</p>
+
+  <div class="lead-form-card" id="form-wrap">
+    <form id="lead-form" novalidate>
+      <div class="lf-row">
+        <div class="lf-group">
+          <label>E-mail*</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="lf-group">
+          <label>WhatsApp</label>
+          <input type="tel" id="whatsapp" placeholder="(11) 99999-9999">
+        </div>
+      </div>
+      <div class="lf-row">
+        <div class="lf-group">
+          <label>Primeiro nome</label>
+          <input type="text" id="nome">
+        </div>
+        <div class="lf-group">
+          <label>Ramo de atividade*</label>
+          <select id="ramo" required>
+            <option value="">Selecione</option>
+            <option>SaaS / Software</option>
+            <option>E-commerce / Marketplace</option>
+            <option>Fintech</option>
+            <option>Saúde / Healthtech</option>
+            <option>Educação / Edtech</option>
+            <option>Logística</option>
+            <option>Outros</option>
+          </select>
+        </div>
+      </div>
+      <div class="consent">
+        <label><input type="checkbox" id="lgpd" required>
+          Li e concordo com a <a href="../politica-de-privacidade.html" target="_blank">Política de Privacidade</a> (LGPD). *
+        </label><br>
+        <label><input type="checkbox" id="mkt">
+          Aceito receber comunicações de marketing.
+        </label>
+      </div>
+      <button type="submit" class="btn-cta">Receber proposta personalizada</button>
+    </form>
+    <div class="thanks" id="thanks">
+      <h2>Recebido!</h2>
+      <p>Em até 24 horas você recebe sua proposta no e-mail informado.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <img src="../../assets/img/logo-lampup-final-transparente-para-fundo-azul.png" alt="LampUP IT" style="display:block;margin-bottom:6px;">
+    <div>© 2026 LampUP IT · Lighting Up Your Business</div>
+  </div>
+  <div>
+    <a href="../politica-de-privacidade.html">Política de Privacidade</a>
+    <a href="mailto:contato@lampup.com.br">contato@lampup.com.br</a>
+    <a href="https://wa.me/5581995994382" target="_blank">WhatsApp</a>
+  </div>
+</footer>
+
+<script src="../shared/lgpd-cookies.js"></script>
+<script src="../shared/beacon-leads.js" defer></script>
+<script>
+function fmt(v) {
+  return 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+}
+
+const inputs = {
+  users: document.getElementById('users'),
+  ticket: document.getElementById('ticket'),
+  bugs: document.getElementById('bugs'),
+  sector: document.getElementById('sector')
+};
+
+function recalc() {
+  const users = +inputs.users.value;
+  const ticket = +inputs.ticket.value;
+  const bugs = +inputs.bugs.value;
+  const sectorMult = +inputs.sector.value;
+
+  document.getElementById('users-val').textContent = users.toLocaleString('pt-BR');
+  document.getElementById('ticket-val').textContent = 'R$ ' + ticket.toLocaleString('pt-BR');
+  document.getElementById('bugs-val').textContent = bugs;
+
+  // Estimativas baseadas em modelo simples:
+  // Churn: cada 10 bugs/mês = 1.5% de clientes saem nos próximos 30 dias
+  const churnRate = Math.min(0.08, (bugs / 10) * 0.015) * sectorMult;
+  const lossChurn = users * ticket * churnRate;
+
+  // Suporte: cada bug consome em média 2h de suporte a R$ 60/h
+  const lossSupport = bugs * 2 * 60;
+
+  // Retrabalho: cada bug em produção custa em média R$ 800 para corrigir (dev + QA + deploy)
+  const lossRework = bugs * 800;
+
+  const totalLoss = lossChurn + lossSupport + lossRework;
+
+  document.getElementById('loss-churn').textContent = fmt(lossChurn);
+  document.getElementById('loss-support').textContent = fmt(lossSupport);
+  document.getElementById('loss-rework').textContent = fmt(lossRework);
+  document.getElementById('loss-total-breakdown').textContent = fmt(totalLoss);
+  document.getElementById('total-loss').innerHTML = fmt(totalLoss) + ' <span class="small">/mês</span>';
+
+  // Context line
+  const ctxEl = document.getElementById('loss-context');
+  if (totalLoss > 20000) ctxEl.textContent = 'Isso é mais que o salário de um time inteiro de QA — sendo perdido todo mês.';
+  else if (totalLoss > 5000) ctxEl.textContent = 'Equivale a perder receita silenciosamente todo mês.';
+  else if (totalLoss > 1000) ctxEl.textContent = 'Pode parecer pouco, mas é acumulativo — todo mês esse valor sai do caixa.';
+  else ctxEl.textContent = 'Exposição baixa hoje, mas tende a crescer com a base de clientes.';
+
+  const economy = totalLoss - 1500;
+  const savings = document.getElementById('savings');
+  if (economy > 0) {
+    savings.textContent = `Economia estimada: ${fmt(economy)}/mês`;
+    savings.style.color = '#A8E5C5';
+  } else {
+    savings.textContent = 'Custo do serviço próximo do prejuízo atual — vale conversar mesmo assim.';
+    savings.style.color = '#FFD8A0';
+  }
+}
+
+Object.values(inputs).forEach(el => el.addEventListener('input', recalc));
+recalc();
+
+// Form
+document.getElementById('lead-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const lgpd = document.getElementById('lgpd').checked;
+  const ramo = document.getElementById('ramo').value;
+  if (!email || !lgpd || !ramo) { alert('Preencha e-mail, ramo e aceite a Política de Privacidade.'); return; }
+  const btn = this.querySelector('button');
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  const payload = {
+    nome: document.getElementById('nome').value, email,
+    whatsapp: document.getElementById('whatsapp').value,
+    ramo_atividade: ramo,
+    calc_users: inputs.users.value,
+    calc_ticket: inputs.ticket.value,
+    calc_bugs: inputs.bugs.value,
+    calc_sector: inputs.sector.value,
+    calc_loss: document.getElementById('total-loss').textContent.replace(/\s+/g, ' ').trim(),
+    origem: 'landing-modelo-7',
+  };
+  try {
+    await BeaconLeads.submit(payload);
+    this.style.display = 'none';
+    document.getElementById('thanks').style.display = 'block';
+  } catch (err) {
+    console.error('[BeaconLeads]', err);
+    alert('Não foi possível enviar agora. Tente novamente em instantes.');
+    btn.disabled = false; btn.textContent = 'Enviar';
+  }
+});
+
+document.getElementById('whatsapp').addEventListener('input', function(e){
+  let v = e.target.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>=7) v=`(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  else if(v.length>=3) v=`(${v.slice(0,2)}) ${v.slice(2)}`;
+  e.target.value = v;
+});
+</script>
+<button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+  <img src="../../assets/img/simbolo-lampup-final-transparente.png" alt="">
+</button>
+<script>
+(function(){
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  window.addEventListener('scroll', () => { btn.classList.toggle('visible', window.scrollY > 400); }, { passive: true });
+})();
+</script>
+</body>
+</html>
