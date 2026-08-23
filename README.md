@@ -22,16 +22,21 @@ site-institucional/
 │   ├── robots.txt, sitemap.xml
 │   ├── favicon-lampup.png
 │   ├── logo-lampup.png, logo-lampup-fundo-azul.png, simbolo-lampup.png
+│   ├── planos.html              — Vitrine de planos (consome catálogo do Beacon)
 │   ├── politica-de-privacidade.html
 │   ├── politica-de-cookies.html
 │   ├── termos-de-uso.html
+│   ├── shared/                  — Cópia local dos conectores compartilhados
 │   └── fonts/                   — UniNeue (5 pesos)
 │
 ├── modelo-1/ ... modelo-7/      ← Variações em refinamento (não publicadas)
+├── planos.html                  ← Vitrine de planos (referência)
 ├── politica-de-privacidade.html ← Versão de referência (modelos vão consumir)
 ├── politica-de-cookies.html
 ├── termos-de-uso.html
-└── shared/                      ← Conector beacon-leads.js para os modelos
+└── shared/                      ← Conectores dos modelos: beacon-leads.js (leads → Beacon),
+                                   catalog-plans.js (planos dinâmicos do catalog-svc),
+                                   lgpd-cookies.js (banner de consentimento)
 ```
 
 ## Deploy

@@ -1,6 +1,16 @@
 # Landing → Beacon Integration
 
-Como conectar os formulários da landing ao funil de leads do Beacon.
+Este diretório contém os 3 conectores compartilhados pelos modelos da landing:
+
+| Arquivo | Função |
+|---|---|
+| `beacon-leads.js` | Envia leads do formulário para o Beacon (`/public/leads`) — documentado abaixo |
+| `catalog-plans.js` | Renderiza planos dinâmicos consumindo `GET /public/catalog/plans` do catalog-svc, com fallback estático |
+| `lgpd-cookies.js` | Banner de consentimento de cookies (LGPD) — bloqueia tracking antes do aceite |
+
+> Nota: os **modelos** postam direto no Beacon via `beacon-leads.js` (endpoints abaixo); a página **coming-soon** em produção usa outro fluxo — POST no Worker `leads.lampup.com.br/submit` (3 camadas, ver `infra/leads-worker/`).
+
+## Como conectar os formulários da landing ao funil de leads do Beacon
 
 ## 1. Inclua o script `beacon-leads.js`
 

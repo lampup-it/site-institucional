@@ -7,15 +7,17 @@ Página única "em breve" servida em `lampup.com.br` enquanto o Modelo 2 está s
 ```
 coming-soon/
 ├── index.html                       — página única (HTML/CSS/JS inline)
+├── planos.html                      — vitrine de planos (catálogo do Beacon)
 ├── leads.js                         — captura à prova de falha (3 camadas)
 ├── vercel.json                      — headers de segurança + cache
 ├── robots.txt
 ├── sitemap.xml
 ├── favicon-lampup.png
-├── logo-lampup.png
+├── logo-lampup.png, logo-lampup-fundo-azul.png, simbolo-lampup.png
 ├── politica-de-privacidade.html     — LGPD
 ├── politica-de-cookies.html         — LGPD
 ├── termos-de-uso.html
+├── shared/                          — cópia local dos conectores (catalog-plans, lgpd-cookies)
 └── fonts/                           — UniNeue (5 pesos)
 ```
 

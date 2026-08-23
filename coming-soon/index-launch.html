@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--
+  B-084.6 (item 10 do lançamento 31/07) — PÁGINA DE VIRADA do lançamento.
+  NO DIA D: renomear este arquivo para index.html (substituindo o coming-soon)
+  e fazer o deploy no Cloudflare Pages.
+  AJUSTAR ANTES DO DEPLOY: o subdomínio do Lumen está como
+  https://lumen.lampup.com.br (proposta) — trocar se a decisão for outra.
+-->
+<meta name="description" content="O Lumen está no ar: agentes de QA com IA e gestão de testes completa. Comece grátis — para QAs que querem produtividade e empresas que precisam de qualidade.">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="LampUP IT — O Lumen está no ar">
+<meta property="og:description" content="Agentes de QA com IA + gestão de testes completa. Comece grátis, sem cartão de crédito.">
+<meta property="og:url" content="https://lampup.com.br">
+<meta property="og:image" content="https://lampup.com.br/og-image.png">
+<meta property="og:locale" content="pt_BR">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LampUP IT — O Lumen está no ar">
+<meta name="twitter:description" content="Agentes de QA com IA + gestão de testes completa. Comece grátis.">
+
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon-lampup.png">
+<link rel="canonical" href="https://lampup.com.br">
+
+<title>LampUP IT — O Lumen está no ar</title>
+
+<style>
+@font-face { font-family:'UniNeue'; src:url('/fonts/UniNeueBlack.ttf') format('truetype'); font-weight:900; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('/fonts/UniNeueBold.ttf') format('truetype'); font-weight:700; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('/fonts/UniNeueBook.ttf') format('truetype'); font-weight:400; font-display:swap; }
+@font-face { font-family:'UniNeue'; src:url('/fonts/UniNeueLight.ttf') format('truetype'); font-weight:300; font-display:swap; }
+
+:root {
+  --cyan: #00D4E8;
+  --purple: #5B2D9F;
+  --purple-dark: #3D1F6B;
+  --text: #1A1A2E;
+  --gray: #6B7280;
+  --gray-light: #9CA3AF;
+  --white: #FFFFFF;
+  --off-white: #F8F7FC;
+  --border: #E5E7EB;
+  --success: #10B981;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; }
+body {
+  font-family:'UniNeue','Segoe UI',Arial,sans-serif;
+  background:var(--white); color:var(--text);
+  overflow-x:hidden; line-height:1.5;
+}
+
+.bg-shape {
+  position:fixed; pointer-events:none; z-index:0;
+  border-radius:50%; filter:blur(80px);
+}
+.bg-shape-1 {
+  top:-200px; right:-200px; width:600px; height:600px;
+  background:radial-gradient(circle, rgba(91,45,159,0.12) 0%, transparent 70%);
+}
+.bg-shape-2 {
+  bottom:-250px; left:-250px; width:700px; height:700px;
+  background:radial-gradient(circle, rgba(0,212,232,0.10) 0%, transparent 70%);
+}
+
+.wrap {
+  position:relative; z-index:1;
+  max-width:1080px; margin:0 auto; padding:32px 24px;
+  min-height:100vh; display:flex; flex-direction:column;
+}
+
+header.top {
+  display:flex; justify-content:space-between; align-items:center; gap:16px;
+}
+.top-meta { font-size:13px; color:var(--gray-light); letter-spacing:0.06em; }
+
+main.hero { margin:auto 0; padding:56px 0; text-align:center; }
+
+.badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.35);
+  color:#0B7A56; font-size:12px; font-weight:700; letter-spacing:0.08em;
+  text-transform:uppercase; padding:6px 14px; border-radius:999px; margin-bottom:22px;
+}
+.badge .dot {
+  width:8px; height:8px; border-radius:50%; background:var(--success);
+  animation:pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow:0 0 0 0 rgba(16,185,129,0.5); }
+  60% { box-shadow:0 0 0 8px rgba(16,185,129,0); }
+}
+
+h1 {
+  font-size:clamp(30px, 5vw, 52px); font-weight:900; line-height:1.12;
+  margin-bottom:18px;
+}
+h1 .gradient {
+  background:linear-gradient(90deg, var(--purple), var(--cyan));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+.tagline {
+  font-size:17px; color:var(--gray); max-width:640px; margin:0 auto 10px;
+}
+.subtag {
+  font-size:14px; color:var(--gray-light); max-width:560px; margin:0 auto 34px;
+}
+
+.cta-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:44px; }
+.btn {
+  display:inline-block; text-decoration:none; font-family:inherit;
+  font-size:15px; font-weight:700; padding:14px 28px; border-radius:10px;
+  transition:all 0.2s; cursor:pointer;
+}
+.btn-primary { background:var(--purple); color:#fff; }
+.btn-primary:hover { background:var(--purple-dark); transform:translateY(-1px); }
+.btn-outline { background:transparent; color:var(--purple); border:1px solid var(--purple); }
+.btn-outline:hover { background:var(--purple); color:#fff; }
+.btn-ghost { background:transparent; color:var(--gray); border:1px solid var(--border); }
+.btn-ghost:hover { color:var(--purple); border-color:var(--purple); }
+
+.pillars {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:16px; text-align:left; max-width:920px; margin:0 auto;
+}
+.pillar {
+  background:var(--off-white); border:1px solid var(--border);
+  border-radius:14px; padding:20px 22px;
+}
+.pillar h3 { font-size:15px; font-weight:900; color:var(--purple-dark); margin-bottom:6px; }
+.pillar p { font-size:13px; color:var(--gray); }
+
+footer.bottom {
+  margin-top:auto; padding-top:48px;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:16px;
+  font-size:12px; color:var(--gray-light);
+}
+footer.bottom a {
+  color:var(--gray); text-decoration:none; margin-right:18px;
+  transition:color 0.2s;
+}
+footer.bottom a:hover { color:var(--purple); }
+
+@media (max-width:640px) {
+  .wrap { padding:24px 16px; }
+  header.top { flex-direction:column; gap:8px; align-items:flex-start; }
+  footer.bottom { flex-direction:column; align-items:flex-start; }
+  footer.bottom .links { margin-bottom:8px; }
+}
+</style>
+</head>
+<body>
+<div class="bg-shape bg-shape-1"></div>
+<div class="bg-shape bg-shape-2"></div>
+
+<div class="wrap">
+  <header class="top">
+    <div class="logo">
+      <img src="/logo-lampup.png" alt="LampUP IT" width="160" height="40">
+    </div>
+    <div class="top-meta">Lighting up your business</div>
+  </header>
+
+  <main class="hero">
+    <div class="badge">
+      <span class="dot"></span>
+      No ar
+    </div>
+
+    <h1>O <span class="gradient">Lumen</span> está no ar.<br>Qualidade de software com IA, do seu jeito.</h1>
+
+    <p class="tagline">
+      Agentes de IA que geram requisitos, cenários e casos de teste a partir dos
+      seus documentos e vídeos — e uma gestão de testes completa pra executar,
+      rastrear e evoluir. O Lumen <strong>agrega</strong> ao trabalho de quem faz
+      qualidade: apoia QAs profissionais e cobre empresas que ainda não têm time de QA.
+    </p>
+    <p class="subtag">
+      Comece grátis com 100 mil tokens de boas-vindas. Sem cartão de crédito.
+    </p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://lumen.lampup.com.br/onboarding/step-1">Começar grátis</a>
+      <a class="btn btn-outline" href="https://lumen.lampup.com.br/planos">Ver planos</a>
+      <a class="btn btn-ghost" href="https://lumen.lampup.com.br/enterprise">Enterprise</a>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <h3>Agentes independentes</h3>
+        <p>Use 1, use 10, use quando precisar. Cada agente Lamp transforma documentos, especificações de API e vídeos de passagem de conhecimento em artefatos de teste prontos.</p>
+      </div>
+      <div class="pillar">
+        <h3>Gestão de testes completa</h3>
+        <p>Suítes, casos com Gherkin, planos, execuções manuais com evidências rastreadas e relatórios — no padrão das melhores ferramentas do mercado.</p>
+      </div>
+      <div class="pillar">
+        <h3>Preço transparente</h3>
+        <p>Você paga pelo que usa, em tokens. Do plano Free ao PME Premium — e Enterprise sob medida com SSO e opção on-premises.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bottom">
+    <div class="links">
+      <a href="/politica-de-privacidade.html">Política de Privacidade</a>
+      <a href="/politica-de-cookies.html">Cookies</a>
+      <a href="/termos-de-uso.html">Termos</a>
+    </div>
+    <div>
+      &copy; <span id="year"></span> LampUP IT &middot; CNPJ 44.339.749/0001-33
+    </div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
