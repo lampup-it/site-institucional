@@ -20,6 +20,7 @@ site-institucional/
 ├── coming-soon/                 ← Versão atual em produção (raiz do Vercel)
 │   ├── index.html               — Página oficial (07/09): Lumen no ar + lead "avise-me" + A empresa
 │   ├── index-launch.html        — Versão do dia D com "Começar grátis" (cadastro aberto)
+│   ├── maria-clara-*.png/.webp  — Mascote (recortes das artes finais em MARIA CLARA E CLARINHA/revisadas/)
 │   ├── leads.js                 — Captura à prova de falha (3 camadas)
 │   ├── vercel.json              — Headers de segurança + cache
 │   ├── robots.txt, sitemap.xml

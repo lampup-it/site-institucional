@@ -21,6 +21,12 @@
   Regras que continuam valendo: nenhum preço neste arquivo (fonte única =
   catalog-svc, renderizado pelo Lumen em /planos); copy "agrega, não
   substitui"; formulário de lead usa /leads.js (ids preservados).
+
+  Maria Clara (mascote, bíblia em DOCUMENTACAO/MASCOTE/MARIA-CLARA.md):
+  entra como colega de time, nunca no lugar do logo (o símbolo manda, no
+  header). Artes finais = "MARIA CLARA E CLARINHA/revisadas/" (logo oficial
+  composto). Aqui: boas-vindas (cargo + emblema) no hero e "apontando" para o
+  formulário. Recorte de fundo + WebP gerados por script; PNG é o fallback.
 -->
 <meta name="description" content="LampUP IT — qualidade de software com IA. O Lumen está no ar: agentes de IA que geram requisitos, cenários e casos de teste, e gestão de testes completa. Para QAs que querem produtividade e empresas que precisam de qualidade.">
 <meta name="robots" content="index, follow">
@@ -99,7 +105,24 @@ header.top {
 .top-nav a.entrar { color:var(--purple); border:1px solid var(--purple); padding:8px 16px; border-radius:8px; }
 .top-nav a.entrar:hover { background:var(--purple); color:#fff; }
 
-main.hero { padding:64px 0 40px; text-align:center; }
+main.hero { padding:56px 0 40px; }
+.hero-grid {
+  display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+  gap:32px; align-items:center; text-align:left;
+}
+.hero-copy .tagline, .hero-copy .subtag { margin-left:0; margin-right:0; }
+.hero-copy .cta-row { justify-content:flex-start; margin-bottom:0; }
+.hero-figure { margin:0; text-align:center; }
+.hero-figure img { height:min(520px, 60vh); width:auto; max-width:100%; display:block; margin:0 auto; }
+.hero-figure figcaption { font-size:12px; color:var(--gray-light); margin-top:10px; }
+.hero-figure figcaption strong { color:var(--purple); font-weight:700; }
+.pillars { margin-top:44px; }
+.avise-grid {
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,520px);
+  gap:24px; align-items:end; justify-content:center; max-width:920px; margin:0 auto;
+}
+.avise-figure { margin:0; text-align:right; }
+.avise-figure img { height:360px; width:auto; max-width:100%; display:inline-block; }
 
 .badge {
   display:inline-flex; align-items:center; gap:8px;
@@ -261,6 +284,14 @@ footer.bottom a {
 }
 footer.bottom a:hover { color:var(--purple); }
 
+@media (max-width:820px) {
+  .hero-grid { grid-template-columns:1fr; text-align:center; }
+  .hero-copy .tagline, .hero-copy .subtag { margin-left:auto; margin-right:auto; }
+  .hero-copy .cta-row { justify-content:center; }
+  .hero-figure img { height:300px; }
+  .avise-grid { grid-template-columns:1fr; }
+  .avise-figure { display:none; }
+}
 @media (max-width:640px) {
   .wrap { padding:24px 16px; }
   header.top { flex-direction:column; gap:12px; align-items:flex-start; }
@@ -289,6 +320,8 @@ footer.bottom a:hover { color:var(--purple); }
   </header>
 
   <main class="hero">
+    <div class="hero-grid">
+    <div class="hero-copy">
     <div class="badge">
       <span class="dot"></span>
       Lumen no ar
@@ -311,6 +344,16 @@ footer.bottom a:hover { color:var(--purple); }
       <a class="btn btn-primary" href="https://lumen.lampup.com.br">Conhecer o Lumen</a>
       <a class="btn btn-outline" href="https://lumen.lampup.com.br/planos">Ver planos</a>
       <a class="btn btn-ghost" href="https://lumen.lampup.com.br/enterprise">Enterprise</a>
+    </div>
+    </div>
+
+    <figure class="hero-figure">
+      <picture>
+        <source srcset="/maria-clara-boas-vindas.webp" type="image/webp">
+        <img src="/maria-clara-boas-vindas.png" alt="Maria Clara, do time LampUP, acenando" width="543" height="1000" fetchpriority="high">
+      </picture>
+      <figcaption><strong>Maria Clara</strong>, do time LampUP</figcaption>
+    </figure>
     </div>
 
     <div class="pillars">
@@ -345,6 +388,13 @@ footer.bottom a:hover { color:var(--purple); }
   </section>
 
   <section class="block" id="avise-me">
+    <div class="avise-grid">
+    <figure class="avise-figure" aria-hidden="true">
+      <picture>
+        <source srcset="/maria-clara-apontando.webp" type="image/webp">
+        <img src="/maria-clara-apontando.png" alt="" width="461" height="1000" loading="lazy">
+      </picture>
+    </figure>
     <div class="form-card" id="form-card">
       <div id="form-content">
       <h2>Avise-me quando o cadastro abrir</h2>
@@ -388,6 +438,7 @@ footer.bottom a:hover { color:var(--purple); }
           <button type="button" class="btn-secondary" id="btn-new-signup">Cadastrar outro e-mail</button>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
