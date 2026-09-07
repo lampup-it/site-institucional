@@ -22,7 +22,9 @@
     dia D está em `index-launch.html` (conferir a franquia do Free no
     catálogo antes de publicar qualquer número de token).
 
-  Regras que continuam valendo: nenhum preço neste arquivo (fonte única =
+  Regras que continuam valendo: botão "voltar ao topo" no padrão LampUP (o
+  mesmo das páginas jurídicas e do Lumen — ver a memória
+  feedback-back-to-top-component); nenhum preço neste arquivo (fonte única =
   catalog-svc, renderizado pelo Lumen em /planos); copy "agrega, não
   substitui"; números só com fonte (estão no rodapé do bloco); formulário de
   lead usa /leads.js (ids preservados); o Lumen Enterprise aponta para
@@ -423,6 +425,34 @@ footer.bottom a:hover { color:var(--purple); }
   footer.bottom { flex-direction:column; align-items:flex-start; }
   footer.bottom .links { margin-bottom:8px; }
 }
+
+/* Voltar ao topo — componente compartilhado LampUP.
+   Mesma especificação das páginas jurídicas e do Lumen (memória
+   feedback-back-to-top-component): círculo branco, borda ciano, símbolo da
+   LampUP, pulse ocioso e hover roxo com o símbolo "subindo". Não alterar aqui
+   sem alterar nas outras páginas — o botão é o mesmo em toda a casa. */
+.back-to-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 90;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #FFFFFF; border: 2px solid #00D4E8;
+  cursor: pointer; padding: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity 0.25s, transform 0.25s ease-out, visibility 0.25s, box-shadow 0.3s, border-color 0.3s, background 0.3s;
+  animation: btt-pulse 2.6s ease-out infinite;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top img { width: 30px; height: 30px; object-fit: contain; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.back-to-top:hover { background: #FFFFFF; border-color: #5B2D9F; box-shadow: 0 14px 36px rgba(91,45,159,0.4), 0 0 0 8px rgba(0,212,232,0.25); transform: translateY(-2px); animation: none; }
+.back-to-top:hover img { transform: translateY(-6px) scale(1.12); }
+.back-to-top:active img { transform: translateY(-2px) scale(0.96); }
+@keyframes btt-pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55); }
+  50% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 14px rgba(0,212,232,0); }
+}
+@media (max-width: 768px) { .back-to-top { right: 16px; bottom: 16px; width: 50px; height: 50px; } .back-to-top img { width: 26px; height: 26px; } }
+@media (prefers-reduced-motion: reduce) { .back-to-top { animation: none; } .back-to-top img, .back-to-top:hover img { transition: none; transform: none; } }
 </style>
 </head>
 <body>
@@ -757,9 +787,22 @@ footer.bottom a:hover { color:var(--purple); }
   </footer>
 </div>
 
+<button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+  <img src="/simbolo-lampup.png" alt="">
+</button>
+
 <script src="/leads.js" defer></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  (function () {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+  })();
 </script>
 </body>
 </html>
