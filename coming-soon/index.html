@@ -29,9 +29,11 @@
   #contato desta página.
 
   Maria Clara (mascote, bíblia em DOCUMENTACAO/MASCOTE/MARIA-CLARA.md):
-  entra como colega de time, nunca no lugar do logo. Artes finais =
-  "MARIA CLARA E CLARINHA/revisadas/". Aqui: boas-vindas no hero, apontando
-  para o formulário e positivo no bloco de contato. WebP + PNG de fallback.
+  entra como colega de time, nunca no lugar do logo. Aqui: boas-vindas no
+  hero, apontando para o formulário e positivo no bloco de contato. WebP +
+  PNG de fallback. As artes saem de `DOCUMENTACAO/MASCOTE/retoque/mc_web.py`
+  — ele imprime a medida de cada pose, que precisa ser copiada para o
+  `width`/`height` daqui, senão a página salta quando a imagem carrega.
 -->
 <meta name="description" content="LampUP IT: qualidade de software com IA, ao alcance de quem faz software. O Lumen chega em 14 de setembro de 2026 e você já pode conhecê-lo: agentes de IA que geram requisitos, cenários e casos de teste, executam os testes com evidência e uma gestão de testes completa.">
 <meta name="robots" content="index, follow">
@@ -472,7 +474,7 @@ footer.bottom a:hover { color:var(--purple); }
     <figure class="hero-figure">
       <picture>
         <source srcset="/maria-clara-boas-vindas.webp" type="image/webp">
-        <img src="/maria-clara-boas-vindas.png" alt="Maria Clara, do time LampUP, acenando" width="397" height="1000" fetchpriority="high">
+        <img src="/maria-clara-boas-vindas.png" alt="Maria Clara, do time LampUP, acenando" width="398" height="1000" fetchpriority="high">
       </picture>
       <figcaption><strong>Maria Clara</strong>, do time LampUP</figcaption>
     </figure>
@@ -630,7 +632,7 @@ footer.bottom a:hover { color:var(--purple); }
     <figure class="avise-figure" aria-hidden="true">
       <picture>
         <source srcset="/maria-clara-apontando.webp" type="image/webp">
-        <img src="/maria-clara-apontando.png" alt="" width="461" height="1000" loading="lazy">
+        <img src="/maria-clara-apontando.png" alt="" width="460" height="1000" loading="lazy">
       </picture>
     </figure>
     <div class="form-card" id="form-card">
