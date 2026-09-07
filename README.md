@@ -10,7 +10,7 @@ Site público da LampUP IT em `lampup.com.br`.
 |---|---|---|
 | v0.1 | Coming soon page (captura de leads) | Substituída em 07/09/2026 |
 | v0.2 | Página oficial: Lumen no ar, cadastro fechado (lead "avise-me"), seção A empresa | Substituída em 07/09/2026 (mesmo dia) |
-| **v0.3** | Página oficial com a história da LampUP (sem expor os sócios), narrativa "lançamento 14/09, mas o Lumen já pode ser visitado", duas capturas reais do produto, Maria Clara (3 poses), âncora `#contato` (usada pelo Lumen Enterprise) | Em produção |
+| **v0.3** | Página oficial com a história da LampUP (sem expor os sócios), narrativa "lançamento 14/09, mas o Lumen já pode ser visitado", duas capturas reais do produto, Maria Clara (3 poses, recorte neural sem sombra), FAQ, chips da base metodológica, âncora `#contato` (usada pelo Lumen Enterprise) | Em produção |
 | v0.3 | `index-launch.html` — versão com "Começar grátis", publicar só quando o cadastro abrir (`SIGNUP_OPEN=true` no Lumen) | Pronta, aguardando abertura do cadastro |
 | v1.0 | Modelo 2 — Clean Tech (landing completa) | Em refinamento |
 
@@ -21,7 +21,7 @@ site-institucional/
 ├── coming-soon/                 ← Versão atual em produção (raiz do Vercel)
 │   ├── index.html               — Página oficial (07/09): Lumen no ar + lead "avise-me" + A empresa
 │   ├── index-launch.html        — Versão do dia D com "Começar grátis" (cadastro aberto)
-│   ├── maria-clara-*.png/.webp  — Mascote (recortes das artes finais em MARIA CLARA E CLARINHA/revisadas/)
+│   ├── maria-clara-*.png/.webp  — Mascote (artes finais de MARIA CLARA E CLARINHA/revisadas/, fundo removido com rembg/isnet — floodfill deixa a sombra do chão)
 │   ├── leads.js                 — Captura à prova de falha (3 camadas)
 │   ├── vercel.json              — Headers de segurança + cache
 │   ├── robots.txt, sitemap.xml
