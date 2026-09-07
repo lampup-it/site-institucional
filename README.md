@@ -9,7 +9,8 @@ Site público da LampUP IT em `lampup.com.br`.
 | Versão | Conteúdo | Status |
 |---|---|---|
 | v0.1 | Coming soon page (captura de leads) | Substituída em 07/09/2026 |
-| **v0.2** | Página oficial: Lumen no ar, cadastro fechado (lead "avise-me"), seção A empresa (CNPJ/endereço/contato) | Em produção |
+| v0.2 | Página oficial: Lumen no ar, cadastro fechado (lead "avise-me"), seção A empresa | Substituída em 07/09/2026 (mesmo dia) |
+| **v0.3** | Página oficial com a história da LampUP (sem expor os sócios), narrativa "lançamento 14/09, mas o Lumen já pode ser visitado", duas capturas reais do produto, Maria Clara (3 poses), âncora `#contato` (usada pelo Lumen Enterprise) | Em produção |
 | v0.3 | `index-launch.html` — versão com "Começar grátis", publicar só quando o cadastro abrir (`SIGNUP_OPEN=true` no Lumen) | Pronta, aguardando abertura do cadastro |
 | v1.0 | Modelo 2 — Clean Tech (landing completa) | Em refinamento |
 
