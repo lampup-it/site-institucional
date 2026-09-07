@@ -7,21 +7,39 @@
  *   <script src="../shared/catalog-plans.js" defer></script>
  *
  * O script encontra automaticamente elementos com `data-plan-slug` e
- * atualiza filhos marcados com `data-plan-field`. Slugs reconhecidos:
- *   starter, growth, scale
+ * atualiza filhos marcados com `data-plan-field`.
+ *
+ * SLUGS VIGENTES (catálogo B-110, 8 tiers — fonte: catalog-svc seed_launch.py):
+ *   free, pro_individual, pro_plus, pro_master,
+ *   pme_basico, pme_padrao, pme_premium, enterprise
+ *
+ * ⚠ starter / growth / scale entraram em SUNSET em 02/08/2026 e NÃO voltam
+ * mais no endpoint público. Marcação com esses slugs nunca é substituída —
+ * a página fica presa no HTML estático. Foi assim que o `planos.html` do
+ * site exibiu preços de julho até 01/09 (mesma família do B-166).
+ *
+ * REGRA: este conector serve para REFLETIR o catálogo, nunca para guardar
+ * preço. HTML que use este script não deve conter valor comercial que
+ * precise envelhecer — se o fetch falhar, o certo é avisar, não inventar.
  *
  * Campos disponíveis:
  *   name, tagline, description_md, is_featured (texto vira "destaque")
  *   monthly_price_brl, annual_price_brl, setup_fee_brl
- *   overage_per_run_brl, runs_quota, cycle_length_months
+ *   tokens_month, tokens_onetime, tokens_bonus_pct, disk_bytes
+ *   max_users, managed_projects, retention_months, cycle_length_months
+ *   overage_per_run_brl, runs_quota (legado do modelo por execução)
  *
  * Exemplo:
- *   <article data-plan-slug="starter">
- *     <h3 data-plan-field="name">Starter</h3>
- *     <p data-plan-field="tagline">...</p>
- *     <span data-plan-field="monthly_price_brl">R$ 297</span>
- *     <span data-plan-field="runs_quota">50</span>
+ *   <article data-plan-slug="pme_padrao">
+ *     <h3 data-plan-field="name">—</h3>
+ *     <p data-plan-field="tagline">—</p>
+ *     <span data-plan-field="monthly_price_brl">—</span>
+ *     <span data-plan-field="tokens_month">—</span>
  *   </article>
+ *
+ * Repare no travessão: o HTML entra VAZIO de propósito. Se o catálogo não
+ * responder, a página mostra um traço (e o aviso de indisponibilidade) em
+ * vez de um preço que envelheceu.
  *
  * Formatação:
  *   - campos *_brl são formatados como BRL via Intl.NumberFormat

@@ -3,179 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" sizes="64x64" href="favicon-lampup.png">
-<title>Planos — LampUP IT | Testes de Software como Serviço</title>
-<meta name="description" content="Conheça os planos da LampUP IT: Starter, Growth e Scale. Testes de software com IA — agentes que amplificam a produtividade de times de QA e viabilizam qualidade para empresas em qualquer estágio.">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon-lampup.png">
+<title>Planos — LampUP IT</title>
+<meta name="description" content="Planos do Lumen: do Free ao Enterprise, cobrados por consumo de tokens. A tabela vigente fica na página de planos do Lumen.">
+<!--
+  01/09/2026 — ESTA PÁGINA DEIXOU DE TER TABELA DE PREÇOS. Redireciona para
+  lumen.lampup.com.br/planos, que lê o catálogo vigente (catalog-svc) em
+  tempo real.
+
+  POR QUÊ: até 01/09 este arquivo carregava, em HTML estático, os planos
+  Starter (R$ 297) / Growth (R$ 897) / Scale (R$ 2.497) cobrados por
+  "execuções/mês". Esses três planos entraram em SUNSET no B-110 (02/08) e
+  o modelo comercial passou a ser por TOKEN. Como o `catalog-plans.js` casa
+  por slug e os slugs sunset não voltam no endpoint público, o fetch nunca
+  substituía nada: a página exibia 100% do tempo uma oferta que não existe
+  mais, com preços até 5x errados, em URL pública.
+
+  É o mesmo defeito do B-166 (fallback de preço congelado no signup) numa
+  página de marketing. A correção segue a mesma regra: preço vencido em
+  código é bomba com relógio — o conserto não é atualizar os números aqui,
+  é PARAR de guardar preço aqui. Fonte da verdade única = catalog-svc, e
+  quem a renderiza é o Lumen.
+
+  NÃO reintroduzir tabela de preços neste arquivo.
+-->
+<link rel="canonical" href="https://lumen.lampup.com.br/planos">
+<meta name="robots" content="noindex, follow">
+<meta http-equiv="refresh" content="0; url=https://lumen.lampup.com.br/planos">
 <style>
-  :root {
-    --cyan:#00D4E8; --purple:#5B2D9F; --purple-dark:#3D1F6B;
-    --white:#FFFFFF; --gray-light:#F5F5F5; --gray:#666; --text:#1A1A2E;
-  }
+  :root { --cyan:#00D4E8; --purple:#5B2D9F; --purple-dark:#3D1F6B; --text:#1A1A2E; --gray:#666; }
   * { margin:0; padding:0; box-sizing:border-box; }
-
-  @font-face { font-family:'UniNeue'; src:url('../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueLight.ttf') format('truetype'); font-weight:300; font-display:swap; }
-  @font-face { font-family:'UniNeue'; src:url('../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBook.ttf') format('truetype'); font-weight:400; font-display:swap; }
-  @font-face { font-family:'UniNeue'; src:url('../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBold.ttf') format('truetype'); font-weight:700; font-display:swap; }
-  @font-face { font-family:'UniNeue'; src:url('../IDENTIDADE VISUAL/LampUP/FONTES/UniNeueBlack.ttf') format('truetype'); font-weight:900; font-display:swap; }
-
-  body { font-family:'UniNeue', 'Segoe UI', Arial, sans-serif; color:var(--text); background:var(--gray-light); line-height:1.6; }
-
-  header { background:linear-gradient(135deg, var(--purple-dark), var(--purple)); color:var(--white); padding:48px 24px 80px; text-align:center; }
-  header .logo { height:48px; margin-bottom:24px; }
-  header h1 { font-size:42px; font-weight:800; margin-bottom:12px; letter-spacing:-0.5px; }
-  header p.subtitle { color:rgba(255,255,255,0.85); font-size:18px; max-width:640px; margin:0 auto; }
-  header a.back-link { display:inline-block; margin-top:24px; color:var(--cyan); text-decoration:none; font-size:14px; font-weight:600; }
-  header a.back-link:hover { text-decoration:underline; }
-
-  main { max-width:1180px; margin:-48px auto 64px; padding:0 24px; }
-
-  .plans-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px; }
-  .plan-card { background:var(--white); border-radius:16px; padding:32px 28px; box-shadow:0 6px 24px rgba(0,0,0,0.08); display:flex; flex-direction:column; position:relative; transition:transform 0.25s ease, box-shadow 0.25s ease; }
-  .plan-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(91,45,159,0.18); }
-  .plan-card[data-plan-featured="true"] { border:2px solid var(--cyan); box-shadow:0 10px 30px rgba(0,212,232,0.25); }
-  .plan-card[data-plan-featured="true"]::before { content:"Mais popular"; position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:var(--cyan); color:var(--purple-dark); font-size:12px; font-weight:700; padding:4px 14px; border-radius:20px; letter-spacing:0.5px; text-transform:uppercase; }
-
-  .plan-name { font-size:24px; font-weight:800; color:var(--purple-dark); }
-  .plan-tagline { color:var(--gray); font-size:14px; margin:8px 0 24px; min-height:42px; }
-  .plan-price { display:flex; align-items:baseline; gap:6px; margin-bottom:6px; }
-  .plan-price .currency { color:var(--purple); font-size:18px; font-weight:600; }
-  .plan-price .amount { color:var(--purple-dark); font-size:44px; font-weight:800; line-height:1; }
-  .plan-price .period { color:var(--gray); font-size:14px; }
-  .plan-annual { color:var(--gray); font-size:13px; margin-bottom:24px; }
-
-  .plan-features { list-style:none; padding:0; margin:16px 0 24px; }
-  .plan-features li { padding:8px 0; border-bottom:1px solid #EEE; color:var(--text); font-size:14px; display:flex; justify-content:space-between; gap:12px; }
-  .plan-features li:last-child { border-bottom:none; }
-  .plan-features li .label { color:var(--gray); }
-  .plan-features li .value { color:var(--purple); font-weight:600; }
-
-  .plan-description { color:var(--gray); font-size:14px; margin:16px 0 24px; min-height:80px; }
-  .plan-cta { margin-top:auto; display:block; text-align:center; background:var(--purple); color:var(--white); padding:14px 20px; border-radius:10px; text-decoration:none; font-weight:700; font-size:15px; transition:background 0.2s ease; }
-  .plan-cta:hover { background:var(--purple-dark); }
-  /* CTA do plano destacado: usa roxo escuro (AA garantido) e cyan vira borda/realce */
-  .plan-card[data-plan-featured="true"] .plan-cta { background:var(--purple-dark); color:var(--white); box-shadow:0 0 0 3px var(--cyan); }
-  .plan-card[data-plan-featured="true"] .plan-cta:hover { background:var(--purple); }
-
-  .below-grid { text-align:center; margin-top:48px; color:var(--gray); font-size:14px; }
-  .below-grid a { color:var(--purple); text-decoration:none; font-weight:600; }
-  .below-grid a:hover { text-decoration:underline; }
-
-  .api-error { display:none; background:#FFF4E6; border:1px solid #FFA94D; color:#A05E00; padding:16px 20px; border-radius:8px; margin-bottom:24px; font-size:14px; text-align:center; }
-  .api-error.visible { display:block; }
-
-  footer { background:var(--purple-dark); color:rgba(255,255,255,0.7); text-align:center; padding:32px 24px; font-size:13px; }
-  footer img { height:28px; margin-bottom:8px; }
-  footer strong { color:var(--cyan); }
-  footer a { color:rgba(255,255,255,0.8); text-decoration:none; margin:0 8px; }
-  footer a:hover { color:var(--cyan); }
-
-  @media (max-width: 768px) {
-    header h1 { font-size:32px; }
-    header p.subtitle { font-size:16px; }
-    .plan-price .amount { font-size:36px; }
+  @font-face { font-family:'UniNeue'; src:url('/fonts/UniNeueBook.ttf') format('truetype'); font-weight:400; font-display:swap; }
+  @font-face { font-family:'UniNeue'; src:url('/fonts/UniNeueBold.ttf') format('truetype'); font-weight:700; font-display:swap; }
+  @font-face { font-family:'UniNeue'; src:url('/fonts/UniNeueBlack.ttf') format('truetype'); font-weight:900; font-display:swap; }
+  body {
+    font-family:'UniNeue','Segoe UI',Arial,sans-serif; color:var(--text);
+    background:linear-gradient(135deg,var(--purple-dark),var(--purple));
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    padding:32px 24px; line-height:1.6;
   }
+  .box { background:#fff; border-radius:16px; padding:44px 40px; max-width:520px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,.25); }
+  .box img { height:44px; margin-bottom:24px; }
+  h1 { font-size:26px; font-weight:900; color:var(--purple-dark); margin-bottom:12px; }
+  p { color:var(--gray); font-size:15px; margin-bottom:24px; }
+  a.cta { display:inline-block; background:var(--purple); color:#fff; text-decoration:none; font-weight:700; padding:14px 28px; border-radius:10px; }
+  a.cta:hover { background:var(--purple-dark); }
+  small { display:block; margin-top:20px; color:#999; font-size:12px; }
 </style>
 </head>
 <body>
-
-<header>
-  <img class="logo" src="logo-lampup-up-ciano.png" alt="LampUP IT">
-  <h1>Planos LampUP</h1>
-  <p class="subtitle">Qualidade de software com agentes de IA que trabalham junto com o seu time. Escolha o plano ideal para o tamanho do seu negócio.</p>
-  <a class="back-link" href="javascript:history.back()">← Voltar</a>
-</header>
-
-<main>
-
-  <div id="api-error" class="api-error">
-    Não conseguimos carregar os planos mais recentes agora. Mostrando os valores de referência.
+  <div class="box">
+    <img src="/logo-lampup.png" alt="LampUP IT">
+    <h1>Os planos do Lumen mudaram de endereço</h1>
+    <p>
+      A tabela vigente — do Free ao Enterprise, cobrada por consumo de tokens —
+      fica na página de planos do Lumen, que lê o catálogo em tempo real.
+    </p>
+    <a class="cta" href="https://lumen.lampup.com.br/planos">Ver os planos do Lumen</a>
+    <small>Redirecionando automaticamente…</small>
   </div>
-
-  <div class="plans-grid">
-
-    <article class="plan-card" data-plan-slug="starter">
-      <h2 class="plan-name" data-plan-field="name">Starter</h2>
-      <p class="plan-tagline" data-plan-field="tagline">Para PMEs que estão começando com QA</p>
-      <div class="plan-price">
-        <span class="currency">R$</span>
-        <span class="amount" data-plan-field="monthly_price_brl" data-plan-format="integer">297</span>
-        <span class="period">/mês</span>
-      </div>
-      <p class="plan-annual">ou <span data-plan-field="annual_price_brl">R$ 2.970</span> no plano anual</p>
-      <p class="plan-description" data-plan-field="description_md">Cobertura essencial de testes automatizados com IA. Ideal para times de até 10 pessoas.</p>
-      <ul class="plan-features">
-        <li><span class="label">Execuções/mês</span><span class="value" data-plan-field="runs_quota">50</span></li>
-        <li><span class="label">Excedente por execução</span><span class="value" data-plan-field="overage_per_run_brl">R$ 8</span></li>
-      </ul>
-      <a class="plan-cta" href="modelo-1/index.html#contato">Falar com a LampUP</a>
-    </article>
-
-    <article class="plan-card" data-plan-slug="growth">
-      <h2 class="plan-name" data-plan-field="name">Growth</h2>
-      <p class="plan-tagline" data-plan-field="tagline">Para PMEs em crescimento que precisam acelerar entregas</p>
-      <div class="plan-price">
-        <span class="currency">R$</span>
-        <span class="amount" data-plan-field="monthly_price_brl" data-plan-format="integer">897</span>
-        <span class="period">/mês</span>
-      </div>
-      <p class="plan-annual">ou <span data-plan-field="annual_price_brl">R$ 8.970</span> no plano anual</p>
-      <p class="plan-description" data-plan-field="description_md">Cobertura completa Web + API + Mobile com agentes especialistas. Inclui relatórios executivos.</p>
-      <ul class="plan-features">
-        <li><span class="label">Execuções/mês</span><span class="value" data-plan-field="runs_quota">200</span></li>
-        <li><span class="label">Excedente por execução</span><span class="value" data-plan-field="overage_per_run_brl">R$ 6</span></li>
-      </ul>
-      <a class="plan-cta" href="modelo-1/index.html#contato">Falar com a LampUP</a>
-    </article>
-
-    <article class="plan-card" data-plan-slug="scale">
-      <h2 class="plan-name" data-plan-field="name">Scale</h2>
-      <p class="plan-tagline" data-plan-field="tagline">Para empresas mid-market com pipeline contínuo</p>
-      <div class="plan-price">
-        <span class="currency">R$</span>
-        <span class="amount" data-plan-field="monthly_price_brl" data-plan-format="integer">2.497</span>
-        <span class="period">/mês</span>
-      </div>
-      <p class="plan-annual">ou <span data-plan-field="annual_price_brl">R$ 24.970</span> no plano anual</p>
-      <p class="plan-description" data-plan-field="description_md">Cobertura avançada incluindo segurança, performance e regressão contínua. CI/CD plug-and-play.</p>
-      <ul class="plan-features">
-        <li><span class="label">Execuções/mês</span><span class="value" data-plan-field="runs_quota">800</span></li>
-        <li><span class="label">Excedente por execução</span><span class="value" data-plan-field="overage_per_run_brl">R$ 4,50</span></li>
-      </ul>
-      <a class="plan-cta" href="modelo-1/index.html#contato">Falar com a LampUP</a>
-    </article>
-
-  </div>
-
-  <p class="below-grid">
-    Precisa de algo sob medida? Conheça o plano <a href="modelo-1/index.html#contato">Enterprise</a> ou converse com nosso time comercial.
-  </p>
-
-</main>
-
-<footer>
-  <img src="logo-lampup-up-ciano.png" alt="LampUP IT">
-  <p><strong>LampUP IT</strong> — Lighting Up Your Business</p>
-  <p style="margin-top:8px;">
-    <a href="politica-de-privacidade.html">Privacidade</a> ·
-    <a href="politica-de-cookies.html">Cookies</a> ·
-    <a href="termos-de-uso.html">Termos de Uso</a>
-  </p>
-</footer>
-
-<script src="shared/catalog-plans.js" defer></script>
-<script>
-  // Mostra o aviso de fallback se o fetch falhar
-  window.addEventListener("DOMContentLoaded", () => {
-    const banner = document.getElementById("api-error");
-    const original = console.warn;
-    console.warn = function (...args) {
-      if (typeof args[0] === "string" && args[0].includes("[catalog-plans]")) {
-        banner.classList.add("visible");
-      }
-      return original.apply(console, args);
-    };
-  });
-</script>
-
+  <script>location.replace("https://lumen.lampup.com.br/planos");</script>
 </body>
 </html>
