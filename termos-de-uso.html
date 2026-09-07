@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" sizes="64x64" href="../assets/img/favicon-lampup.png">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon-lampup.png">
 <title>Termos de Uso — LampUP IT</title>
 <meta name="robots" content="noindex">
 <style>
@@ -32,17 +32,13 @@
 <body>
 
 <header>
-  <img class="logo" src="../assets/img/logo-lampup-fundo-escuro-up-ciano.png" alt="LampUP IT">
+  <img class="logo" src="/logo-lampup-up-ciano.png" alt="LampUP IT">
   <h1>Termos de Uso</h1>
-  <p class="subtitle">Última atualização: Junho de 2026 — Versão 1.0 (rascunho aguardando validação jurídica)</p>
-  <a class="back-link" href="javascript:history.back()">Voltar ao site</a>
+  <p class="subtitle">Última atualização: Junho de 2026 — Versão 1.0</p>
+  <a class="back-link" href="javascript:history.back()">← Voltar ao site</a>
 </header>
 
 <main>
-
-  <div class="legal-note">
-    <strong>Aviso:</strong> esta versão é um rascunho preparado pela própria LampUP IT. A versão definitiva passará por revisão de assessoria jurídica especializada em direito digital e LGPD antes de produzir efeitos contratuais. Ao continuar navegando, você concorda com as condições gerais descritas abaixo.
-  </div>
 
   <div class="card">
     <h2>1. Aceitação</h2>
@@ -105,17 +101,52 @@
 
   <div class="card">
     <h2>11. Contato</h2>
-    <p><strong>LampUP IT</strong><br>Al. Rio Negro, 1033 — Alphaville Comercial, Barueri/SP<br>CNPJ: a ser registrado<br>E-mail: <a href="mailto:contato@lampup.com.br">contato@lampup.com.br</a><br>Encarregado de Dados (DPO): <a href="mailto:privacidade@lampup.com.br">privacidade@lampup.com.br</a></p>
+    <p><strong>LampUP IT</strong><br>Al. Rio Negro, 1033 — Alphaville Comercial, Barueri/SP<br>CNPJ: 44.339.749/0001-33<br>E-mail: <a href="mailto:contato@lampup.com.br">contato@lampup.com.br</a><br>Encarregado de Dados (DPO): <a href="mailto:privacidade@lampup.com.br">privacidade@lampup.com.br</a></p>
   </div>
 
-  <p class="last-update">Termos de Uso — LampUP IT · Versão 1.0 (rascunho) · Junho/2026</p>
+  <p class="last-update">Termos de Uso — LampUP IT · Versão 1.0 · Junho/2026</p>
 </main>
 
 <footer>
-  <img src="../assets/img/logo-lampup-fundo-escuro-up-ciano.png" alt="LampUP IT" style="height:36px;width:auto;display:block;margin:0 auto 10px;">
-  <strong>LampUP IT</strong> · "Lighting Up Your Business" · www.lampup.com.br
+  <img src="/logo-lampup-up-ciano.png" alt="LampUP IT" style="height:36px;width:auto;display:block;margin:0 auto 10px;">
+  <strong>LampUP IT</strong> · CNPJ 44.339.749/0001-33 · "Lighting Up Your Business" · www.lampup.com.br
 </footer>
 
-<script src="shared/lgpd-cookies.js"></script>
+<style>
+.back-to-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 90;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #FFFFFF; border: 2px solid #00D4E8;
+  cursor: pointer; padding: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity 0.25s, transform 0.25s ease-out, visibility 0.25s, box-shadow 0.3s, border-color 0.3s, background 0.3s;
+  animation: btt-pulse 2.6s ease-out infinite;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top img { width: 30px; height: 30px; object-fit: contain; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.back-to-top:hover { background: #FFFFFF; border-color: #5B2D9F; box-shadow: 0 14px 36px rgba(91,45,159,0.4), 0 0 0 8px rgba(0,212,232,0.25); transform: translateY(-2px); animation: none; }
+.back-to-top:hover img { transform: translateY(-6px) scale(1.12); }
+.back-to-top:active img { transform: translateY(-2px) scale(0.96); }
+@keyframes btt-pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 0 rgba(0,212,232,0.55); }
+  50% { box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 14px rgba(0,212,232,0); }
+}
+@media (max-width: 768px) { .back-to-top { right: 16px; bottom: 16px; width: 50px; height: 50px; } .back-to-top img { width: 26px; height: 26px; } }
+@media (prefers-reduced-motion: reduce) { .back-to-top { animation: none; } .back-to-top img, .back-to-top:hover img { transition: none; transform: none; } }
+</style>
+
+<button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+  <img src="/simbolo-lampup.png" alt="">
+</button>
+<script>
+(function(){
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  window.addEventListener('scroll', () => { btn.classList.toggle('visible', window.scrollY > 400); }, { passive: true });
+})();
+</script>
 </body>
 </html>

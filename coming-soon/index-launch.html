@@ -4,11 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--
-  B-084.6 (item 10 do lançamento 31/07) — PÁGINA DE VIRADA do lançamento.
-  NO DIA D: renomear este arquivo para index.html (substituindo o coming-soon)
-  e fazer o deploy no Cloudflare Pages.
-  AJUSTAR ANTES DO DEPLOY: o subdomínio do Lumen está como
-  https://lumen.lampup.com.br (proposta) — trocar se a decisão for outra.
+  B-084.6 (item 10 do lançamento) — PÁGINA DE VIRADA do lançamento.
+
+  NO DIA D (14/09/2026): renomear este arquivo para index.html (substituindo
+  o coming-soon) e fazer o deploy — o site é servido pela **Vercel** a partir
+  de `coming-soon/` como root (ver README desta pasta), não pelo Cloudflare
+  Pages como este comentário dizia antes de 01/09.
+
+  Subdomínio do Lumen CONFIRMADO: https://lumen.lampup.com.br (no ar desde
+  27/07; vitrine pública liberada em 15/08).
+
+  ⚠ ANTES DE PUBLICAR, CONFERIR (revisão 01/09):
+  - o cadastro precisa estar aberto — hoje `SIGNUP_OPEN=false` no Lumen faz
+    TODO interesse virar lead, inclusive o Free. Publicar "Começar grátis"
+    com o signup fechado entrega o botão numa tela que não cadastra.
+  - a franquia do Free vem do catálogo (catalog-svc). Não repetir número de
+    token aqui sem conferir o seed — foi assim que esta página ficou
+    prometendo 100 mil onde o produto entrega 575 mil.
 -->
 <meta name="description" content="O Lumen está no ar: agentes de QA com IA e gestão de testes completa. Comece grátis — para QAs que querem produtividade e empresas que precisam de qualidade.">
 <meta name="robots" content="index, follow">
@@ -184,7 +196,7 @@ footer.bottom a:hover { color:var(--purple); }
       qualidade: apoia QAs profissionais e cobre empresas que ainda não têm time de QA.
     </p>
     <p class="subtag">
-      Comece grátis com 100 mil tokens de boas-vindas. Sem cartão de crédito.
+      Comece grátis com 575 mil tokens de boas-vindas. Sem cartão de crédito.
     </p>
 
     <div class="cta-row">
