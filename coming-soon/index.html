@@ -4,42 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--
-  07/09/2026 — PÁGINA OFICIAL (substitui o coming-soon de 24/06).
+  07/09/2026 — PÁGINA OFICIAL v0.3 (a v0.2 substituiu o coming-soon no mesmo dia).
 
-  Estado comercial que esta página reflete:
-  - O Lumen está NO AR em https://lumen.lampup.com.br (vitrine pública,
-    planos e Enterprise visíveis).
+  O que esta página conta:
+  - A LampUP: por que existimos (nossa história, sem expor os sócios — sem
+    nome, sem foto, sem cargo), em que acreditamos e o que o nome significa.
+  - O Lumen: o produto, com duas capturas reais (as mesmas do material
+    comercial, barra do usuário recortada) e o caminho "do documento solto
+    ao teste rodando".
+  - A narrativa do lançamento: oficial em 14/09/2026, MAS o Lumen já pode ser
+    visitado hoje (vitrine, tour e planos). O cadastro abre no lançamento.
+
+  Estado comercial que ela reflete:
   - O CADASTRO segue FECHADO (`SIGNUP_OPEN=false` no Lumen): nenhum plano,
-    nem o Free, abre conta sozinho. Todo interesse vira lead. Por isso esta
-    página NÃO tem "Começar grátis" — o CTA principal leva ao Lumen e o
-    formulário avisa quando o cadastro abrir.
-  - Quando o cadastro abrir (testes de onboarding → lançamento 14/09), a
-    versão com "Começar grátis" está em `index-launch.html`. Conferir a
-    franquia do Free no catálogo (catalog-svc) antes de publicar qualquer
-    número de token aqui.
+    nem o Free, abre conta sozinho. Por isso não existe "Começar grátis" aqui;
+    o formulário avisa no lançamento. A versão com "Começar grátis" para o
+    dia D está em `index-launch.html` (conferir a franquia do Free no
+    catálogo antes de publicar qualquer número de token).
 
   Regras que continuam valendo: nenhum preço neste arquivo (fonte única =
   catalog-svc, renderizado pelo Lumen em /planos); copy "agrega, não
-  substitui"; formulário de lead usa /leads.js (ids preservados).
+  substitui"; números só com fonte (estão no rodapé do bloco); formulário de
+  lead usa /leads.js (ids preservados); o Lumen Enterprise aponta para
+  #contato desta página.
 
   Maria Clara (mascote, bíblia em DOCUMENTACAO/MASCOTE/MARIA-CLARA.md):
-  entra como colega de time, nunca no lugar do logo (o símbolo manda, no
-  header). Artes finais = "MARIA CLARA E CLARINHA/revisadas/" (logo oficial
-  composto). Aqui: boas-vindas (cargo + emblema) no hero e "apontando" para o
-  formulário. Recorte de fundo + WebP gerados por script; PNG é o fallback.
+  entra como colega de time, nunca no lugar do logo. Artes finais =
+  "MARIA CLARA E CLARINHA/revisadas/". Aqui: boas-vindas no hero, apontando
+  para o formulário e positivo no bloco de contato. WebP + PNG de fallback.
 -->
-<meta name="description" content="LampUP IT — qualidade de software com IA. O Lumen está no ar: agentes de IA que geram requisitos, cenários e casos de teste, e gestão de testes completa. Para QAs que querem produtividade e empresas que precisam de qualidade.">
+<meta name="description" content="LampUP IT: qualidade de software com IA, ao alcance de quem faz software. O Lumen chega em 14 de setembro de 2026 e você já pode conhecê-lo: agentes de IA que geram requisitos, cenários e casos de teste, executam os testes com evidência e uma gestão de testes completa.">
 <meta name="robots" content="index, follow">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="LampUP IT — O Lumen está no ar">
+<meta property="og:title" content="LampUP IT — O Lumen chega em 14 de setembro. E você já pode conhecê-lo.">
 <meta property="og:description" content="Agentes de QA com IA + gestão de testes completa. Qualidade de software como serviço, para QAs e para empresas que ainda não têm QA.">
 <meta property="og:url" content="https://lampup.com.br">
 <meta property="og:image" content="https://lampup.com.br/logo-lampup.png">
 <meta property="og:locale" content="pt_BR">
 
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LampUP IT — O Lumen está no ar">
+<meta name="twitter:title" content="LampUP IT — O Lumen chega em 14 de setembro">
 <meta name="twitter:description" content="Agentes de QA com IA + gestão de testes completa. Qualidade de software como serviço.">
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon-lampup.png">
@@ -55,6 +60,7 @@
 
 :root {
   --cyan: #00D4E8;
+  --cyan-dark: #00A5B8;
   --purple: #5B2D9F;
   --purple-dark: #3D1F6B;
   --text: #1A1A2E;
@@ -105,7 +111,7 @@ header.top {
 .top-nav a.entrar { color:var(--purple); border:1px solid var(--purple); padding:8px 16px; border-radius:8px; }
 .top-nav a.entrar:hover { background:var(--purple); color:#fff; }
 
-main.hero { padding:56px 0 40px; }
+main.hero { padding:56px 0 24px; }
 .hero-grid {
   display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
   gap:32px; align-items:center; text-align:left;
@@ -117,12 +123,6 @@ main.hero { padding:56px 0 40px; }
 .hero-figure figcaption { font-size:12px; color:var(--gray-light); margin-top:10px; }
 .hero-figure figcaption strong { color:var(--purple); font-weight:700; }
 .pillars { margin-top:44px; }
-.avise-grid {
-  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,520px);
-  gap:24px; align-items:end; justify-content:center; max-width:920px; margin:0 auto;
-}
-.avise-figure { margin:0; text-align:right; }
-.avise-figure img { height:360px; width:auto; max-width:100%; display:inline-block; }
 
 .badge {
   display:inline-flex; align-items:center; gap:8px;
@@ -138,6 +138,10 @@ main.hero { padding:56px 0 40px; }
   0%,100% { box-shadow:0 0 0 0 rgba(16,185,129,0.5); }
   60% { box-shadow:0 0 0 8px rgba(16,185,129,0); }
 }
+.badge.launch {
+  background:rgba(91,45,159,0.08); border-color:rgba(91,45,159,0.35); color:var(--purple-dark);
+}
+.badge.launch .dot { background:var(--purple); animation:none; }
 
 h1 {
   font-size:clamp(30px, 5vw, 52px); font-weight:900; line-height:1.12;
@@ -170,7 +174,7 @@ h1 .gradient {
 
 .pillars {
   display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-  gap:16px; text-align:left; max-width:920px; margin:0 auto;
+  gap:16px; text-align:left; max-width:920px; margin-left:auto; margin-right:auto;
 }
 .pillar {
   background:var(--off-white); border:1px solid var(--border);
@@ -180,14 +184,89 @@ h1 .gradient {
 .pillar p { font-size:13px; color:var(--gray); }
 
 /* SEÇÕES */
-section.block { padding:40px 0; }
+section.block { padding:48px 0; scroll-margin-top:24px; }
 section.block h2 {
   font-size:clamp(22px, 3vw, 30px); font-weight:900; text-align:center;
   margin-bottom:10px; color:var(--text);
 }
+section.block h2 .accent { color:var(--purple); }
 section.block .lead {
   font-size:15px; color:var(--gray); text-align:center; max-width:640px; margin:0 auto 28px;
 }
+.kicker {
+  display:block; text-align:center; font-size:12px; font-weight:900; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--cyan-dark); margin-bottom:10px;
+}
+
+/* HISTÓRIA */
+.story {
+  max-width:760px; margin:0 auto; font-size:16px; color:#374151; line-height:1.7;
+}
+.story p { margin-bottom:16px; }
+.story p strong { color:var(--purple-dark); }
+.nowrap { white-space:nowrap; }
+.story .quote {
+  border-left:4px solid var(--cyan); padding:6px 0 6px 18px; margin:22px 0;
+  font-size:19px; font-weight:700; color:var(--purple-dark); line-height:1.4;
+}
+
+.stats {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:16px; max-width:920px; margin:32px auto 0;
+}
+.stat {
+  background:var(--white); border:1px solid var(--border); border-radius:14px; padding:22px;
+  box-shadow:0 4px 24px rgba(91,45,159,0.05);
+}
+.stat .num { font-size:34px; font-weight:900; color:var(--purple); line-height:1; margin-bottom:8px; }
+.stat p { font-size:13px; color:var(--gray); }
+.sources { font-size:11px; color:var(--gray-light); text-align:center; max-width:920px; margin:12px auto 0; }
+
+.principles {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  gap:16px; max-width:920px; margin:28px auto 0;
+}
+.principle {
+  background:var(--off-white); border:1px solid var(--border); border-radius:14px; padding:20px 22px;
+}
+.principle h3 { font-size:15px; font-weight:900; color:var(--purple-dark); margin-bottom:6px; }
+.principle p { font-size:13px; color:var(--gray); }
+
+/* PRODUTO */
+.shots {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:20px; max-width:960px; margin:0 auto 28px;
+}
+.shot {
+  margin:0; border:1px solid var(--border); border-radius:14px; overflow:hidden;
+  background:var(--white); box-shadow:0 10px 32px rgba(91,45,159,0.14);
+}
+.shot .bar {
+  display:flex; align-items:center; gap:6px; padding:8px 12px;
+  background:#F3F4F6; border-bottom:1px solid var(--border); font-size:11px; color:var(--gray);
+}
+.shot .bar i { width:9px; height:9px; border-radius:50%; display:inline-block; }
+.shot .bar i:nth-child(1) { background:#FB7185; }
+.shot .bar i:nth-child(2) { background:#FBBF24; }
+.shot .bar i:nth-child(3) { background:#34D399; }
+.shot .bar span { margin-left:8px; }
+.shot img { width:100%; height:auto; display:block; }
+.shot figcaption { padding:10px 14px; font-size:12px; color:var(--gray); background:var(--off-white); border-top:1px solid var(--border); }
+.shot figcaption strong { color:var(--purple-dark); }
+
+.steps {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  gap:14px; max-width:960px; margin:0 auto 28px;
+}
+.step {
+  background:var(--white); border:1px solid var(--border); border-radius:14px; padding:18px 20px;
+}
+.step .n {
+  width:30px; height:30px; border-radius:50%; background:var(--purple); color:#fff;
+  font-weight:900; font-size:13px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;
+}
+.step h3 { font-size:14px; font-weight:900; color:var(--purple-dark); margin-bottom:4px; }
+.step p { font-size:13px; color:var(--gray); }
 
 .publics { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px; max-width:920px; margin:0 auto; }
 .public-card {
@@ -198,6 +277,12 @@ section.block .lead {
 .public-card p { font-size:14px; color:var(--gray); }
 
 /* FORM */
+.avise-grid {
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,520px);
+  gap:24px; align-items:end; justify-content:center; max-width:920px; margin:0 auto;
+}
+.avise-figure { margin:0; text-align:right; }
+.avise-figure img { height:360px; width:auto; max-width:100%; display:inline-block; }
 .form-card {
   background:var(--white);
   border:1px solid var(--border);
@@ -261,16 +346,23 @@ button[type="submit"]:disabled { opacity:0.6; cursor:wait; }
 }
 .btn-secondary:hover { background:var(--purple); color:#fff; }
 
-/* EMPRESA */
+/* EMPRESA + CONTATO */
+.contact-grid {
+  display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px; align-items:end;
+  max-width:920px; margin:0 auto;
+}
+.contact-figure { margin:0; }
+.contact-figure img { height:300px; width:auto; display:block; }
 .company {
   background:var(--off-white); border:1px solid var(--border); border-radius:14px;
-  padding:24px 28px; max-width:920px; margin:0 auto;
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px;
+  padding:24px 28px;
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px;
 }
 .company h3 { font-size:13px; font-weight:900; color:var(--purple-dark); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px; }
 .company p { font-size:14px; color:var(--gray); }
 .company a { color:var(--purple); text-decoration:none; font-weight:700; }
 .company a:hover { text-decoration:underline; }
+.contact-cta { margin-top:16px; display:flex; gap:12px; flex-wrap:wrap; }
 
 footer.bottom {
   margin-top:auto; padding-top:48px;
@@ -291,11 +383,14 @@ footer.bottom a:hover { color:var(--purple); }
   .hero-figure img { height:300px; }
   .avise-grid { grid-template-columns:1fr; }
   .avise-figure { display:none; }
+  .contact-grid { grid-template-columns:1fr; }
+  .contact-figure { display:none; }
 }
 @media (max-width:640px) {
   .wrap { padding:24px 16px; }
   header.top { flex-direction:column; gap:12px; align-items:flex-start; }
-  main.hero { padding:40px 0 24px; }
+  main.hero { padding:40px 0 16px; }
+  section.block { padding:36px 0; }
   footer.bottom { flex-direction:column; align-items:flex-start; }
   footer.bottom .links { margin-bottom:8px; }
 }
@@ -313,8 +408,8 @@ footer.bottom a:hover { color:var(--purple); }
     <nav class="top-nav" aria-label="Principal">
       <a href="https://lumen.lampup.com.br">Lumen</a>
       <a href="https://lumen.lampup.com.br/planos">Planos</a>
-      <a href="https://lumen.lampup.com.br/enterprise">Enterprise</a>
-      <a href="#empresa">A empresa</a>
+      <a href="#historia">Nossa história</a>
+      <a href="#contato">Contato</a>
       <a class="entrar" href="https://lumen.lampup.com.br/login">Entrar</a>
     </nav>
   </header>
@@ -322,28 +417,30 @@ footer.bottom a:hover { color:var(--purple); }
   <main class="hero">
     <div class="hero-grid">
     <div class="hero-copy">
-    <div class="badge">
+    <div class="badge launch">
       <span class="dot"></span>
-      Lumen no ar
+      Lançamento oficial · 14 de setembro de 2026
     </div>
 
-    <h1>O <span class="gradient">Lumen</span> está no ar.<br>Qualidade de software com IA, do seu jeito.</h1>
+    <h1>O <span class="gradient">Lumen</span> chega em 14 de setembro.<br>E você já pode <span class="nowrap">conhecê-lo</span>.</h1>
 
     <p class="tagline">
-      Agentes de IA que geram requisitos, cenários e casos de teste a partir dos
-      seus documentos, APIs e vídeos — e uma gestão de testes completa para executar,
-      rastrear e evoluir. O Lumen <strong>agrega</strong> ao trabalho de quem faz
-      qualidade: apoia QAs profissionais e cobre empresas que ainda não têm time de QA.
+      Agentes de IA que leem a sua documentação, o vídeo de passagem de conhecimento ou o
+      contrato da API e devolvem requisitos, cenários e casos de teste prontos. Depois,
+      executam os testes contra a aplicação, com evidência de tela passo a passo. E uma
+      gestão de testes completa para conduzir o ciclo inteiro. O Lumen <strong>agrega</strong> ao
+      trabalho de quem faz qualidade: apoia QAs profissionais e cobre empresas que ainda não
+      têm time de QA.
     </p>
     <p class="subtag">
-      O cadastro abre em breve. Conheça a plataforma e os planos agora e deixe seu e-mail
-      para ser avisado na abertura.
+      A plataforma e os planos já estão no ar para você navegar. O cadastro abre no
+      lançamento, e a gente avisa você.
     </p>
 
     <div class="cta-row">
       <a class="btn btn-primary" href="https://lumen.lampup.com.br">Conhecer o Lumen</a>
       <a class="btn btn-outline" href="https://lumen.lampup.com.br/planos">Ver planos</a>
-      <a class="btn btn-ghost" href="https://lumen.lampup.com.br/enterprise">Enterprise</a>
+      <a class="btn btn-ghost" href="#avise-me">Avise-me no lançamento</a>
     </div>
     </div>
 
@@ -359,18 +456,130 @@ footer.bottom a:hover { color:var(--purple); }
     <div class="pillars">
       <div class="pillar">
         <h3>Agentes independentes</h3>
-        <p>Use 1, use 10, use quando precisar. Cada agente Lamp transforma documentos, especificações de API e vídeos de passagem de conhecimento em artefatos de teste prontos.</p>
+        <p>Use 1, use 10, use quando precisar. Cada agente Lamp transforma documentos, contratos de API e vídeos de passagem de conhecimento em artefatos de teste prontos. Quem revisa e aprova é gente.</p>
       </div>
       <div class="pillar">
         <h3>Gestão de testes completa</h3>
-        <p>Suítes, casos com Gherkin, planos, execuções manuais com evidências rastreadas e relatórios — no padrão das melhores ferramentas do mercado.</p>
+        <p>Suítes, casos em Gherkin, planos, marcos, execuções manuais e automatizadas com evidência por passo e um painel de qualidade que diz se a entrega está pronta.</p>
       </div>
       <div class="pillar">
         <h3>Preço transparente</h3>
-        <p>Você paga pelo que usa, em tokens. Do plano Free ao PME Premium — e Enterprise sob medida, com SSO e opção on-premises.</p>
+        <p>Você paga pelo que usa, em tokens. Do plano Free ao PME Premium, e Enterprise sob medida, com SSO e opção on-premises. O consumo aparece antes de disparar.</p>
       </div>
     </div>
   </main>
+
+  <section class="block" id="historia">
+    <span class="kicker">Nossa história</span>
+    <h2>Por que a LampUP <span class="accent">existe</span></h2>
+    <p class="lead">Qualidade de software sempre foi privilégio de empresa grande. Nascemos para mudar isso.</p>
+
+    <div class="story">
+      <p>
+        A LampUP nasceu da prática: quase duas décadas de projetos de qualidade de software em
+        bancos, telecoms e indústria, e milhares de profissionais formados na trilha ISTQB.
+        Nesse caminho, uma cena se repetia. Qualidade era coisa de empresa grande: ferramenta
+        em dólar por assento, time dedicado, processo pesado e um projeto de integração antes
+        de qualquer resultado.
+      </p>
+      <p>
+        Do outro lado, pequenas e médias empresas de tecnologia carregam nas costas o software
+        que roda a vida financeira de clientes, pacientes e pequenos negócios. E entregam sem QA.
+        <strong>Não por falta de vontade. Por falta de acesso.</strong>
+      </p>
+      <p class="quote">
+        Software com defeito não é bug. É dinheiro no lixo. E a conta sempre chega em produção.
+      </p>
+      <p>
+        Fundamos a LampUP IT, em Barueri, para fechar esse vão. Pegamos a metodologia da
+        consultoria de testes, embarcamos em agentes de inteligência artificial e entregamos no
+        modelo de uma ferramenta: preço público, autoatendimento, cobrança pelo que você consome e
+        a chance de experimentar antes de contratar. Você contrata a competência, não a hora, e
+        não precisa operá-la.
+      </p>
+      <p>
+        O Lumen é o produto que nasceu dessa decisão. Desde julho de 2026, profissionais de QA
+        usam a plataforma em rodadas contínuas de teste, e o que apontam entra na metodologia dos
+        agentes. Em 14 de setembro ele abre para todo mundo.
+      </p>
+      <p>
+        O nome diz o que fazemos: acender a luz sobre a qualidade do seu software.
+        <strong>Lighting up your business.</strong>
+      </p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num">&gt; 90%</div>
+        <p>das PMEs de TI brasileiras não têm QA formal. E seguem entregando software.</p>
+      </div>
+      <div class="stat">
+        <div class="num">530 mil</div>
+        <p>profissionais de TI faltam no país. Mesmo com orçamento, muitas vezes não há quem contratar.</p>
+      </div>
+      <div class="stat">
+        <div class="num">R$ 5 a 13 mil</div>
+        <p>por mês custa um QA pleno em CLT, antes dos encargos. Para a maioria das PMEs, não cabe.</p>
+      </div>
+    </div>
+    <p class="sources">Fontes: IBGE PSTI, Softex Observatório e ABES 2025 (PMEs de TI) · Brasscom 2024 (déficit de talentos) · Glassdoor e Robert Half 2026 (faixas salariais).</p>
+
+    <div class="principles">
+      <div class="principle">
+        <h3>Quem revisa, decide e assina é gente</h3>
+        <p>Todo artefato produzido pela IA nasce aguardando revisão e só vale depois que alguém aprova. A IA agrega ao profissional de qualidade.</p>
+      </div>
+      <div class="principle">
+        <h3>Metodologia de verdade, não marketing</h3>
+        <p>CTFL/ISTQB, checklist CARTER, ISO 25010, ISO/IEC/IEEE 29119 e OWASP API Top 10, versionados dentro dos agentes.</p>
+      </div>
+      <div class="principle">
+        <h3>Preço que se explica</h3>
+        <p>Você paga pelo que consome, em tokens, do Free ao PME Premium. Sem assento, sem letra miúda, e o custo aparece antes de disparar.</p>
+      </div>
+      <div class="principle">
+        <h3>A régua não muda</h3>
+        <p>Recurso só aparece no produto quando funciona. O que não está pronto aparece como “em breve”, nunca como fachada.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="lumen">
+    <span class="kicker">O produto</span>
+    <h2>Conheça o <span class="accent">Lumen</span> antes do lançamento</h2>
+    <p class="lead">A vitrine já está no ar, com as telas reais da plataforma. As duas abaixo são capturas do produto, com dados de demonstração.</p>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>lumen.lampup.com.br</span></div>
+        <picture>
+          <source srcset="/lumen-catalogo.webp" type="image/webp">
+          <img src="/lumen-catalogo.jpg" alt="Catálogo de agentes do Lumen: 21 agentes organizados por etapa do ciclo" width="1400" height="817" loading="lazy">
+        </picture>
+        <figcaption><strong>Catálogo de agentes.</strong> 21 agentes organizados pela etapa do ciclo. Você escolhe pelo problema que tem, não pelo nome técnico.</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>lumen.lampup.com.br</span></div>
+        <picture>
+          <source srcset="/lumen-evidencia.webp" type="image/webp">
+          <img src="/lumen-evidencia.jpg" alt="Evidência passo a passo de uma execução automatizada no Lumen" width="1400" height="932" loading="lazy">
+        </picture>
+        <figcaption><strong>Evidência passo a passo.</strong> Cada passo guarda a captura da tela ou a requisição e a resposta. “Passou” e “falhou” não bastam.</figcaption>
+      </figure>
+    </div>
+
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Traga o que já tem</h3><p>Documentos, exportações de Jira, Zephyr, Azure DevOps e TestRail, o vídeo de uma demonstração ou reunião, o contrato da API ou só um briefing.</p></div>
+      <div class="step"><div class="n">2</div><h3>Os agentes especificam</h3><p>Criticam a documentação, escrevem o requisito que falta e geram cenários e casos de teste em Gherkin, com o requisito de origem amarrado.</p></div>
+      <div class="step"><div class="n">3</div><h3>Você aprova</h3><p>Nada entra no projeto sem alguém revisar. Aprovar importa para o projeto; rejeitar registra o motivo e melhora o agente.</p></div>
+      <div class="step"><div class="n">4</div><h3>Executa e prova</h3><p>Testes manuais com evidência por passo ou automatizados pelos Runners, contra a sua aplicação. O painel diz se a entrega está pronta.</p></div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://lumen.lampup.com.br/#tour">Ver o Lumen por dentro</a>
+      <a class="btn btn-outline" href="https://lumen.lampup.com.br/planos">Ver planos</a>
+    </div>
+  </section>
 
   <section class="block" id="para-quem">
     <h2>Para quem é</h2>
@@ -378,7 +587,7 @@ footer.bottom a:hover { color:var(--purple); }
     <div class="publics">
       <article class="public-card">
         <h3>Para QAs profissionais</h3>
-        <p>Elimine o trabalho repetitivo de escrever requisitos, cenários e casos a partir de documentação. Ganhe tempo para o que realmente importa: estratégia, teste exploratório e análise de risco.</p>
+        <p>Elimine o trabalho repetitivo de escrever requisitos, cenários e casos a partir de documentação. Ganhe tempo para o que realmente importa: estratégia, teste exploratório e análise de risco. Os casos saem em Excel, CSV e JSON para a ferramenta que o seu time já usa.</p>
       </article>
       <article class="public-card">
         <h3>Para empresas sem time de QA</h3>
@@ -397,8 +606,8 @@ footer.bottom a:hover { color:var(--purple); }
     </figure>
     <div class="form-card" id="form-card">
       <div id="form-content">
-      <h2>Avise-me quando o cadastro abrir</h2>
-      <p class="form-sub">Sem spam. Um único aviso quando o cadastro do Lumen for liberado.</p>
+      <h2>Avise-me no lançamento</h2>
+      <p class="form-sub">Sem spam. Um único aviso quando o cadastro do Lumen abrir, em 14 de setembro.</p>
 
       <form id="lead-form" novalidate>
         <div class="field">
@@ -416,7 +625,7 @@ footer.bottom a:hover { color:var(--purple); }
           <input type="checkbox" id="aceite_lgpd" name="aceite_lgpd" required aria-required="true"
                  aria-describedby="consent-error">
           <label for="aceite_lgpd" style="margin:0; font-size:12px; font-weight:400; color:inherit; letter-spacing:0;">
-            Concordo em receber comunicações da LampUP IT sobre a abertura do cadastro e atualizações. Veja nossa <a href="/politica-de-privacidade.html">Política de Privacidade</a>.
+            Concordo em receber comunicações da LampUP IT sobre o lançamento e atualizações. Veja nossa <a href="/politica-de-privacidade.html">Política de Privacidade</a>.
           </label>
         </div>
         <small class="consent-error" id="consent-error" role="alert" aria-live="polite"></small>
@@ -431,7 +640,7 @@ footer.bottom a:hover { color:var(--purple); }
         </div>
         <h2>Cadastro confirmado!</h2>
         <p class="thanks-text">
-          Obrigado pelo interesse no Lumen. Assim que o cadastro abrir, você será um dos primeiros a saber.
+          Obrigado pelo interesse no Lumen. No lançamento, você será um dos primeiros a saber.
         </p>
         <div class="thanks-email" id="thanks-email"></div>
         <div class="thanks-actions">
@@ -442,22 +651,37 @@ footer.bottom a:hover { color:var(--purple); }
     </div>
   </section>
 
-  <section class="block" id="empresa">
-    <h2>A empresa</h2>
-    <p class="lead">A LampUP IT é uma consultoria de testes e qualidade de software como serviço. O Lumen é a plataforma que entrega esse serviço, com agentes de IA e gestão de testes.</p>
-    <div class="company">
+  <section class="block" id="contato">
+    <span class="kicker">A empresa</span>
+    <h2>Fale com a <span class="accent">gente</span></h2>
+    <p class="lead">A LampUP IT é uma consultoria de testes e qualidade de software como serviço. O Lumen é a plataforma que entrega esse serviço, com agentes de IA e gestão de testes. Quer ver rodando com a sua documentação? A demonstração leva 30 minutos.</p>
+    <div class="contact-grid">
       <div>
-        <h3>Razão social</h3>
-        <p>LampUP IT<br>CNPJ 44.339.749/0001-33</p>
+        <div class="company">
+          <div>
+            <h3>Razão social</h3>
+            <p>LampUP IT<br>CNPJ 44.339.749/0001-33</p>
+          </div>
+          <div>
+            <h3>Endereço</h3>
+            <p>Al. Rio Negro, 1033 — Alphaville Comercial<br>Barueri — SP</p>
+          </div>
+          <div>
+            <h3>Contato</h3>
+            <p><a href="mailto:contato@lampup.com.br">contato@lampup.com.br</a><br>Privacidade: <a href="mailto:privacidade@lampup.com.br">privacidade@lampup.com.br</a></p>
+          </div>
+        </div>
+        <div class="contact-cta">
+          <a class="btn btn-primary" href="mailto:contato@lampup.com.br?subject=Quero%20ver%20o%20Lumen%20rodando">Pedir uma demonstração</a>
+          <a class="btn btn-outline" href="https://lumen.lampup.com.br/enterprise">Lumen Enterprise</a>
+        </div>
       </div>
-      <div>
-        <h3>Endereço</h3>
-        <p>Al. Rio Negro, 1033 — Alphaville Comercial<br>Barueri — SP</p>
-      </div>
-      <div>
-        <h3>Contato</h3>
-        <p><a href="mailto:contato@lampup.com.br">contato@lampup.com.br</a><br>Privacidade: <a href="mailto:privacidade@lampup.com.br">privacidade@lampup.com.br</a></p>
-      </div>
+      <figure class="contact-figure" aria-hidden="true">
+        <picture>
+          <source srcset="/maria-clara-positivo.webp" type="image/webp">
+          <img src="/maria-clara-positivo.png" alt="" width="372" height="1000" loading="lazy">
+        </picture>
+      </figure>
     </div>
   </section>
 
