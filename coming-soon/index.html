@@ -22,7 +22,9 @@
     dia D está em `index-launch.html` (conferir a franquia do Free no
     catálogo antes de publicar qualquer número de token).
 
-  Regras que continuam valendo: botão "voltar ao topo" no padrão LampUP (o
+  Regras que continuam valendo: as capturas do Lumen ABREM AMPLIADAS no
+  clique (o detalhe da tela e o que convence, e ele nao se le na largura da
+  pagina); botão "voltar ao topo" no padrão LampUP (o
   mesmo das páginas jurídicas e do Lumen — ver a memória
   feedback-back-to-top-component); nenhum preço neste arquivo (fonte única =
   catalog-svc, renderizado pelo Lumen em /planos); copy "agrega, não
@@ -281,6 +283,67 @@ section.block .lead {
 .shot .bar i:nth-child(3) { background:#34D399; }
 .shot .bar span { margin-left:8px; }
 .shot img { width:100%; height:auto; display:block; }
+/* Clique para ampliar (07/09, sugestao de cliente): numa captura de produto o
+   que convence e o DETALHE - rotulo de status, nome de coluna, codigo do caso
+   - e na largura da pagina nada disso se le. E BOTAO, nao imagem com clique:
+   quem navega por teclado precisa chegar aqui pelo Tab e abrir com Enter. */
+.shot-zoom {
+  display:block; width:100%; padding:0; border:0; background:none;
+  position:relative; cursor:zoom-in; font:inherit;
+}
+.shot-zoom::after {
+  content:""; position:absolute; inset:0;
+  background:rgba(61,31,107,0); transition:background 0.2s;
+}
+.shot-zoom:hover::after, .shot-zoom:focus-visible::after { background:rgba(61,31,107,0.10); }
+.shot-hint {
+  position:absolute; right:12px; bottom:12px; z-index:1;
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(255,255,255,0.95); color:var(--purple-dark);
+  font-size:12px; font-weight:700; padding:6px 12px; border-radius:8px;
+  box-shadow:0 4px 16px rgba(91,45,159,0.18);
+  opacity:0; transition:opacity 0.2s;
+}
+.shot-zoom:hover .shot-hint, .shot-zoom:focus-visible .shot-hint { opacity:1; }
+.shot figcaption button {
+  background:none; border:0; padding:0; font:inherit; font-weight:700;
+  color:var(--purple); text-decoration:underline; cursor:pointer;
+}
+.shot figcaption button:hover { color:var(--purple-dark); }
+
+/* Lightbox - mesma linguagem do modal do Lumen: fundo preto a 60%, painel
+   branco arredondado, fecha por ESC, clique fora e X. */
+.lightbox { position:fixed; inset:0; z-index:100; background:rgba(0,0,0,0.6); padding:16px; }
+.lightbox[hidden] { display:none; }
+.lightbox:not([hidden]) { display:flex; align-items:center; justify-content:center; }
+.lightbox-painel {
+  background:var(--white); border-radius:16px; box-shadow:0 10px 32px rgba(0,0,0,0.35);
+  width:100%; max-width:1400px; max-height:94vh; display:flex; flex-direction:column; overflow:hidden;
+}
+.lightbox-topo {
+  display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+  padding:16px 24px; border-bottom:1px solid var(--border);
+}
+.lightbox-topo h2 { font-size:18px; font-weight:900; color:var(--purple-dark); text-align:left; margin:0; }
+.lightbox-topo p { font-size:12px; color:var(--gray); margin-top:2px; }
+.lightbox-fechar {
+  background:none; border:0; cursor:pointer; padding:4px; line-height:1;
+  font-size:26px; color:var(--gray); transition:color 0.2s;
+}
+.lightbox-fechar:hover { color:var(--purple-dark); }
+.lightbox-corpo {
+  padding:20px 24px 24px; flex:1; min-height:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.lightbox-corpo img {
+  max-width:100%; max-height:100%; width:auto; height:auto;
+  object-fit:contain; border-radius:8px; border:1px solid var(--border); display:block;
+}
+@media (max-width:640px) {
+  .lightbox { padding:8px; }
+  .lightbox-topo { padding:12px 16px; }
+  .lightbox-corpo { padding:12px 16px 16px; }
+}
 .shot figcaption { padding:10px 14px; font-size:12px; color:var(--gray); background:var(--off-white); border-top:1px solid var(--border); }
 .shot figcaption strong { color:var(--purple-dark); }
 
@@ -612,19 +675,31 @@ footer.bottom a:hover { color:var(--purple); }
     <div class="shots">
       <figure class="shot">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>lumen.lampup.com.br</span></div>
-        <picture>
-          <source srcset="/lumen-catalogo.webp" type="image/webp">
-          <img src="/lumen-catalogo.jpg" alt="Catálogo de agentes do Lumen: 21 agentes organizados por etapa do ciclo" width="1400" height="817" loading="lazy">
-        </picture>
-        <figcaption><strong>Catálogo de agentes.</strong> 21 agentes organizados pela etapa do ciclo. Você escolhe pelo problema que tem, não pelo nome técnico.</figcaption>
+        <button type="button" class="shot-zoom" aria-label="Ampliar a captura: catálogo de agentes"
+                data-jpg="/lumen-catalogo.jpg" data-webp="/lumen-catalogo.webp"
+                data-titulo="Catálogo de agentes"
+                data-legenda="Captura real do Lumen · dados de demonstração">
+          <picture>
+            <source srcset="/lumen-catalogo.webp" type="image/webp">
+            <img src="/lumen-catalogo.jpg" alt="Catálogo de agentes do Lumen: 21 agentes organizados por etapa do ciclo" width="1400" height="817" loading="lazy">
+          </picture>
+          <span class="shot-hint">Ampliar</span>
+        </button>
+        <figcaption><strong>Catálogo de agentes.</strong> 21 agentes organizados pela etapa do ciclo. Você escolhe pelo problema que tem, não pelo nome técnico. <button type="button" class="shot-ampliar">ampliar</button></figcaption>
       </figure>
       <figure class="shot">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>lumen.lampup.com.br</span></div>
-        <picture>
-          <source srcset="/lumen-evidencia.webp" type="image/webp">
-          <img src="/lumen-evidencia.jpg" alt="Evidência passo a passo de uma execução automatizada no Lumen" width="1400" height="932" loading="lazy">
-        </picture>
-        <figcaption><strong>Evidência passo a passo.</strong> Cada passo guarda a captura da tela ou a requisição e a resposta. “Passou” e “falhou” não bastam.</figcaption>
+        <button type="button" class="shot-zoom" aria-label="Ampliar a captura: evidência passo a passo"
+                data-jpg="/lumen-evidencia.jpg" data-webp="/lumen-evidencia.webp"
+                data-titulo="Evidência passo a passo"
+                data-legenda="Captura real do Lumen · dados de demonstração">
+          <picture>
+            <source srcset="/lumen-evidencia.webp" type="image/webp">
+            <img src="/lumen-evidencia.jpg" alt="Evidência passo a passo de uma execução automatizada no Lumen" width="1400" height="932" loading="lazy">
+          </picture>
+          <span class="shot-hint">Ampliar</span>
+        </button>
+        <figcaption><strong>Evidência passo a passo.</strong> Cada passo guarda a captura da tela ou a requisição e a resposta. “Passou” e “falhou” não bastam. <button type="button" class="shot-ampliar">ampliar</button></figcaption>
       </figure>
     </div>
 
@@ -787,6 +862,24 @@ footer.bottom a:hover { color:var(--purple); }
   </footer>
 </div>
 
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-titulo" hidden>
+  <div class="lightbox-painel">
+    <div class="lightbox-topo">
+      <div>
+        <h2 id="lightbox-titulo"></h2>
+        <p id="lightbox-legenda"></p>
+      </div>
+      <button type="button" class="lightbox-fechar" id="lightbox-fechar" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="lightbox-corpo">
+      <picture>
+        <source id="lightbox-webp" type="image/webp">
+        <img id="lightbox-img" alt="">
+      </picture>
+    </div>
+  </div>
+</div>
+
 <button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
   <img src="/simbolo-lampup.png" alt="">
 </button>
@@ -794,6 +887,51 @@ footer.bottom a:hover { color:var(--purple); }
 <script src="/leads.js" defer></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Ampliar captura: abre a imagem grande, fecha por ESC, clique fora e X.
+  // Devolve o foco a quem abriu - sem isso, quem usa teclado e jogado de volta
+  // para o comeco da pagina ao fechar.
+  (function () {
+    const caixa = document.getElementById('lightbox');
+    if (!caixa) return;
+    const painel = caixa.querySelector('.lightbox-painel');
+    const img = document.getElementById('lightbox-img');
+    const webp = document.getElementById('lightbox-webp');
+    const titulo = document.getElementById('lightbox-titulo');
+    const legenda = document.getElementById('lightbox-legenda');
+    const fechar = document.getElementById('lightbox-fechar');
+    let origem = null;
+
+    function abrir(gatilho) {
+      const zoom = gatilho.classList.contains('shot-zoom')
+        ? gatilho
+        : gatilho.closest('.shot').querySelector('.shot-zoom');
+      origem = gatilho;
+      webp.srcset = zoom.dataset.webp;
+      img.src = zoom.dataset.jpg;
+      img.alt = zoom.querySelector('img').alt;
+      titulo.textContent = zoom.dataset.titulo;
+      legenda.textContent = zoom.dataset.legenda;
+      caixa.hidden = false;
+      document.body.style.overflow = 'hidden';
+      fechar.focus();
+    }
+
+    function esconder() {
+      caixa.hidden = true;
+      document.body.style.overflow = '';
+      if (origem) { origem.focus(); origem = null; }
+    }
+
+    document.querySelectorAll('.shot-zoom, .shot-ampliar').forEach((b) => {
+      b.addEventListener('click', () => abrir(b));
+    });
+    fechar.addEventListener('click', esconder);
+    caixa.addEventListener('click', (e) => { if (!painel.contains(e.target)) esconder(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !caixa.hidden) esconder();
+    });
+  })();
 
   (function () {
     const btn = document.getElementById('back-to-top');
