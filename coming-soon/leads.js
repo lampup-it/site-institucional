@@ -39,8 +39,13 @@
    * Etiqueta de campanha (pre-lancamento Turma Zero, 09/09/2026).
    *
    * O `source` era a constante 'coming-soon' — todo lead chegava igual, e sem
-   * saber DE ONDE veio nao da para medir canal nem ordenar os 50 primeiros por
-   * campanha. Agora `?c=qa` na URL vira `coming-soon:qa`.
+   * saber DE ONDE veio nao da para medir canal. Agora `?c=qa` na URL vira
+   * `coming-soon:qa`.
+   *
+   * ATENCAO (B-205, 11/09): a etiqueta serve para MEDIR CANAL, nao para
+   * ordenar vaga. A Turma Zero passou a valer por ORDEM DE ATIVACAO — quem
+   * roda a primeira execucao primeiro —, e nao pela ordem de chegada do lead.
+   * A ordem e resolvida no billing-svc, por `MIN(AgentRun.ran_at)`.
    *
    * Vai dentro do `source` de proposito: o Worker aceita 60 caracteres nesse
    * campo e ja o repassa ao CRM do Beacon. Campo novo exigiria mexer nos dois,
