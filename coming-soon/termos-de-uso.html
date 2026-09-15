@@ -148,5 +148,16 @@
   window.addEventListener('scroll', () => { btn.classList.toggle('visible', window.scrollY > 400); }, { passive: true });
 })();
 </script>
+<!-- LGPD (15/09/2026): o banner de consentimento. A Politica de Cookies
+     publicada SEMPRE descreveu este banner e o botao "Gerenciar cookies", mas
+     `lgpd-cookies.js` nunca foi copiado para a raiz publicada (`coming-soon/`)
+     nem carregado por pagina nenhuma — o botao "Abrir banner de preferencias"
+     da propria politica caia no `else` e mostrava "Banner indisponivel nesta
+     pagina". Pagina juridica publicada prometendo controle que nao existe.
+     Hoje o site nao roda rastreador nenhum (sem GA, sem pixel, CSP travada em
+     'self'), entao o banner nasce so com o essencial marcado. Ele e o PORTAO:
+     quem for ligar analytics escuta `lampup:analytics-consent` e nao dispara
+     antes dele. Banner primeiro, rastreador depois — nunca o contrario. -->
+<script src="/shared/lgpd-cookies.js" defer></script>
 </body>
 </html>
