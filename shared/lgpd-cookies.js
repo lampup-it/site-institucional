@@ -196,15 +196,14 @@
     btn.style.display = 'block';
   }
 
+  // 15/09: os sete modelos de layout saíram do repositório (o site oficial é o
+  // `coming-soon/`, publicado desde 07/09), e com eles o caso do caminho com
+  // um nível a mais. As políticas ficam ao lado da página que as referencia.
   function findPrivacyPolicyPath() {
-    const currentPath = window.location.pathname;
-    if (currentPath.includes('/modelo-')) return '../politica-de-privacidade.html';
     return 'politica-de-privacidade.html';
   }
 
   function findCookiesPolicyPath() {
-    const currentPath = window.location.pathname;
-    if (currentPath.includes('/modelo-')) return '../politica-de-cookies.html';
     return 'politica-de-cookies.html';
   }
 

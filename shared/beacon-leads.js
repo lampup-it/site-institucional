@@ -8,7 +8,7 @@
  *     BeaconLeads.attach({
  *       formId: 'lead-form',                  // id do <form>
  *       successId: 'form-success',            // div mostrada após sucesso (opcional)
- *       origin: 'landing-modelo-1',           // identifica de onde veio
+ *       origin: 'landing-oficial',            // identifica de onde veio
  *       endpoint: 'http://localhost:8000'     // gateway do Beacon (opcional)
  *     });
  *   </script>

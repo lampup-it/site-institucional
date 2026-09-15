@@ -12,7 +12,7 @@ Site público da LampUP IT em `lampup.com.br`.
 | v0.2 | Página oficial: Lumen no ar, cadastro fechado (lead "avise-me"), seção A empresa | Substituída em 07/09/2026 (mesmo dia) |
 | **v0.3** | Página oficial com a história da LampUP (sem expor os sócios), narrativa "lançamento 18/09, mas o Lumen já pode ser visitado", duas capturas reais do produto, Maria Clara (3 poses, recorte neural sem sombra), FAQ, chips da base metodológica, âncora `#contato` (usada pelo Lumen Enterprise) | Em produção |
 | v0.3 | `index-launch.html` — versão com "Começar grátis", publicar só quando o cadastro abrir (`SIGNUP_OPEN=true` no Lumen) | Pronta, aguardando abertura do cadastro |
-| v1.0 | Modelo 2 — Clean Tech (landing completa) | Em refinamento |
+| v1.0 | Landing completa | A desenhar — os 7 modelos de layout foram removidos em 15/09 (histórico do git) |
 
 ## Estrutura
 
@@ -34,29 +34,32 @@ site-institucional/
 │   ├── shared/                  — Cópia local dos conectores compartilhados
 │   └── fonts/                   — UniNeue (5 pesos)
 │
-├── modelo-1/ ... modelo-7/      ← Variações em refinamento (não publicadas)
-├── planos.html                  ← ESPELHO EXATO do arquivo em coming-soon/
-├── politica-de-privacidade.html ← ESPELHO EXATO do arquivo em coming-soon/
-├── politica-de-cookies.html     ← ESPELHO EXATO
-├── termos-de-uso.html           ← ESPELHO EXATO
-└── shared/                      ← Conectores dos modelos: beacon-leads.js (leads → Beacon),
+└── shared/                      ← Conectores reutilizáveis: beacon-leads.js (leads → Beacon),
                                    catalog-plans.js (planos dinâmicos do catalog-svc),
                                    lgpd-cookies.js (banner de consentimento)
 ```
 
-### ⚠ Os arquivos da raiz são ESPELHOS, não versões de trabalho
+### Os sete modelos e os espelhos da raiz saíram (15/09/2026)
 
-`coming-soon/` é a raiz publicada. Os arquivos homônimos na raiz do repo
-existem para os `modelo-*/` consumirem, mas **têm de ser cópia byte a byte**
-dos publicados — inclusive `shared/`.
+Os `modelo-1/` a `modelo-7/` eram as variações de layout da Fase 1, feitas para
+escolher a cara do site. A escolha aconteceu: o site oficial é o `coming-soon/`,
+publicado desde 07/09. Protótipo que perdeu a disputa e fica no repositório vira
+duas coisas ruins — alguém edita o arquivo errado, e o leitor não sabe qual é o
+site de verdade.
 
-Isso não é preciosismo: até 01/09/2026 as duas cópias tinham divergido em
-silêncio, e a da raiz era a errada. O `termos-de-uso.html` da raiz declarava
-*"CNPJ: a ser registrado"* e trazia um aviso de "rascunho aguardando validação
-jurídica" que a versão publicada já não tinha; a política de privacidade
-repetia o CNPJ ausente. Página jurídica pública dizendo que a empresa não está
-registrada é problema real, e ninguém percebe porque a errada não é a que
-está no ar — até alguém publicar a cópia errada.
+Com eles saíram os **espelhos da raiz** (`planos.html`, `politica-de-*.html`,
+`termos-de-uso.html`), que existiam só para os modelos consumirem. Eles eram uma
+armadilha documentada: até 01/09/2026 as duas cópias tinham divergido em
+silêncio, e a da raiz era a errada — o `termos-de-uso.html` declarava *"CNPJ: a
+ser registrado"* e trazia um aviso de "rascunho aguardando validação jurídica"
+que a versão publicada já não tinha. Página jurídica pública dizendo que a
+empresa não está registrada é problema real, e ninguém percebe porque a errada
+não é a que está no ar — até alguém publicar a cópia errada. **Agora existe uma
+cópia só, e ela é a publicada.**
+
+Nada disso se perde: o histórico do git guarda tudo. Para recuperar um modelo,
+`git log --diff-filter=D -- modelo-2` acha o commit e `git checkout <sha>^ --
+modelo-2` traz de volta.
 
 **Ao editar qualquer um destes arquivos, edite em `coming-soon/` e copie para
 a raiz na mesma passada.**
