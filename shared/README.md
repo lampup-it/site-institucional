@@ -1,6 +1,16 @@
 # Landing → Beacon Integration
 
-Este diretório contém os 3 conectores compartilhados pelos modelos da landing:
+> ⚠ **NENHUMA página deste repositório carrega estes arquivos hoje** (15/09/2026).
+> Os consumidores eram os layouts `modelo-1/` a `modelo-7/`, removidos em 15/09
+> (commit `80bcbe1`), e o `planos.html`, que virou redirect em 01/09. O site no
+> ar é o `coming-soon/`, que usa o próprio `coming-soon/leads.js` — outro fluxo,
+> via Worker.
+>
+> Ficam aqui como **referência para a próxima landing**, não como código vivo.
+> Antes de reusar qualquer um, conferir contra o que o Beacon aceita hoje: este
+> documento descreve o estado de quando os modelos existiam.
+
+Este diretório contém os 3 conectores que os modelos da landing compartilhavam:
 
 | Arquivo | Função |
 |---|---|
@@ -8,7 +18,7 @@ Este diretório contém os 3 conectores compartilhados pelos modelos da landing:
 | `catalog-plans.js` | Renderiza planos dinâmicos consumindo `GET /public/catalog/plans` do catalog-svc, com fallback estático |
 | `lgpd-cookies.js` | Banner de consentimento de cookies (LGPD) — bloqueia tracking antes do aceite |
 
-> Nota: os **modelos** postam direto no Beacon via `beacon-leads.js` (endpoints abaixo); a página **coming-soon** em produção usa outro fluxo — POST no Worker `leads.lampup.com.br/submit` (3 camadas, ver `infra/leads-worker/`).
+> Nota: os modelos postavam direto no Beacon via `beacon-leads.js` (endpoints abaixo). A página **coming-soon**, que é o site em produção, usa outro fluxo — POST no Worker `leads.lampup.com.br/submit` (3 camadas, ver `infra/leads-worker/`), e o Worker **está no ar**.
 
 ## Como conectar os formulários da landing ao funil de leads do Beacon
 
@@ -30,7 +40,7 @@ substitua por:
   BeaconLeads.attach({
     formId: 'lead-form',         // id do <form>
     successId: 'form-success',   // id do bloco que aparece após sucesso (opcional)
-    origin: 'landing-modelo-1',  // marca de onde veio
+    origin: 'landing-institucional',  // marca de onde veio
   });
 </script>
 ```
@@ -81,10 +91,11 @@ Após o usuário submeter:
 
 A partir daí o time comercial qualifica, evolui de estágio e pontua o BANT.
 
-## Exemplo completo (modelo-1)
+## Exemplo completo
 
-Veja `modelo-1/index.html` — já está integrado e serve como referência para
-os modelos 2, 3 e 4.
+A referência integrada era `modelo-1/index.html`, removido em 15/09. Para
+recuperar o exemplo: `git log --diff-filter=D -- modelo-1` acha o commit e
+`git checkout <sha>^ -- modelo-1/index.html` traz o arquivo de volta.
 
 ## LGPD
 
