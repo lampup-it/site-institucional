@@ -61,8 +61,11 @@ Nada disso se perde: o histórico do git guarda tudo. Para recuperar um modelo,
 `git log --diff-filter=D -- modelo-2` acha o commit e `git checkout <sha>^ --
 modelo-2` traz de volta.
 
-**Ao editar qualquer um destes arquivos, edite em `coming-soon/` e copie para
-a raiz na mesma passada.**
+**NÃO recriar os espelhos da raiz.** Esta linha dizia o contrário — "edite em
+`coming-soon/` e copie para a raiz na mesma passada" — e sobreviveu à remoção
+dos espelhos, mandando refazer exatamente a armadilha que os dois parágrafos
+acima explicam ter sido desmontada. O que vale: **editar só em `coming-soon/`,
+que é a raiz publicada no Vercel.** Cópia só existe para divergir em silêncio.
 
 ### Planos: a página não guarda mais preço
 
