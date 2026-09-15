@@ -14,6 +14,8 @@
 
   const ENDPOINT = 'https://leads.lampup.com.br/submit';
   const STORAGE_KEY = 'lampup_leads_queue';
+  const SOURCE_BASE = 'coming-soon';
+  const CAMPANHA_MAX = 20;
   const MAX_RETRIES = 6;
   const RETRY_BASE_MS = 5000;
 
@@ -32,6 +34,53 @@
   if (!form || !formContent || !thanksPanel) return;
 
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  /**
+   * Etiqueta de campanha (pre-lancamento Turma Zero, 09/09/2026).
+   *
+   * O `source` era a constante 'coming-soon' — todo lead chegava igual, e sem
+   * saber DE ONDE veio nao da para medir canal. Agora `?c=qa` na URL vira
+   * `coming-soon:qa`.
+   *
+   * ATENCAO (B-205, 11/09): a etiqueta serve para MEDIR CANAL, nao para
+   * ordenar vaga. A Turma Zero passou a valer por ORDEM DE ATIVACAO — quem
+   * roda a primeira execucao primeiro —, e nao pela ordem de chegada do lead.
+   * A ordem e resolvida no billing-svc, por `MIN(AgentRun.ran_at)`.
+   *
+   * Vai dentro do `source` de proposito: o Worker aceita 60 caracteres nesse
+   * campo e ja o repassa ao CRM do Beacon. Campo novo exigiria mexer nos dois,
+   * e o que precisamos e de uma etiqueta, nao de um schema.
+   *
+   * A etiqueta e GRAVADA na primeira visita e sobrevive a navegacao interna:
+   * quem chega por `?c=qa`, le a pagina inteira e so entao rola ate o form
+   * continua sendo lead de QA. Sem isso a etiqueta se perderia exatamente nos
+   * leads mais quentes, que sao os que leem tudo antes de assinar.
+   */
+  const CAMPANHA_KEY = 'lampup_campanha';
+
+  function lerCampanha() {
+    var bruto = null;
+    try {
+      var qs = new URLSearchParams(location.search);
+      bruto = qs.get('c') || qs.get('utm_campaign') || qs.get('utm_source');
+    } catch (e) { /* URL exotica: segue sem etiqueta */ }
+
+    if (bruto) {
+      // Whitelist de formato: so minuscula, digito e hifen. Qualquer outra
+      // coisa e descartada inteira — etiqueta e dado nosso, nao entrada livre.
+      var limpo = String(bruto).toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, CAMPANHA_MAX);
+      if (limpo) {
+        try { sessionStorage.setItem(CAMPANHA_KEY, limpo); } catch (e) { /* modo privado */ }
+        return limpo;
+      }
+    }
+    try { return sessionStorage.getItem(CAMPANHA_KEY) || null; } catch (e) { return null; }
+  }
+
+  function montarSource() {
+    var campanha = lerCampanha();
+    return campanha ? SOURCE_BASE + ':' + campanha : SOURCE_BASE;
+  }
 
   function setFieldError(input, errorEl, message) {
     if (message) {
@@ -202,7 +251,7 @@
     }
 
     const payload = {
-      source: 'coming-soon',
+      source: montarSource(),
       nome,
       email,
       aceite_lgpd: true,
