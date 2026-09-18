@@ -10,8 +10,9 @@ Site público da LampUP IT em `lampup.com.br`.
 |---|---|---|
 | v0.1 | Coming soon page (captura de leads) | Substituída em 07/09/2026 |
 | v0.2 | Página oficial: Lumen no ar, cadastro fechado (lead "avise-me"), seção A empresa | Substituída em 07/09/2026 (mesmo dia) |
-| **v0.3** | Página oficial com a história da LampUP (sem expor os sócios), narrativa "lançamento 18/09, mas o Lumen já pode ser visitado", duas capturas reais do produto, Maria Clara (3 poses, recorte neural sem sombra), FAQ, chips da base metodológica, âncora `#contato` (usada pelo Lumen Enterprise) | Em produção |
-| v0.3 | `index-launch.html` — versão com "Começar grátis", publicar só quando o cadastro abrir (`SIGNUP_OPEN=true` no Lumen) | Pronta, aguardando abertura do cadastro |
+| v0.3 | Página oficial com a história da LampUP (sem expor os sócios), narrativa "lançamento 18/09, mas o Lumen já pode ser visitado", duas capturas reais do produto, Maria Clara (3 poses, recorte neural sem sombra), FAQ, chips da base metodológica, âncora `#contato` (usada pelo Lumen Enterprise) | Substituída em 18/09/2026 |
+| **v0.4** | **O lançamento aconteceu.** Selo "No ar · cadastro aberto", CTA primário "Começar grátis" → `/onboarding/step-1`, Maria Clara **comemorando** no hero, e o formulário de lead deixou de ser lista de espera para ser opt-in de novidades. Nenhuma promessa de data futura sobrou na página | **Em produção** |
+| — | `index-launch.html` — página de virada preparada para o dia D e **não utilizada**: nasceu antes da v0.3 e não tem história, tour, FAQ nem a âncora `#contato`. Publicá-la teria custado conteúdo. Fica como referência de copy | Aposentada (18/09) |
 | v1.0 | Landing completa | A desenhar — os 7 modelos de layout foram removidos em 15/09 (histórico do git) |
 
 ## Estrutura
@@ -19,8 +20,8 @@ Site público da LampUP IT em `lampup.com.br`.
 ```
 site-institucional/
 ├── coming-soon/                 ← Versão atual em produção (raiz do Vercel)
-│   ├── index.html               — Página oficial (07/09): Lumen no ar + lead "avise-me" + A empresa
-│   ├── index-launch.html        — Versão do dia D com "Começar grátis" (cadastro aberto)
+│   ├── index.html               — Página oficial (v0.4, 18/09): Lumen no ar + cadastro aberto + A empresa
+│   ├── index-launch.html        — Página de virada preparada e NÃO usada; referência de copy (ver tabela acima)
 │   ├── maria-clara-*.png/.webp  — Mascote (artes finais de MARIA CLARA E CLARINHA/revisadas/, fundo removido com rembg/isnet — floodfill deixa a sombra do chão)
 │   ├── leads.js                 — Captura à prova de falha (3 camadas)
 │   ├── vercel.json              — Headers de segurança + cache
