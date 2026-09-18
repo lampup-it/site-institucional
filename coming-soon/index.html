@@ -12,17 +12,25 @@
   - O Lumen: o produto, com duas capturas reais (as mesmas do material
     comercial, barra do usuário recortada) e o caminho "do documento solto
     ao teste rodando".
-  - A narrativa do lançamento: oficial em 18/09/2026 (era 14/09; mudou em
-    12/09, decisão do Aldemir — shift de quatro dias, mesma sequência), MAS o
-    Lumen já pode ser visitado hoje (vitrine, tour e planos). O cadastro abre
-    no lançamento — nunca antes, e nunca com o Asaas em sandbox.
+  - A narrativa do LANÇAMENTO FEITO: o Lumen abriu em 18/09/2026, na data
+    marcada. A página deixou de anunciar uma data futura e passa a dizer o
+    que é verdade agora — a plataforma está no ar e o cadastro está aberto.
 
-  Estado comercial que ela reflete:
-  - O CADASTRO segue FECHADO (`SIGNUP_OPEN=false` no Lumen): nenhum plano,
-    nem o Free, abre conta sozinho. Por isso não existe "Começar grátis" aqui;
-    o formulário avisa no lançamento. A versão com "Começar grátis" para o
-    dia D está em `index-launch.html` (conferir a franquia do Free no
-    catálogo antes de publicar qualquer número de token).
+  Estado comercial que ela reflete (18/09/2026):
+  - CADASTRO ABERTO. `SIGNUP_OPEN` e `PAID_SIGNUP_OPEN` estão `true` no Lumen
+    (lib/launch-phase.ts), e a /planos passou a exibir botão "Contratar" nos
+    planos pagos. Por isso o CTA primário é "Começar grátis" e aponta para
+    /onboarding/step-1 — o caminho que de fato cadastra.
+  - A franquia do Free é 575 mil tokens, conferida em catalog-svc
+    (`seed_launch.py`). NÃO repetir número de token aqui sem conferir o seed:
+    foi assim que esta página já prometeu 100 mil onde o produto entrega 575.
+  - O formulário de lead NÃO é mais lista de espera — a espera acabou. Ele
+    virou opt-in de novidades, com o consentimento reescrito para dizer isso.
+    Os ids e o contrato com `leads.js` foram preservados de propósito.
+  - `index-launch.html` era a página de virada preparada para o dia D. Ela
+    NÃO foi usada: nasceu antes da v0.3 e não tem história, tour, FAQ nem a
+    âncora `#contato` que o Lumen Enterprise consome. Trocar por ela teria
+    sido perder conteúdo. Mantida só como referência de copy.
 
   Regras que continuam valendo: as capturas do Lumen ABREM AMPLIADAS no
   clique (o detalhe da tela e o que convence, e ele nao se le na largura da
@@ -41,18 +49,18 @@
   — ele imprime a medida de cada pose, que precisa ser copiada para o
   `width`/`height` daqui, senão a página salta quando a imagem carrega.
 -->
-<meta name="description" content="LampUP IT: qualidade de software com IA, ao alcance de quem faz software. O Lumen chega em 18 de setembro de 2026 e você já pode conhecê-lo: agentes de IA que geram requisitos, cenários e casos de teste, executam os testes com evidência e uma gestão de testes completa.">
+<meta name="description" content="LampUP IT: qualidade de software com IA, ao alcance de quem faz software. O Lumen está no ar e o cadastro está aberto: agentes de IA que geram requisitos, cenários e casos de teste, executam os testes com evidência e uma gestão de testes completa. Comece grátis, sem cartão de crédito.">
 <meta name="robots" content="index, follow">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="LampUP IT — O Lumen chega em 18 de setembro. E você já pode conhecê-lo.">
+<meta property="og:title" content="LampUP IT — O Lumen está no ar. O cadastro está aberto.">
 <meta property="og:description" content="Agentes de QA com IA + gestão de testes completa. Qualidade de software como serviço, para QAs e para empresas que ainda não têm QA.">
 <meta property="og:url" content="https://lampup.com.br">
 <meta property="og:image" content="https://lampup.com.br/logo-lampup.png">
 <meta property="og:locale" content="pt_BR">
 
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LampUP IT — O Lumen chega em 18 de setembro">
+<meta name="twitter:title" content="LampUP IT — O Lumen está no ar">
 <meta name="twitter:description" content="Agentes de QA com IA + gestão de testes completa. Qualidade de software como serviço.">
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon-lampup.png">
@@ -541,12 +549,12 @@ footer.bottom a:hover { color:var(--purple); }
   <main class="hero">
     <div class="hero-grid">
     <div class="hero-copy">
-    <div class="badge launch">
+    <div class="badge">
       <span class="dot"></span>
-      Lançamento oficial · 18 de setembro de 2026
+      No ar · cadastro aberto
     </div>
 
-    <h1>O <span class="gradient">Lumen</span> chega em 18 de setembro.<br>E você já pode <span class="nowrap">conhecê-lo</span>.</h1>
+    <h1>O <span class="gradient">Lumen</span> está no ar.<br>E o cadastro já está <span class="nowrap">aberto</span>.</h1>
 
     <p class="tagline">
       Agentes de IA que transformam a sua documentação, o vídeo de passagem de conhecimento
@@ -555,21 +563,21 @@ footer.bottom a:hover { color:var(--purple); }
       inteiro. O Lumen <strong>agrega</strong> ao trabalho de quem faz qualidade.
     </p>
     <p class="subtag">
-      A plataforma e os planos já estão no ar para você navegar. O cadastro abre no
-      lançamento, e a gente avisa você.
+      Lançado em 18 de setembro de 2026. Comece grátis com 575 mil tokens de
+      boas-vindas — sem cartão de crédito.
     </p>
 
     <div class="cta-row">
-      <a class="btn btn-primary" href="https://lumen.lampup.com.br">Conhecer o Lumen</a>
+      <a class="btn btn-primary" href="https://lumen.lampup.com.br/onboarding/step-1">Começar grátis</a>
       <a class="btn btn-outline" href="https://lumen.lampup.com.br/planos">Ver planos</a>
-      <a class="btn btn-ghost" href="#avise-me">Avise-me no lançamento</a>
+      <a class="btn btn-ghost" href="https://lumen.lampup.com.br">Conhecer o Lumen</a>
     </div>
     </div>
 
     <figure class="hero-figure">
       <picture>
-        <source srcset="/maria-clara-boas-vindas.webp" type="image/webp">
-        <img src="/maria-clara-boas-vindas.png" alt="Maria Clara, do time LampUP, acenando" width="398" height="1000" fetchpriority="high">
+        <source srcset="/maria-clara-comemorando.webp" type="image/webp">
+        <img src="/maria-clara-comemorando.png" alt="Maria Clara, do time LampUP, comemorando o lançamento" width="540" height="1000" fetchpriority="high">
       </picture>
       <figcaption><strong>Maria Clara</strong>, do time LampUP</figcaption>
     </figure>
@@ -622,7 +630,7 @@ footer.bottom a:hover { color:var(--purple); }
       <p>
         O Lumen é o produto que nasceu dessa decisão. Desde julho de 2026, profissionais de QA
         usam a plataforma em rodadas contínuas de teste, e o que apontam entra na metodologia dos
-        agentes. Em 18 de setembro ele abre para todo mundo.
+        agentes. Em 18 de setembro de 2026 ele abriu para todo mundo.
       </p>
       <p>
         O nome diz o que fazemos: acender a luz sobre a qualidade do seu software.
@@ -671,8 +679,8 @@ footer.bottom a:hover { color:var(--purple); }
 
   <section class="block" id="lumen">
     <span class="kicker">O produto</span>
-    <h2>Conheça o <span class="accent">Lumen</span> antes do lançamento</h2>
-    <p class="lead">A vitrine já está no ar, com as telas reais da plataforma. As duas abaixo são capturas do produto, com dados de demonstração.</p>
+    <h2>Conheça o <span class="accent">Lumen</span> por dentro</h2>
+    <p class="lead">A plataforma está no ar, com as telas reais que você vê abaixo. As duas são capturas do produto, com dados de demonstração.</p>
 
     <div class="shots">
       <figure class="shot">
@@ -744,8 +752,16 @@ footer.bottom a:hover { color:var(--purple); }
     </figure>
     <div class="form-card" id="form-card">
       <div id="form-content">
-      <h2>Avise-me no lançamento</h2>
-      <p class="form-sub">Sem spam. Um único aviso quando o cadastro do Lumen abrir, em 18 de setembro.</p>
+      <h2>Comece agora. É grátis.</h2>
+      <p class="form-sub">O cadastro está aberto. Crie a sua conta em minutos e ganhe 575 mil tokens de boas-vindas — sem cartão de crédito.</p>
+
+      <p style="margin:0 0 20px">
+        <a class="btn btn-primary" href="https://lumen.lampup.com.br/onboarding/step-1">Criar minha conta grátis</a>
+      </p>
+
+      <p class="form-sub" style="border-top:1px solid var(--border); padding-top:18px">
+        Ainda não é hora de criar conta? Deixe o seu e-mail e a gente avisa das novidades do Lumen.
+      </p>
 
       <form id="lead-form" novalidate>
         <div class="field">
@@ -763,12 +779,12 @@ footer.bottom a:hover { color:var(--purple); }
           <input type="checkbox" id="aceite_lgpd" name="aceite_lgpd" required aria-required="true"
                  aria-describedby="consent-error">
           <label for="aceite_lgpd" style="margin:0; font-size:12px; font-weight:400; color:inherit; letter-spacing:0;">
-            Concordo em receber comunicações da LampUP IT sobre o lançamento e atualizações. Veja nossa <a href="/politica-de-privacidade.html">Política de Privacidade</a>.
+            Concordo em receber comunicações da LampUP IT sobre o Lumen, novidades e atualizações. Veja nossa <a href="/politica-de-privacidade.html">Política de Privacidade</a>.
           </label>
         </div>
         <small class="consent-error" id="consent-error" role="alert" aria-live="polite"></small>
 
-        <button type="submit" id="btn-submit">Quero ser avisado</button>
+        <button type="submit" id="btn-submit">Quero receber novidades</button>
       </form>
       </div>
 
@@ -776,9 +792,11 @@ footer.bottom a:hover { color:var(--purple); }
         <div class="thanks-icon" aria-hidden="true">
           <img src="/simbolo-lampup.png" alt="">
         </div>
-        <h2>Cadastro confirmado!</h2>
+        <h2>Contato confirmado!</h2>
         <p class="thanks-text">
-          Obrigado pelo interesse no Lumen. No lançamento, você será um dos primeiros a saber.
+          Obrigado pelo interesse no Lumen. Você vai receber as novidades da plataforma.
+          E quando quiser começar, o cadastro está aberto —
+          <a href="https://lumen.lampup.com.br/onboarding/step-1">crie a sua conta grátis</a>.
         </p>
         <div class="thanks-email" id="thanks-email"></div>
         <div class="thanks-actions">
@@ -795,8 +813,8 @@ footer.bottom a:hover { color:var(--purple); }
     <p class="lead">Respostas curtas. O resto a gente mostra rodando.</p>
     <div class="faq">
       <details>
-        <summary>Quando o cadastro abre?</summary>
-        <p>No lançamento oficial, em 18 de setembro de 2026. Até lá a plataforma e os planos ficam no ar para você conhecer, e o formulário acima avisa você na abertura.</p>
+        <summary>Como eu começo?</summary>
+        <p>O cadastro está aberto desde o lançamento, em 18 de setembro de 2026. Você <a href="https://lumen.lampup.com.br/onboarding/step-1">cria a sua conta</a> em minutos, recebe 575 mil tokens de boas-vindas e já pode rodar o primeiro agente. Não pedimos cartão de crédito para começar.</p>
       </details>
       <details>
         <summary>Preciso ter time de QA para usar o Lumen?</summary>
